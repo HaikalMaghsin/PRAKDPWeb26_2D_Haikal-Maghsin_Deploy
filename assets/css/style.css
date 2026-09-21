@@ -262,6 +262,18 @@ form p { margin: 0 0 1rem; }
 .error { display: block; margin-top: 0.35rem; color: var(--danger); font-size: 0.82rem; }
 #loading-indicator { color: var(--muted); font-weight: 600; }
 
+.flash {
+    margin: 1rem 0 0;
+    padding: 0.8rem 1rem;
+    border-radius: 9px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.flash-success { color: #0b624e; background: #dcf5ed; }
+.flash-error { color: #963440; background: #ffe8eb; }
+.hero .flash-error { color: #963440; }
+
 footer { padding: 1rem 1.5rem 2rem; color: var(--muted); text-align: center; font-size: 0.84rem; }
 
 @media (max-width: 767px) {

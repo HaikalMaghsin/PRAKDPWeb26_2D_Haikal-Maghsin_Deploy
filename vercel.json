@@ -1,0 +1,32 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/buku/list.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/buku/tambah.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/buku/proses_tambah.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/anggota/list.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/anggota/tambah.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/anggota/proses_tambah.php": {
+      "runtime": "vercel-php@0.9.0"
+    }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/api/index.php" },
+    { "source": "/index.php", "destination": "/api/index.php" },
+    { "source": "/buku/:path*", "destination": "/api/buku/:path*" },
+    { "source": "/anggota/:path*", "destination": "/api/anggota/:path*" }
+  ]
+}
