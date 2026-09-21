@@ -9,24 +9,29 @@
 <body>
     <header>
         <h1>SIMPUS-Mini</h1>
-        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Buka/tutup menu navigasi" aria-controls="menu-utama" aria-expanded="false">&#9776;</button>
+        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Buka atau tutup menu navigasi" aria-controls="menu-utama" aria-expanded="false">&#9776;</button>
         <nav id="menu-utama" aria-label="Navigasi utama">
             <ul>
                 <li><a href="index.html">Beranda</a></li>
-                <li><a href="buku/list.html">Daftar Buku</a></li>
-                <li><a href="anggota/list.html">Daftar Anggota</a></li>
+                <li><a href="buku/list.html">Koleksi Buku</a></li>
+                <li><a href="anggota/list.html">Anggota</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section>
-            <h2>Selamat Datang di Sistem Perpustakaan Mini</h2>
-            <p>Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.</p>
+        <section class="hero">
+            <span class="eyebrow">SISTEM INFORMASI PERPUSTAKAAN</span>
+            <h2>Temukan cerita, kelola koleksi.</h2>
+            <p>SIMPUS-Mini membantu mencatat buku dan anggota dalam satu tempat yang sederhana untuk dipakai.</p>
+            <div class="hero-links">
+                <a href="buku/list.html">Lihat koleksi</a>
+                <a href="anggota/list.html">Data anggota</a>
+            </div>
         </section>
 
-        <section>
-            <h2>Ringkasan</h2>
+        <p class="summary-title">RINGKASAN KOLEKSI</p>
+        <section class="summary-grid" aria-label="Ringkasan data perpustakaan">
             <article>
                 <h3>Total Buku</h3>
                 <p>55</p>
@@ -43,7 +48,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 6</p>
+        <p>&copy; 2026 SIMPUS-Mini &mdash; Versi deploy</p>
     </footer>
     <script src="assets/js/app.js"></script>
 </body>
