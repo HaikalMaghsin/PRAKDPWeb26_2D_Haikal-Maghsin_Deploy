@@ -20,6 +20,12 @@ if ($nama === '') {
 if ($noAnggota === '') {
     $errors[] = "No. Anggota wajib diisi.";
 }
+if ($alamat === ''){
+    $errors[] = "Alamat wajib diisi.";
+}
+if ($noHp === ''){
+    $errors[] = "No. Hp wajib diisi.";
+}
 
 if (!empty($errors)) {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => implode(' ', $errors)];

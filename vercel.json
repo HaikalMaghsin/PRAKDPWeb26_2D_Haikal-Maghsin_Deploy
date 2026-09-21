@@ -13,6 +13,15 @@
     "api/buku/proses_tambah.php": {
       "runtime": "vercel-php@0.9.0"
     },
+    "api/buku/edit.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/buku/proses_edit.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/buku/proses_hapus.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
     "api/anggota/list.php": {
       "runtime": "vercel-php@0.9.0"
     },
@@ -20,6 +29,15 @@
       "runtime": "vercel-php@0.9.0"
     },
     "api/anggota/proses_tambah.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/anggota/edit.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/anggota/proses_edit.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/anggota/proses_hapus.php": {
       "runtime": "vercel-php@0.9.0"
     }
   },

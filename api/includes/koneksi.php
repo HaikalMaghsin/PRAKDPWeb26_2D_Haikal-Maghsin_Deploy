@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/env.php';
+
 $pdo = null;
 $databaseError = null;
 $databaseUrl = getenv('DATABASE_URL');
@@ -39,5 +41,5 @@ try {
 
     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (Throwable $exception) {
-    $databaseError = 'Database belum terhubung. Tambahkan DATABASE_URL atau DB_HOST, DB_NAME, DB_USER, dan DB_PASS di Vercel.';
+    $databaseError = 'Data perpustakaan belum bisa dimuat. Silakan hubungi pengelola.';
 }

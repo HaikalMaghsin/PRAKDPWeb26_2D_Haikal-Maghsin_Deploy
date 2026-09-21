@@ -8,8 +8,9 @@ unset($_SESSION['flash']);
 
 $daftarAnggota = $pdo ? $pdo->query("SELECT * FROM anggota ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC) : [];
 ?>
-        <section>
-            <h2>Daftar Anggota</h2>
+        <section class="panel">
+            <h1>Daftar Anggota</h1>
+            <p class="page-description">Lihat anggota yang terdaftar atau tambahkan anggota perpustakaan baru.</p>
 
             <?php if ($databaseError): ?>
                 <p class="flash flash-error"><?php echo esc($databaseError); ?></p>
@@ -18,16 +19,17 @@ $daftarAnggota = $pdo ? $pdo->query("SELECT * FROM anggota ORDER BY id DESC")->f
             <a class="btn-tambah" href="tambah.php">+ Tambah Anggota</a>
 
             <?php if ($flash): ?>
-                <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo $flash['pesan']; ?></p>
+                <p class="flash flash-<?php echo esc($flash['type']); ?>"><?php echo esc($flash['pesan']); ?></p>
             <?php endif; ?>
 
             <div class="search-box">
                 <label for="search-input">Cari Nama Anggota</label>
-                <input type="text" id="search-input" placeholder="Ketik nama anggota...">
+                <input type="search" id="search-input" placeholder="Ketik nama atau nomor anggota..." aria-controls="tabel-data">
             </div>
+            <p class="filter-status" id="filter-status" role="status" hidden></p>
 
             <div class="table-responsive">
-            <table>
+            <table id="tabel-data">
                 <thead>
                     <tr>
                         <th>No. Anggota</th>
@@ -50,8 +52,11 @@ $daftarAnggota = $pdo ? $pdo->query("SELECT * FROM anggota ORDER BY id DESC")->f
                             <td><?php echo esc($anggota['alamat']); ?></td>
                             <td><?php echo esc($anggota['no_hp']); ?></td>
                             <td>
-                                <button type="button" class="btn-aksi btn-edit">Edit</button>
-                                <button type="button" class="btn-aksi btn-hapus">Hapus</button>
+                                <a class="btn-aksi btn-edit" href="edit.php?id=<?php echo esc($anggota['id']); ?>">Edit</a>
+                                <form class="form-hapus" method="post" action="proses_hapus.php" data-nama="<?php echo esc($anggota['nama']); ?>">
+                                    <input type="hidden" name="id" value="<?php echo esc($anggota['id']); ?>">
+                                    <button type="submit" class="btn-aksi btn-hapus">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                         <?php endforeach; ?>

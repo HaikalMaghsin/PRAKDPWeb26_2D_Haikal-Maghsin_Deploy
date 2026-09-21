@@ -11,17 +11,17 @@ function initNavToggle() {
 }
 
 function initHapusConfirm() {
-    document.addEventListener("click", function (event) {
-        const tombol = event.target.closest(".btn-hapus");
-        if (!tombol) return;
+    const daftarFormHapus = document.querySelectorAll(".form-hapus");
 
-        const baris = tombol.closest("tr");
-        const namaData = baris ? baris.querySelector("td")?.textContent.trim() : "data ini";
-        const yakin = confirm('Yakin ingin menghapus "' + namaData + '"?');
+    daftarFormHapus.forEach(function (form) {
+        form.addEventListener("submit", function (event) {
+            const namaData = form.dataset.nama || "data ini";
+            const yakin = confirm('Yakin ingin menghapus "' + namaData + '"?');
 
-        if (yakin && baris) {
-            baris.remove();
-        }
+            if (!yakin) {
+                event.preventDefault();
+            }
+        });
     });
 }
 
@@ -31,14 +31,27 @@ function initTableFilter() {
 
     if (!inputCari || !tabel) return;
 
-    inputCari.addEventListener("keyup", function () {
-        const keyword = inputCari.value.toLowerCase();
+    inputCari.addEventListener("input", function () {
+        const keyword = inputCari.value.trim().toLowerCase();
         const baris = tabel.querySelectorAll("tbody tr");
+        const status = document.getElementById("filter-status");
+        let ditemukan = 0;
 
         baris.forEach(function (row) {
+            // Baris pesan tabel kosong bukan data yang perlu disaring.
+            if (row.querySelector("td[colspan]")) return;
             const isiBaris = row.textContent.toLowerCase();
-            row.style.display = isiBaris.includes(keyword) ? "" : "none";
+            const cocok = isiBaris.includes(keyword);
+            row.hidden = !cocok;
+            if (cocok) ditemukan++;
         });
+
+        if (status) {
+            status.hidden = keyword === "";
+            status.textContent = ditemukan > 0
+                ? ditemukan + " hasil ditemukan."
+                : "Tidak ada data yang cocok. Coba kata kunci lain.";
+        }
     });
 }
 
@@ -47,6 +60,9 @@ function hapusError(input) {
     if (error) {
         error.remove();
     }
+
+    input.removeAttribute("aria-invalid");
+    input.removeAttribute("aria-describedby");
 }
 
 function tampilkanError(input, pesan) {
@@ -54,8 +70,13 @@ function tampilkanError(input, pesan) {
 
     const error = document.createElement("span");
     error.className = "error";
+    error.id = input.id + "-error";
     error.textContent = pesan;
     input.insertAdjacentElement("afterend", error);
+
+    // Memberi tanda bahwa kolom ini masih salah.
+    input.setAttribute("aria-invalid", "true");
+    input.setAttribute("aria-describedby", error.id);
 }
 
 function validasiInputWajib(form) {
@@ -64,7 +85,7 @@ function validasiInputWajib(form) {
 
     inputWajib.forEach(function (input) {
         if (input.value.trim() === "") {
-            tampilkanError(input, "Field ini wajib diisi.");
+            tampilkanError(input, "Form ini wajib diisi.");
             valid = false;
         } else {
             hapusError(input);
@@ -102,12 +123,25 @@ function initValidasiForm() {
     const daftarForm = document.querySelectorAll("form[data-validate='true']");
 
     daftarForm.forEach(function (form) {
+        // Pesan error hilang saat pengguna mulai memperbaiki isi kolom.
+        form.querySelectorAll("input, select").forEach(function (input) {
+            input.addEventListener("input", function () {
+                hapusError(input);
+            });
+        });
+
         form.addEventListener("submit", function (event) {
             const wajibValid = validasiInputWajib(form);
             const angkaValid = validasiAngka(form);
 
             if (!wajibValid || !angkaValid) {
                 event.preventDefault();
+
+                // Memindahkan kursor ke kolom pertama yang harus diperbaiki.
+                const inputPertamaSalah = form.querySelector("[aria-invalid='true']");
+                if (inputPertamaSalah) {
+                    inputPertamaSalah.focus();
+                }
             }
         });
     });

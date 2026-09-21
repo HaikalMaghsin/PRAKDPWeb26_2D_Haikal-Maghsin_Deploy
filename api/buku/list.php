@@ -8,8 +8,9 @@ unset($_SESSION['flash']);
 
 $daftarBuku = $pdo ? $pdo->query("SELECT * FROM buku ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC) : [];
 ?>
-        <section>
-            <h2>Daftar Buku</h2>
+        <section class="panel">
+            <h1>Daftar Buku</h1>
+            <p class="page-description">Jelajahi koleksi perpustakaan dan cek stok buku sebelum berkunjung.</p>
 
             <?php if ($databaseError): ?>
                 <p class="flash flash-error"><?php echo esc($databaseError); ?></p>
@@ -18,22 +19,24 @@ $daftarBuku = $pdo ? $pdo->query("SELECT * FROM buku ORDER BY id DESC")->fetchAl
             <a class="btn-tambah" href="tambah.php">+ Tambah Buku</a>
 
             <?php if ($flash): ?>
-                <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo $flash['pesan']; ?></p>
+                <p class="flash flash-<?php echo esc($flash['type']); ?>"><?php echo esc($flash['pesan']); ?></p>
             <?php endif; ?>
 
             <div class="search-box">
-                <label for="search-input">Cari Judul Buku</label>
-                <input type="text" id="search-input" placeholder="Ketik judul buku...">
+                <label for="search-input">Cari buku</label>
+                <input type="search" id="search-input" placeholder="Ketik judul atau nama pengarang..." aria-controls="tabel-data">
             </div>
+            <p class="filter-status" id="filter-status" role="status" hidden></p>
 
             <div class="table-responsive">
-            <table>
+            <table id="tabel-data">
                 <thead>
                     <tr>
                         <th>Judul</th>
                         <th>Pengarang</th>
                         <th>Tahun</th>
                         <th>Stok</th>
+                        <th>Kategori</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -49,9 +52,13 @@ $daftarBuku = $pdo ? $pdo->query("SELECT * FROM buku ORDER BY id DESC")->fetchAl
                             <td><?php echo esc($buku['pengarang']); ?></td>
                             <td><?php echo esc($buku['tahun']); ?></td>
                             <td><?php echo esc($buku['stok']); ?></td>
+                            <td><?php echo esc($buku['kategori']); ?></td>
                             <td>
-                                <button type="button" class="btn-aksi btn-edit">Edit</button>
-                                <button type="button" class="btn-aksi btn-hapus">Hapus</button>
+                                <a class="btn-aksi btn-edit" href="edit.php?id=<?php echo esc($buku['id']); ?>">Edit</a>
+                                <form class="form-hapus" method="post" action="proses_hapus.php" data-nama="<?php echo esc($buku['judul']); ?>">
+                                    <input type="hidden" name="id" value="<?php echo esc($buku['id']); ?>">
+                                    <button type="submit" class="btn-aksi btn-hapus">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                         <?php endforeach; ?>
