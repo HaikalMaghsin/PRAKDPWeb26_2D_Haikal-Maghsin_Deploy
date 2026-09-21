@@ -14,13 +14,11 @@ $routes = [
     '/buku/proses_tambah.php' => 'buku/proses_tambah.php',
     '/buku/edit.php' => 'buku/edit.php',
     '/buku/proses_edit.php' => 'buku/proses_edit.php',
-    '/buku/proses_hapus.php' => 'buku/proses_hapus.php',
     '/anggota/list.php' => 'anggota/list.php',
     '/anggota/tambah.php' => 'anggota/tambah.php',
     '/anggota/proses_tambah.php' => 'anggota/proses_tambah.php',
     '/anggota/edit.php' => 'anggota/edit.php',
     '/anggota/proses_edit.php' => 'anggota/proses_edit.php',
-    '/anggota/proses_hapus.php' => 'anggota/proses_hapus.php',
 ];
 
 if (!isset($routes[$path])) {

@@ -53,7 +53,8 @@ $daftarAnggota = $pdo ? $pdo->query("SELECT * FROM anggota ORDER BY id DESC")->f
                             <td><?php echo esc($anggota['no_hp']); ?></td>
                             <td>
                                 <a class="btn-aksi btn-edit" href="edit.php?id=<?php echo esc($anggota['id']); ?>">Edit</a>
-                                <form class="form-hapus" method="post" action="proses_hapus.php" data-nama="<?php echo esc($anggota['nama']); ?>">
+                                <form class="form-hapus" method="post" action="proses_edit.php" data-nama="<?php echo esc($anggota['nama']); ?>">
+                                    <input type="hidden" name="aksi" value="hapus">
                                     <input type="hidden" name="id" value="<?php echo esc($anggota['id']); ?>">
                                     <button type="submit" class="btn-aksi btn-hapus">Hapus</button>
                                 </form>

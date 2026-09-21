@@ -55,7 +55,8 @@ $daftarBuku = $pdo ? $pdo->query("SELECT * FROM buku ORDER BY id DESC")->fetchAl
                             <td><?php echo esc($buku['kategori']); ?></td>
                             <td>
                                 <a class="btn-aksi btn-edit" href="edit.php?id=<?php echo esc($buku['id']); ?>">Edit</a>
-                                <form class="form-hapus" method="post" action="proses_hapus.php" data-nama="<?php echo esc($buku['judul']); ?>">
+                                <form class="form-hapus" method="post" action="proses_edit.php" data-nama="<?php echo esc($buku['judul']); ?>">
+                                    <input type="hidden" name="aksi" value="hapus">
                                     <input type="hidden" name="id" value="<?php echo esc($buku['id']); ?>">
                                     <button type="submit" class="btn-aksi btn-hapus">Hapus</button>
                                 </form>

@@ -8,6 +8,31 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+$aksi = $_POST['aksi'] ?? 'edit';
+
+// Proses hapus digabung di file ini agar jumlah Serverless Function lebih sedikit.
+if ($aksi === 'hapus') {
+    if (!$pdo || !$id) {
+        $_SESSION['flash'] = ['type' => 'error', 'pesan' => $pdo ? 'ID buku tidak valid.' : $databaseError];
+        header('Location: list.php');
+        exit;
+    }
+
+    try {
+        $stmt = $pdo->prepare('DELETE FROM buku WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+
+        $_SESSION['flash'] = $stmt->rowCount() > 0
+            ? ['type' => 'success', 'pesan' => 'Buku berhasil dihapus.']
+            : ['type' => 'error', 'pesan' => 'Data buku tidak ditemukan.'];
+    } catch (Throwable $exception) {
+        $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Buku gagal dihapus.'];
+    }
+
+    header('Location: list.php');
+    exit;
+}
+
 $judul = trim($_POST['judul'] ?? '');
 $pengarang = trim($_POST['pengarang'] ?? '');
 $tahun = $_POST['tahun'] ?? '';
@@ -56,4 +81,3 @@ try {
     header('Location: edit.php?id=' . $id);
 }
 exit;
-
