@@ -41,5 +41,5 @@ try {
 
     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (Throwable $exception) {
-    $databaseError = 'Data perpustakaan belum bisa dimuat. Silakan hubungi pengelola.';
+    $databaseError = 'Data warung belum bisa dimuat. Silakan periksa koneksi database.';
 }

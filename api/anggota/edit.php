@@ -50,11 +50,11 @@ include __DIR__ . '/../includes/header.php';
                     </p>
                     <p>
                         <label for="alamat">Alamat</label>
-                        <input type="text" id="alamat" name="alamat" value="<?php echo esc($anggota['alamat']); ?>">
+                        <input type="text" id="alamat" name="alamat" value="<?php echo esc($anggota['alamat']); ?>" required>
                     </p>
                     <p>
                         <label for="no_hp">No. HP</label>
-                        <input type="tel" id="no_hp" name="no_hp" value="<?php echo esc($anggota['no_hp']); ?>">
+                        <input type="tel" id="no_hp" name="no_hp" value="<?php echo esc($anggota['no_hp']); ?>" required>
                     </p>
                     <p class="form-actions">
                         <button type="submit">Simpan Perubahan</button>

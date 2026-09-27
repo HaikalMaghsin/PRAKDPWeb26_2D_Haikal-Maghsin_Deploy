@@ -33,6 +33,7 @@ if (!empty($errors)) {
     exit;
 }
 
+try {
 $stmt = $pdo->prepare(
     "INSERT INTO anggota (nama, no_anggota, alamat, no_hp)
      VALUES (:nama, :no_anggota, :alamat, :no_hp)
@@ -47,4 +48,9 @@ $stmt->execute([
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Anggota berhasil ditambahkan.'];
 header('Location: list.php');
+} catch (PDOException $exception) {
+    $_SESSION['flash'] = ['type' => 'error', 'pesan' => $exception->getCode() === '23505'
+        ? 'Nomor anggota sudah digunakan.' : 'Anggota gagal disimpan. Periksa tabel database.'];
+    header('Location: tambah.php');
+}
 exit;

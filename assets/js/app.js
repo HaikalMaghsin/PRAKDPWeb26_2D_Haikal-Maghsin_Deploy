@@ -1,155 +1,74 @@
-function initNavToggle() {
-    const toggleBtn = document.getElementById("nav-toggle-btn");
-    const nav = document.getElementById("menu-utama");
-
-    if (!toggleBtn || !nav) return;
-
-    toggleBtn.addEventListener("click", function () {
-        const terbuka = nav.classList.toggle("nav-open");
-        toggleBtn.setAttribute("aria-expanded", terbuka ? "true" : "false");
+// Tanya dulu sebelum data dihapus.
+document.querySelectorAll(".form-hapus").forEach(function (form) {
+    form.addEventListener("submit", function (event) {
+        if (!confirm('Hapus "' + form.dataset.nama + '"?')) event.preventDefault();
     });
-}
-
-function initHapusConfirm() {
-    const daftarFormHapus = document.querySelectorAll(".form-hapus");
-
-    daftarFormHapus.forEach(function (form) {
-        form.addEventListener("submit", function (event) {
-            const namaData = form.dataset.nama || "data ini";
-            const yakin = confirm('Yakin ingin menghapus "' + namaData + '"?');
-
-            if (!yakin) {
-                event.preventDefault();
-            }
-        });
-    });
-}
-
-function initTableFilter() {
-    const inputCari = document.getElementById("search-input");
-    const tabel = document.querySelector(".table-responsive table");
-
-    if (!inputCari || !tabel) return;
-
-    inputCari.addEventListener("input", function () {
-        const keyword = inputCari.value.trim().toLowerCase();
-        const baris = tabel.querySelectorAll("tbody tr");
-        const status = document.getElementById("filter-status");
-        let ditemukan = 0;
-
-        baris.forEach(function (row) {
-            // Baris pesan tabel kosong bukan data yang perlu disaring.
-            if (row.querySelector("td[colspan]")) return;
-            const isiBaris = row.textContent.toLowerCase();
-            const cocok = isiBaris.includes(keyword);
-            row.hidden = !cocok;
-            if (cocok) ditemukan++;
-        });
-
-        if (status) {
-            status.hidden = keyword === "";
-            status.textContent = ditemukan > 0
-                ? ditemukan + " hasil ditemukan."
-                : "Tidak ada data yang cocok. Coba kata kunci lain.";
-        }
-    });
-}
-
-function hapusError(input) {
-    const error = input.parentElement.querySelector(".error");
-    if (error) {
-        error.remove();
-    }
-
-    input.removeAttribute("aria-invalid");
-    input.removeAttribute("aria-describedby");
-}
-
-function tampilkanError(input, pesan) {
-    hapusError(input);
-
-    const error = document.createElement("span");
-    error.className = "error";
-    error.id = input.id + "-error";
-    error.textContent = pesan;
-    input.insertAdjacentElement("afterend", error);
-
-    // Memberi tanda bahwa kolom ini masih salah.
-    input.setAttribute("aria-invalid", "true");
-    input.setAttribute("aria-describedby", error.id);
-}
-
-function validasiInputWajib(form) {
-    let valid = true;
-    const inputWajib = form.querySelectorAll("[required]");
-
-    inputWajib.forEach(function (input) {
-        if (input.value.trim() === "") {
-            tampilkanError(input, "Form ini wajib diisi.");
-            valid = false;
-        } else {
-            hapusError(input);
-        }
-    });
-
-    return valid;
-}
-
-function validasiAngka(form) {
-    let valid = true;
-    const tahun = form.querySelector("[name='tahun']");
-    const stok = form.querySelector("[name='stok']");
-
-    if (tahun && tahun.value.trim() !== "") {
-        const nilaiTahun = Number(tahun.value);
-        if (nilaiTahun < 1900 || nilaiTahun > 2026) {
-            tampilkanError(tahun, "Tahun harus berada di antara 1900 sampai 2026.");
-            valid = false;
-        }
-    }
-
-    if (stok && stok.value.trim() !== "") {
-        const nilaiStok = Number(stok.value);
-        if (nilaiStok < 0) {
-            tampilkanError(stok, "Stok tidak boleh bernilai negatif.");
-            valid = false;
-        }
-    }
-
-    return valid;
-}
-
-function initValidasiForm() {
-    const daftarForm = document.querySelectorAll("form[data-validate='true']");
-
-    daftarForm.forEach(function (form) {
-        // Pesan error hilang saat pengguna mulai memperbaiki isi kolom.
-        form.querySelectorAll("input, select").forEach(function (input) {
-            input.addEventListener("input", function () {
-                hapusError(input);
-            });
-        });
-
-        form.addEventListener("submit", function (event) {
-            const wajibValid = validasiInputWajib(form);
-            const angkaValid = validasiAngka(form);
-
-            if (!wajibValid || !angkaValid) {
-                event.preventDefault();
-
-                // Memindahkan kursor ke kolom pertama yang harus diperbaiki.
-                const inputPertamaSalah = form.querySelector("[aria-invalid='true']");
-                if (inputPertamaSalah) {
-                    inputPertamaSalah.focus();
-                }
-            }
-        });
-    });
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    initNavToggle();
-    initHapusConfirm();
-    initTableFilter();
-    initValidasiForm();
 });
+
+// Cek form dan pindahkan kursor ke kolom pertama yang masih salah.
+document.querySelectorAll("[data-validate]").forEach(function (form) {
+    const inputs = form.querySelectorAll("input:not([type='hidden']), select");
+    inputs.forEach(function (input) {
+        input.addEventListener("input", function () {
+            input.removeAttribute("aria-invalid");
+            input.removeAttribute("aria-describedby");
+            const pesan = input.parentElement.querySelector(".error");
+            if (pesan) pesan.remove();
+        });
+    });
+    form.addEventListener("submit", function (event) {
+        let pertama = null;
+        form.querySelectorAll(".error").forEach(function (pesan) { pesan.remove(); });
+        inputs.forEach(function (input) {
+            input.removeAttribute("aria-invalid");
+            input.removeAttribute("aria-describedby");
+            let pesan = "";
+            if (input.required && input.value.trim() === "") pesan = "Form ini wajib diisi.";
+            else if (!input.checkValidity()) pesan = "Isian belum sesuai. Periksa batas angka.";
+            if (pesan) {
+                const teks = document.createElement("span");
+                teks.className = "error";
+                teks.id = input.id + "-error";
+                teks.textContent = pesan;
+                input.after(teks);
+                input.setAttribute("aria-invalid", "true");
+                input.setAttribute("aria-describedby", teks.id);
+                if (!pertama) pertama = input;
+            }
+        });
+        if (pertama) {
+            event.preventDefault();
+            pertama.focus();
+        }
+    });
+});
+
+// Tampilkan perkiraan total saat menu atau jumlah diganti.
+const menu = document.getElementById("menu");
+const jumlah = document.getElementById("jumlah");
+function hitungTotal() {
+    const harga = Number(menu.selectedOptions[0].dataset.harga || 0);
+    const total = harga * Number(jumlah.value);
+    document.getElementById("total").textContent = "Rp " + total.toLocaleString("id-ID");
+}
+if (menu && jumlah) {
+    menu.addEventListener("change", hitungTotal);
+    jumlah.addEventListener("input", hitungTotal);
+    hitungTotal();
+}
+
+// Cari anggota dari isi tabel.
+const cari = document.getElementById("search-input");
+if (cari) {
+    cari.addEventListener("input", function () {
+        let hasil = 0;
+        document.querySelectorAll("#tabel-data tbody tr").forEach(function (baris) {
+            if (baris.querySelector("[colspan]")) return;
+            baris.hidden = !baris.textContent.toLowerCase().includes(cari.value.toLowerCase().trim());
+            if (!baris.hidden) hasil++;
+        });
+        const status = document.getElementById("filter-status");
+        status.hidden = cari.value === "";
+        status.textContent = hasil + " anggota ditemukan.";
+    });
+}

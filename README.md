@@ -1,79 +1,67 @@
-# SIMPUS-Mini Deploy
+# Geprek Kita
 
-Repo ini adalah versi deploy kumulatif SIMPUS-Mini milik Haikal Maghsin. Isi root merepresentasikan hasil Jobsheet 1 sampai 8 dalam satu aplikasi PHP.
+Panduan belajar UTS: [Handbook Geprek Kita](docs/HANDBOOK-GEPREK-KITA.md).
+Versi siap cetak tersedia di [handbook HTML](docs/HANDBOOK-GEPREK-KITA.html).
+Buka file HTML di browser lalu pilih Cetak / Simpan PDF.
 
-## Materi yang diterapkan
+Handbook berisi 9 bab pembuatan, screenshot aplikasi, pengujian, dan lampiran UTS.
+Sumbernya adalah Markdown. Setelah mengeditnya, jalankan
+`python scripts/build_handbook.py` untuk memperbarui versi HTML, lalu cetak
+ulang ke PDF melalui browser. File PDF harus diperbarui terpisah agar isinya sama.
 
-- Jobsheet 1-4: struktur HTML, CSS, responsif, dan desain halaman.
-- Jobsheet 5: hamburger menu, pencarian, validasi form, serta konfirmasi hapus dengan JavaScript.
-- Jobsheet 6: pemisahan data dari halaman statis sebagai tahap sebelum server-side.
-- Jobsheet 7: PHP, `include`, form `POST`, validasi server, dan flash message.
-- Jobsheet 8: PostgreSQL melalui PDO, prepared statement, `SELECT`, dan `COUNT(*)`.
+## Rangkaian repo dan masterpage
 
-## Struktur
+Repo praktikum (folder lokal ../P.D.Web) adalah sumber latihan.
+Repo deploy ini menyimpan masterpage dan salinan hasil yang siap ditampilkan:
 
-- `api/` berisi halaman PHP dan kode server.
-- `assets/` berisi stylesheet dan JavaScript.
-- `sql/01_buku_anggota.sql` berisi skema tabel PostgreSQL.
-- `vercel.json` mengarahkan rute publik ke PHP runtime.
+- / atau index.html: masterpage.
+- /prak1/ sampai /prak6/: HTML, CSS, JavaScript, dan data JSON latihan.
+- /prak7/: latihan PHP dan form, data sementara dalam session.
+- /prak8/: Geprek Kita dengan database, kodenya berada di api/.
 
-## Tampilan dan bahan handbook
+Prak 1 disalin dari kode-praktikum/jobsheet-01, Prak 2 dari folder utama,
+dan Prak 3–7 dari folder Jobsheet3–Jobsheet7 di repo praktikum.
+Tema SIMPUS pada arsip 1–7 dipertahankan. Prak 8 adalah proyek Geprek Kita.
+Salinan ini tidak otomatis tersinkron; perubahan sumber perlu disalin lagi.
+Repo praktikum belum diubah oleh penataan ini.
 
-Website menggunakan PHP, CSS, dan JavaScript biasa tanpa framework atau proses
-build. Font menggunakan font sistem agar halaman tidak perlu mengunduh font.
+Prak 7 memakai api/prak7.php sebagai pintu masuk agar tidak menambah
+satu fungsi deployment untuk setiap halaman. Session hanya untuk latihan,
+bukan penyimpanan permanen dan dapat hilang/berbeda antar-instance hosting.
+Rute lokal di router.php mengikuti rute hosting di vercel.json.
 
-- `api/index.php`: foto pembuka, pengantar singkat, jumlah buku dan anggota,
-  tautan ke halaman daftar, serta informasi jam buka dan aturan berkunjung.
-- `api/includes/header.php` dan `footer.php`: layout bersama melalui `include`.
-- `assets/css/style.css`: warna, jarak, Flexbox, Grid, foto transparan,
-  tabel, formulir, dan media query untuk layar ponsel.
-- `assets/js/app.js`: menu ponsel, pencarian tabel, pesan hasil pencarian,
-  validasi formulir, dan simulasi konfirmasi hapus.
-- `api/buku/` dan `api/anggota/`: tabel, formulir POST, session, validasi
-  server, serta proses tambah, edit, dan hapus data lewat PDO.
+Web sederhana untuk mencatat anggota pelanggan dan pesanan ayam geprek.
+Menggunakan HTML, CSS, JavaScript, PHP, dan PostgreSQL (Supabase).
 
-Beranda sengaja dibuat singkat untuk latihan dasar HTML, CSS, dan PHP.
-Jam buka merupakan contoh untuk praktikum dan bisa diganti di `api/index.php`.
-Website belum mencatat transaksi peminjaman. Data buku dan anggota sudah dapat
-ditambah, diedit, dan dihapus dari database PostgreSQL.
+## Menjalankan lokal
+1. Aktifkan ekstensi pdo_pgsql di PHP.
+2. Salin .env.example menjadi .env, lalu isi koneksi database.
+3. Jalankan isi sql/02_geprek.sql di SQL Editor Supabase.
+4. Jalankan: php -S localhost:8000 router.php
+5. Buka http://localhost:8000
 
-Foto lokal di `assets/images/perpustakaan.jpg` bersumber dari
-[Keisha Kim / Unsplash](https://unsplash.com/photos/a-man-and-a-woman-holding-a-book-in-a-library-sVY04fp6T5Q).
-Efek samar diterapkan melalui CSS, sehingga file foto aslinya tetap utuh.
+Tidak memerlukan npm. File .env jangan diunggah ke Git.
+Untuk Vercel, isi variabel yang sama di Environment Variables lalu deploy ulang.
+Konfigurasi memakai delapan fungsi PHP.
 
-## Menjalankan di lokal
+## Cara memakai
+1. Tambahkan anggota pelanggan.
+2. Buka Pesanan, pilih anggota, menu, dan jumlah.
+3. Simpan pesanan. Data bisa diedit atau dihapus dari tabel.
+4. Anggota yang punya pesanan tidak dapat dihapus sebelum pesanannya dihapus.
 
-Dari folder proyek, jalankan PHP development server di PowerShell:
+Menu dan harga diatur di api/includes/menu.php.
+Satu pesanan berisi satu jenis menu. Untuk menu lain, buat pesanan berikutnya.
+Total dihitung kembali di PHP dari harga menu, bukan dari nilai browser.
+Ini latihan pencatatan penjualan, belum mencakup login dan pembayaran.
 
-```powershell
-& "C:\xampp\php\php.exe" -S localhost:8000 router.php
-```
+## Bahan penjelasan UTS
+- HTML: header, nav, form, input, select, dan table.
+- CSS: warna, font, margin, padding, border, flex, dan media query.
+- JavaScript: validasi, fokus input, konfirmasi hapus, pencarian, dan total harga.
+- PHP: membaca POST, percabangan, perulangan, session, dan prepared statement.
+- Database: anggota terhubung ke pesanan melalui anggota_id.
 
-Jika PHP sudah tersedia di PATH, gunakan `php -S localhost:8000 router.php`.
-Buka http://localhost:8000. Tekan `Ctrl+C` untuk menghentikan server.
-Proyek ini memakai PHP, sehingga tidak membutuhkan `npm run dev`.
-
-Halaman tetap bisa dibuka tanpa database. Untuk membaca dan menyimpan data,
-aktifkan ekstensi PHP `pdo_pgsql`, siapkan database PostgreSQL, lalu jalankan
-`sql/01_buku_anggota.sql`. Setelah itu, buka file `.env` dan sesuaikan koneksinya:
-
-```dotenv
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=simpus
-DB_USER=postgres
-DB_PASS=password_postgresql
-DB_SSLMODE=disable
-```
-
-File `.env` diabaikan oleh Git agar password tidak ikut diunggah. File
-`.env.example` menjadi contoh konfigurasi tanpa menyimpan password asli.
-
-## Konfigurasi Vercel
-
-PHP di Vercel membutuhkan community runtime `vercel-php`. Tambahkan salah satu konfigurasi database berikut di **Vercel → Project → Settings → Environment Variables**:
-
-- `DATABASE_URL`: connection string PostgreSQL publik, atau
-- `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASS`, dan opsional `DB_SSLMODE`.
-
-Database lokal di komputer tidak bisa dipakai langsung oleh Vercel. Gunakan PostgreSQL yang dapat diakses dari internet, lalu jalankan `sql/01_buku_anggota.sql` pada database tersebut.
+assets/css/style.css diberi komentar singkat. Ubah padding tombol untuk
+ukurannya dan font-size untuk besar tulisan. Tidak memakai framework CSS.
+Data buku lama tidak dihapus dari database; aplikasi baru tidak memakainya.

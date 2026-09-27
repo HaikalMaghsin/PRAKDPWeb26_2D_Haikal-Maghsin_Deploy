@@ -8,7 +8,7 @@ unset($_SESSION['flash']);
         <section class="panel">
             <a class="back-link" href="list.php">&larr; Kembali ke daftar anggota</a>
             <h1>Tambah Anggota</h1>
-            <p class="page-description">Isi data anggota baru. Nama dan nomor anggota wajib diisi.</p>
+            <p class="page-description">Isi data pelanggan baru. Semua kolom wajib diisi.</p>
 
             <?php if ($flash): ?>
                 <p class="flash flash-<?php echo esc($flash['type']); ?>"><?php echo esc($flash['pesan']); ?></p>
@@ -25,11 +25,11 @@ unset($_SESSION['flash']);
                 </p>
                 <p>
                     <label for="alamat">Alamat</label>
-                    <input type="text" id="alamat" name="alamat">
+                    <input type="text" id="alamat" name="alamat" required>
                 </p>
                 <p>
                     <label for="no_hp">No. HP</label>
-                    <input type="tel" id="no_hp" name="no_hp">
+                    <input type="tel" id="no_hp" name="no_hp" required>
                 </p>
                 <p class="form-actions">
                     <button type="submit">Simpan anggota</button>

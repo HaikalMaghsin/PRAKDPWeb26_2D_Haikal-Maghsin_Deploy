@@ -26,7 +26,7 @@ if ($aksi === 'hapus') {
             ? ['type' => 'success', 'pesan' => 'Anggota berhasil dihapus.']
             : ['type' => 'error', 'pesan' => 'Data anggota tidak ditemukan.'];
     } catch (Throwable $exception) {
-        $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Anggota gagal dihapus.'];
+        $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Anggota gagal dihapus. Hapus pesanan anggota ini terlebih dahulu jika masih ada.'];
     }
 
     header('Location: list.php');
@@ -42,10 +42,10 @@ $errors = [];
 if (!$id) $errors[] = 'ID anggota tidak valid.';
 if ($nama === '') $errors[] = 'Nama wajib diisi.';
 if ($noAnggota === '') $errors[] = 'No. Anggota wajib diisi.';
-if ($alamat === ''){
+if ($alamat === '') {
     $errors[] = "Alamat wajib diisi.";
 }
-if ($noHp === ''){
+if ($noHp === '') {
     $errors[] = "No. Hp wajib diisi.";
 }
 if (!$pdo) {

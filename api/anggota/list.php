@@ -6,11 +6,18 @@ require __DIR__ . '/../includes/koneksi.php';
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
-$daftarAnggota = $pdo ? $pdo->query("SELECT * FROM anggota ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC) : [];
+$daftarAnggota = [];
+if ($pdo) {
+    try {
+        $daftarAnggota = $pdo->query("SELECT * FROM anggota ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $exception) {
+        $databaseError = 'Tabel anggota belum tersedia. Jalankan file sql/02_geprek.sql terlebih dahulu.';
+    }
+}
 ?>
         <section class="panel">
             <h1>Daftar Anggota</h1>
-            <p class="page-description">Lihat anggota yang terdaftar atau tambahkan anggota perpustakaan baru.</p>
+            <p class="page-description">Daftar anggota pelanggan Geprek Kita.</p>
 
             <?php if ($databaseError): ?>
                 <p class="flash flash-error"><?php echo esc($databaseError); ?></p>

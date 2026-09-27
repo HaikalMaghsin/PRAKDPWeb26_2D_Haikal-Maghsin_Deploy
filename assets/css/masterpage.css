@@ -1,0 +1,92 @@
+/* Ukuran kotak sudah termasuk padding dan border. */
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    background: #f5f4ef;
+    color: #293c4a;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+}
+a { text-decoration: none; }
+a:focus-visible { outline: 3px solid #537b99; outline-offset: 4px; }
+
+/* Header: nama web di kiri dan kelas di kanan. */
+.kepala {
+    padding: 20px max(24px, calc((100% - 1040px) / 2));
+    background: #fffefa;
+    border-bottom: 1px solid #dfe3e3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.brand { display: inline-flex; align-items: center; gap: 10px; color: #293c4a; font-weight: bold; }
+.logo { background: #304b5e; color: white; padding: 5px 9px; border-radius: 8px; }
+.kelas { color: #62717b; font-size: 13px; }
+main, footer { max-width: 1088px; margin: auto; padding: 0 24px; }
+
+/* Pengantar dua kolom. Font Georgia memberi bentuk judul yang berbeda. */
+.pengantar { display: grid; grid-template-columns: 2fr 1fr; align-items: center; gap: 48px; padding: 56px 0; }
+.keterangan { font-size: 11px; font-weight: bold; letter-spacing: 2px; color: #647a89; }
+h1 { font: normal 42px/1.2 Georgia, serif; letter-spacing: -1px; margin: 16px 0; }
+.pengantar p, .catatan { color: #62717b; }
+.tombol, .launch {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-weight: bold;
+}
+.tombol { margin-top: 12px; background: #304b5e; color: white; }
+.tombol:hover { background: #223b4d; }
+/* Tombol handbook memakai warna lebih terang. */
+.tombol-handbook { background: #e2e9ec; color: #304b5e; }
+.tombol-handbook:hover { background: #d0dce3; }
+
+/* Kotak identitas dibuat sederhana, tanpa gambar tambahan. */
+.identitas { display: flex; flex-direction: column; align-items: flex-start; border-left: 3px solid #ccd7dc; padding: 12px 0 12px 28px; gap: 5px; }
+.inisial { background: #e2e9ec; padding: 12px 16px; border-radius: 12px; font: 26px Georgia, serif; margin-bottom: 10px; }
+.identitas strong { font-size: 18px; }
+.identitas small { color: #62717b; margin-top: 8px; }
+
+/* Grid membuat dua kartu dalam satu baris. Gap adalah jarak antarkartu. */
+.judul-bagian { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+h2 { font-size: 24px; margin: 4px 0; }
+.jumlah, .label { border-radius: 5px; background: #e9edef; color: #526977; font-size: 12px; padding: 4px 9px; }
+.catatan { margin: 8px 0 24px; font-size: 13px; max-width: 720px; }
+.daftar-praktikum { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.kartu {
+    background: #fffefa;
+    border: 1px solid #dce2e4;
+    border-radius: 10px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+.kartu:hover { border-color: #98acb8; }
+.kartu-atas { display: flex; justify-content: space-between; align-items: center; }
+.nomor { font: 28px Georgia, serif; color: #718794; }
+h3 { font-size: 19px; margin: 16px 0 6px; }
+.kartu p { color: #62717b; margin: 0 0 22px; }
+.launch { margin-top: auto; background: #e9eef1; color: #304b5e; }
+.launch:hover { background: #d7e2e9; }
+/* Warna kartu terakhir dibedakan karena berisi proyek akhir. */
+.kartu-akhir { background: #edf2f4; border-color: #b6c7d1; }
+.kartu-akhir .launch { background: #304b5e; color: white; }
+.kartu-akhir .launch:hover { background: #223b4d; }
+footer { margin-top: 40px; padding-top: 24px; padding-bottom: 24px; border-top: 1px solid #dce2e4; display: flex; justify-content: space-between; gap: 16px; color: #62717b; font-size: 12px; }
+footer a { color: #304b5e; background: #e9eef1; padding: 5px 10px; border-radius: 5px; }
+
+/* Di HP, kolom ditumpuk dan ukuran judul diperkecil. */
+@media (max-width: 640px) {
+    .kepala { padding: 16px 20px; flex-wrap: wrap; }
+    main, footer { padding-left: 20px; padding-right: 20px; }
+    .pengantar { grid-template-columns: 1fr; gap: 28px; padding: 32px 0; }
+    h1 { font-size: 34px; }
+    .daftar-praktikum { grid-template-columns: 1fr; }
+    .kartu { padding: 20px; }
+    footer { flex-wrap: wrap; }
+}

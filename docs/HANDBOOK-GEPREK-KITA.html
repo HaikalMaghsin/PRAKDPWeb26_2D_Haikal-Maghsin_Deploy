@@ -1,0 +1,611 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Handbook Pembuatan Geprek Kita</title><style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #efefea; color: #293c4a; font: 15px/1.7 Arial, sans-serif; }
+main { max-width: 940px; margin: 24px auto; background: white; padding: 48px; }
+h1 { font: 38px/1.2 Georgia, serif; border-bottom: 4px solid #304b5e; padding-bottom: 24px; }
+h2 { font-size: 25px; margin-top: 48px; color: #304b5e; }
+h3 { font-size: 18px; margin-top: 28px; }
+a { color: #315f7b; }
+code { background: #edf1f3; font: 0.9em Consolas, monospace; overflow-wrap: anywhere; }
+pre { padding: 16px; background: #edf1f3; white-space: pre-wrap; overflow-wrap: anywhere; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { padding: 8px; border: 1px solid #cbd6dc; text-align: left; vertical-align: top; }
+th { background: #e8eef1; }
+.table { overflow-x: auto; }
+figure { margin: 24px 0; }
+img { width: 100%; height: auto; border: 1px solid #d6dfe4; }
+nav { padding: 20px; background: #eef2f4; margin-top: 32px; }
+nav h2 { margin-top: 0; }
+nav a { display: block; padding: 3px 0; }
+.toolbar { max-width: 940px; margin: 20px auto; display: flex; flex-wrap: wrap; gap: 10px; }
+.toolbar a, button { background: #304b5e; color: white; border: 0; border-radius: 5px; padding: 10px 14px; font: inherit; text-decoration: none; cursor: pointer; }
+@media(max-width:640px) { main { padding: 22px; margin: 0; } .toolbar { padding: 0 16px; } h1 { font-size: 30px; } }
+@page { size: A4; margin: 18mm; }
+@media print {
+    body { background: white; font-size: 10pt; line-height: 1.5; }
+    main { padding: 0; margin: 0; max-width: none; }
+    .toolbar { display: none; }
+    .cover { padding-top: 20mm; break-after: page; }
+    nav { background: white; margin: 0; padding: 0; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; break-before: page; margin-top: 0; }
+    h3 { font-size: 12pt; }
+    h1, h2, h3 { break-after: avoid; }
+    table { font-size: 9pt; }
+    tr, pre, figure { break-inside: avoid; }
+    p, li { orphans: 3; widows: 3; }
+    a { color: inherit; text-decoration: none; }
+    img { max-height: 145mm; object-fit: contain; }
+}
+</style></head><body><div class="toolbar"><button onclick="window.print()">Cetak / Simpan PDF</button><a href="/docs/HANDBOOK-GEPREK-KITA.pdf" target="_blank" rel="noopener">Buka PDF</a><a href="/">Masterpage</a></div><main><section class="cover"><h1 id="bagian-1">Handbook Pembuatan Web Geprek Kita</h1>
+<p><strong>Haikal Maghsin · NIM 254107020189 · TI 2D</strong>  </p>
+<p>Desain dan Pemrograman Web · Panduan praktik untuk UTS  </p>
+<p>Edisi revisi · 27 September 2026</p>
+<p>Panduan ini mengikuti urutan membangun dan memahami aplikasi: persiapan, struktur halaman, desain, interaksi, database, dan proses transaksi. Buka proyek sambil membaca, jalankan setiap langkah, lalu cocokkan hasilnya.</p>
+<p>Potongan kode merupakan bagian penting dari implementasi, bukan pengganti semua isi file. Gunakan berkas sumber yang disebutkan untuk melihat kode lengkap. Bila kode sudah ada, pelajari dan ubah salinan latihan; jangan menempel ulang potongan hingga menjadi duplikat.</p></section><nav aria-label="Daftar isi"><h2>Daftar Isi</h2><a href="#bagian-2">Cara menggunakan handbook</a><a href="#bagian-3">Bab 1 — Mengenal aplikasi</a><a href="#bagian-6">Bab 2 — Menyiapkan proyek dan server</a><a href="#bagian-10">Bab 3 — Membuat kerangka halaman dan menu</a><a href="#bagian-12">Bab 4 — Membuat form dan tabel HTML</a><a href="#bagian-15">Bab 5 — Menata halaman dengan CSS</a><a href="#bagian-20">Bab 6 — Menambahkan interaksi JavaScript</a><a href="#bagian-26">Bab 7 — Menyiapkan database dan koneksi PHP</a><a href="#bagian-29">Bab 8 — Memproses tambah, edit, dan hapus</a><a href="#bagian-36">Bab 9 — Pengujian dan perbaikan</a><a href="#bagian-40">Lampiran A — Tanya jawab UTS</a><a href="#bagian-41">Lampiran B — Latihan dan presentasi</a></nav><h2 id="bagian-2">Cara menggunakan handbook</h2>
+<ol>
+<li>Baca tujuan dan langkah kerja setiap bab.</li>
+<li>Buka file yang dirujuk.</li>
+<li>Ikuti penjelasan kode dan perubahan kecil yang disarankan.</li>
+<li>Periksa hasil melalui browser.</li>
+<li>Catat pengujian aktual pada bab terakhir.</li>
+</ol>
+<p>Screenshot diambil dari aplikasi lokal saat revisi. Screenshot membuktikan tampilan yang terlihat, bukan bukti seluruh operasi simpan, edit, dan hapus sudah diuji.</p>
+<h2 id="bagian-3">Bab 1 — Mengenal aplikasi</h2>
+<p><strong>Tujuan:</strong> memahami kebutuhan sebelum menulis kode.</p>
+<h3 id="bagian-4">Langkah kerja</h3>
+<ol>
+<li>Tentukan pengguna aplikasi: petugas yang mencatat pelanggan dan pesanan.</li>
+<li>Tentukan tiga halaman inti: Menu, Anggota, dan Pesanan.</li>
+<li>Tentukan data: identitas pelanggan, pilihan menu, harga, dan jumlah.</li>
+<li>Batasi fitur agar proyek tetap mudah dijelaskan.</li>
+</ol>
+<h3 id="bagian-5">Hasil tampilan awal</h3>
+<figure><img src="images/menu.png" alt="Halaman menu Geprek Kita"></figure>
+<p>Gambar 1. Halaman menu menampilkan tiga pilihan makanan dan tautan pemesanan.</p>
+<p>Geprek Kita mencatat anggota pelanggan dan pesanan makanan. Aplikasi menggunakan HTML, CSS, JavaScript, PHP, dan PostgreSQL. Supabase menyediakan database PostgreSQL yang dihubungi PHP melalui PDO.</p>
+<p>Repository terkait: <a href="https://github.com/HaikalMaghsin/PRAKDPWeb26_2D_Haikal-Maghsin_Deploy">PRAKDPWeb26_2D_Haikal-Maghsin_Deploy</a>.</p>
+<p>Handbook disusun dari berkas lokal terbaru yang terhubung ke repository tersebut. Akses GitHub belum berhasil diverifikasi saat penyusunan, dan perubahan lokal belum tentu sudah di-push. Jadi penjelasan mengacu pada kode lokal, bukan klaim bahwa semua isinya sudah tersedia di GitHub.</p>
+<p>Fitur yang ada:</p>
+<ul>
+<li>Menampilkan tiga menu dan harga.</li>
+<li>Menambah, melihat, mengedit, menghapus, dan mencari anggota.</li>
+<li>Menambah, melihat, mengedit, dan menghapus pesanan.</li>
+<li>Menghitung perkiraan total di browser.</li>
+<li>Memvalidasi input di browser dan di PHP.</li>
+<li>Menyimpan anggota dan pesanan ke database jika koneksi dan tabel sudah siap.</li>
+</ul>
+<p>Satu pesanan memuat satu jenis menu. Proyek belum menyediakan login, pembayaran, keranjang banyak menu, atau pengelolaan stok. Menu disimpan sebagai array PHP, bukan tabel database.</p>
+<p><strong>Status saat revisi:</strong> halaman pesanan lokal menampilkan data tanpa pesan koneksi gagal. Ini menunjukkan pembacaan data berjalan pada sesi tersebut. Operasi tambah, edit, dan hapus belum diuji ulang saat revisi handbook.</p>
+<h2 id="bagian-6">Bab 2 — Menyiapkan proyek dan server</h2>
+<p><strong>Tujuan:</strong> dapat membuka proyek melalui PHP, bukan dengan klik langsung file PHP.</p>
+<h3 id="bagian-7">Langkah kerja</h3>
+<ol>
+<li>Buka folder repo deploy di VS Code.</li>
+<li>Periksa struktur file di bawah.</li>
+<li>Siapkan PHP, ekstensi database, dan konfigurasi lokal.</li>
+<li>Jalankan server dan buka /prak8/.</li>
+<li>Pastikan daftar menu muncul sebelum melanjutkan.</li>
+</ol>
+<p>Alamat yang dibuka pengguna tidak selalu sama dengan letak file. Rute <code>/prak8/</code> diarahkan ke kode di folder <code>api/</code>.</p>
+<div class="table"><table><thead><tr><th>Alamat / file</th><th>Kegunaan</th></tr></thead><tbody>
+<tr><td><code>/</code> → <code>index.html</code></td><td>Masterpage untuk membuka praktikum 1–8</td></tr>
+<tr><td><code>/prak8/index.php</code> → <code>api/index.php</code></td><td>Halaman menu Geprek Kita</td></tr>
+<tr><td><code>api/includes/header.php</code></td><td>Bagian atas, navigasi, fungsi esc</td></tr>
+<tr><td><code>api/includes/footer.php</code></td><td>Bagian bawah dan pemanggilan JavaScript</td></tr>
+<tr><td><code>api/includes/menu.php</code></td><td>Array nama menu dan harga</td></tr>
+<tr><td><code>api/includes/env.php</code></td><td>Membaca konfigurasi lokal dari .env</td></tr>
+<tr><td><code>api/includes/koneksi.php</code></td><td>Membuat koneksi PDO ke PostgreSQL</td></tr>
+<tr><td><code>api/includes/session.php</code></td><td>Memulai session untuk pesan sementara</td></tr>
+<tr><td><code>api/anggota/list.php</code></td><td>Membaca dan menampilkan anggota</td></tr>
+<tr><td><code>api/anggota/tambah.php</code></td><td>Form tambah anggota</td></tr>
+<tr><td><code>api/anggota/proses_tambah.php</code></td><td>Validasi dan INSERT anggota</td></tr>
+<tr><td><code>api/anggota/edit.php</code></td><td>Mengambil anggota berdasarkan ID untuk form edit</td></tr>
+<tr><td><code>api/anggota/proses_edit.php</code></td><td>UPDATE atau DELETE anggota</td></tr>
+<tr><td><code>api/pesanan/list.php</code></td><td>Form, daftar, tambah, edit, dan hapus pesanan</td></tr>
+<tr><td><code>assets/css/style.css</code></td><td>CSS aplikasi Geprek Kita</td></tr>
+<tr><td><code>assets/js/app.js</code></td><td>Validasi, konfirmasi, pencarian, dan total</td></tr>
+<tr><td><code>sql/02_geprek.sql</code></td><td>Struktur tabel anggota dan pesanan</td></tr>
+<tr><td><code>router.php</code></td><td>Pengaturan alamat ketika server PHP lokal dijalankan</td></tr>
+<tr><td><code>vercel.json</code></td><td>Pengaturan rute dan fungsi PHP untuk deployment</td></tr>
+</tbody></table></div>
+<p>Masterpage memakai <code>assets/css/masterpage.css</code>, bukan CSS aplikasi. Repo praktikum berisi sumber latihan; repo deploy ini berisi masterpage dan salinan latihan yang siap ditampilkan.</p>
+<p>Session dipakai untuk pesan sementara setelah redirect, misalnya “Anggota berhasil ditambahkan.” Data anggota dan pesanan tetap berada di PostgreSQL, bukan session. Session sementara di hosting serverless tidak dijamin tersedia pada instance lain; jangan menjadikannya penyimpanan utama.</p>
+<h3 id="bagian-8">Menjalankan lokal</h3>
+<ol>
+<li>Pastikan PHP tersedia dan ekstensi pdo_pgsql aktif.</li>
+<li>Siapkan .env dari .env.example; isi kredensial database sendiri.</li>
+<li>Jalankan isi sql/02_geprek.sql di SQL Editor database yang dipakai.</li>
+<li>Buka terminal di folder repo deploy.</li>
+<li>Jalankan perintah berikut.</li>
+</ol>
+<pre><code>php -S localhost:8000 router.php</code></pre>
+<p>Jika PHP belum masuk PATH pada komputer ini:</p>
+<pre><code>&amp; &#x27;C:\xampp\php\php.exe&#x27; -S localhost:8000 router.php</code></pre>
+<p>Buka <code>http://localhost:8000/prak8/</code>. Alamat <code>http://localhost:8000/</code> adalah masterpage. Proyek ini tidak membutuhkan npm run dev.</p>
+<h3 id="bagian-9">Arti konfigurasi</h3>
+<p>Contoh bentuk isi .env berikut hanya memakai placeholder. Ganti dengan nilai koneksi milik sendiri. Bila memakai database Supabase bernama postgres, jangan mengganti DB_NAME hanya karena judul aplikasi berubah.</p>
+<pre><code>DB_HOST=alamat_server_database
+DB_PORT=5432
+DB_NAME=postgres
+DB_USER=username_database
+DB_PASS=&quot;password_database_sendiri&quot;
+DB_SSLMODE=require</code></pre>
+<p>Di terminal, perintah <code>php -m</code> menampilkan ekstensi aktif. Cari <code>pdo_pgsql</code>. Jika tidak ada, aktifkan ekstensi itu pada php.ini milik PHP yang sedang dijalankan, lalu restart server PHP.</p>
+<div class="table"><table><thead><tr><th>Variabel</th><th>Isi</th></tr></thead><tbody>
+<tr><td>DB_HOST</td><td>Alamat server database</td></tr>
+<tr><td>DB_PORT</td><td>Port koneksi</td></tr>
+<tr><td>DB_NAME</td><td>Nama database, bukan connection string lengkap</td></tr>
+<tr><td>DB_USER</td><td>Username database</td></tr>
+<tr><td>DB_PASS</td><td>Password database, bukan password akun dashboard</td></tr>
+<tr><td>DB_SSLMODE</td><td>Pengaturan SSL; ikuti konfigurasi koneksi yang digunakan</td></tr>
+<tr><td>DATABASE_URL</td><td>Alternatif URI koneksi lengkap</td></tr>
+</tbody></table></div>
+<p>Kode memprioritaskan DATABASE_URL jika terisi. Jika tidak, kode membaca variabel DB_*. Loader .env tidak menimpa variabel yang sudah tersedia di environment proses/server.</p>
+<p>.env tidak boleh dimasukkan ke handbook atau Git. Pada hosting, isi Environment Variables yang diperlukan. Mengubah file lokal tidak otomatis memperbarui konfigurasi deployment.</p>
+<h2 id="bagian-10">Bab 3 — Membuat kerangka halaman dan menu</h2>
+<p><strong>File utama:</strong> api/includes/header.php, api/includes/footer.php, api/includes/menu.php, api/index.php.</p>
+<p><strong>Tujuan:</strong> memahami bagaimana satu kerangka dipakai banyak halaman.</p>
+<h3 id="bagian-11">Langkah kerja</h3>
+<ol>
+<li>Letakkan pembuka HTML, judul, CSS, header, dan navigasi di header.php.</li>
+<li>Letakkan penutup halaman dan script di footer.php.</li>
+<li>Tulis array menu di menu.php.</li>
+<li>Muat header dan menu melalui index.php.</li>
+<li>Gunakan foreach untuk menghasilkan baris tabel.</li>
+</ol>
+<pre><code>$page_title = &#x27;Menu&#x27;;
+include __DIR__ . &#x27;/includes/header.php&#x27;;
+require __DIR__ . &#x27;/includes/menu.php&#x27;;</code></pre>
+<p>page_title memberi nama halaman. include memuat kerangka. require memuat menu yang dibutuhkan. __DIR__ membuat lokasi file dihitung dari folder file PHP, bukan dari alamat browser.</p>
+<pre><code>foreach ($daftarMenu as $menu) {
+    echo &#x27;&lt;tr&gt;&lt;td&gt;&#x27; . esc($menu[&#x27;nama&#x27;]) . &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+}</code></pre>
+<p>Potongan di atas adalah contoh minimal untuk memahami perulangan. Implementasi lengkap di index.php juga menampilkan harga dengan number_format.</p>
+<p><strong>Periksa hasil:</strong> tiga baris menu muncul. Ubah satu nama pada menu.php, refresh, dan pastikan perubahan terlihat.</p>
+<div class="table"><table><thead><tr><th>Kode</th><th>Makna</th></tr></thead><tbody>
+<tr><td>$nama</td><td>Variabel PHP</td></tr>
+<tr><td>$_POST[&#x27;nama&#x27;]</td><td>Nilai nama dari form POST</td></tr>
+<tr><td>$_GET[&#x27;id&#x27;]</td><td>Nilai id dari URL</td></tr>
+<tr><td>??</td><td>Nilai pengganti jika data tidak ada atau null</td></tr>
+<tr><td>trim()</td><td>Menghapus spasi di awal dan akhir</td></tr>
+<tr><td>if / else</td><td>Memilih tindakan berdasarkan kondisi</td></tr>
+<tr><td>foreach</td><td>Mengulang setiap item array</td></tr>
+<tr><td>require / include</td><td>Memuat file PHP lain</td></tr>
+<tr><td>require_once</td><td>Memuat file wajib sekali saja</td></tr>
+<tr><td>__DIR__</td><td>Folder tempat file PHP itu berada</td></tr>
+<tr><td>header(&#x27;Location: ...&#x27;)</td><td>Mengarahkan browser ke alamat lain</td></tr>
+<tr><td>exit</td><td>Menghentikan eksekusi setelah redirect</td></tr>
+<tr><td>try / catch</td><td>Menangani kegagalan melalui exception</td></tr>
+</tbody></table></div>
+<p>Contoh membaca form:</p>
+<pre><code>$nama = trim($_POST[&#x27;nama&#x27;] ?? &#x27;&#x27;);</code></pre>
+<p>Jika nama belum dikirim, gunakan string kosong supaya tidak membaca indeks yang tidak tersedia.</p>
+<p>Menu menggunakan array asosiatif:</p>
+<pre><code>$daftarMenu = [
+    &#x27;original&#x27; =&gt; [&#x27;nama&#x27; =&gt; &#x27;Geprek Original&#x27;, &#x27;harga&#x27; =&gt; 15000],
+    &#x27;keju&#x27; =&gt; [&#x27;nama&#x27; =&gt; &#x27;Geprek Keju&#x27;, &#x27;harga&#x27; =&gt; 18000],
+    &#x27;sambal_ijo&#x27; =&gt; [&#x27;nama&#x27; =&gt; &#x27;Geprek Sambal Ijo&#x27;, &#x27;harga&#x27; =&gt; 16000],
+];</code></pre>
+<p>Kode seperti <code>original</code> menjadi kunci menu. Angka harga tidak memakai titik ribuan. Titik pemisah ditambahkan saat ditampilkan.</p>
+<p>Fungsi <code>esc()</code> di header memakai <code>htmlspecialchars(..., ENT_QUOTES, &#x27;UTF-8&#x27;)</code>. Tujuannya membuat isi pengguna ditampilkan sebagai teks HTML, bukan dianggap markup. Ini berbeda dari prepared statement yang melindungi pemakaian nilai dalam SQL.</p>
+<h2 id="bagian-12">Bab 4 — Membuat form dan tabel HTML</h2>
+<p><strong>File utama:</strong> api/anggota/tambah.php dan api/pesanan/list.php.</p>
+<p><strong>Tujuan:</strong> menghubungkan input yang terlihat dengan data yang dikirim.</p>
+<h3 id="bagian-13">Langkah kerja</h3>
+<ol>
+<li>Buat form anggota berisi nama, nomor anggota, alamat, dan nomor HP.</li>
+<li>Beri setiap input label, id, dan name yang sesuai.</li>
+<li>Gunakan method POST serta action proses_tambah.php pada form anggota.</li>
+<li>Buat form pesanan dengan select anggota, select menu, dan input jumlah.</li>
+<li>Siapkan tabel untuk menampilkan hasil.</li>
+</ol>
+<figure><img src="images/anggota.png" alt="Form tambah anggota"></figure>
+<p>Gambar 2. Form anggota sebelum diisi. Nama input menjadi kunci data pada PHP.</p>
+<p><strong>Periksa hasil:</strong> klik label untuk memfokuskan input; gunakan Tab untuk berpindah kolom.</p>
+<h3 id="bagian-14">Menghubungkan form dengan PHP</h3>
+<p>Berikut contoh minimal pola form anggota. Form lengkap di tambah.php juga mempunyai nomor anggota, alamat, dan nomor HP.</p>
+<pre><code>&lt;form method=&quot;post&quot; action=&quot;proses_tambah.php&quot;
+      data-validate=&quot;true&quot; novalidate&gt;
+    &lt;label for=&quot;nama&quot;&gt;Nama&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;nama&quot; name=&quot;nama&quot; required autofocus&gt;
+    &lt;button type=&quot;submit&quot;&gt;Simpan anggota&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<ol>
+<li>Browser membuka tambah.php dan menampilkan form.</li>
+<li>Ketika tombol Simpan ditekan, JavaScript memeriksa isian.</li>
+<li>Jika lolos, action mengirim form ke proses_tambah.php dalam folder yang sama.</li>
+<li>PHP membaca nilai melalui <code>$_POST[&#x27;nama&#x27;]</code>.</li>
+</ol>
+<p>Pada form pesanan, action tidak ditulis. Browser mengirim form kembali ke halaman pesanan yang sedang dibuka. Karena itu, pengolahan POST ditempatkan di bagian atas pesanan/list.php, sebelum HTML dikirim.</p>
+<p>Buka <code>api/pesanan/list.php</code> dan <code>api/includes/header.php</code>.</p>
+<div class="table"><table><thead><tr><th>Elemen / atribut</th><th>Penjelasan sederhana</th></tr></thead><tbody>
+<tr><td>header, nav, main, footer</td><td>Membagi halaman menurut fungsinya</td></tr>
+<tr><td>section</td><td>Mengelompokkan bagian isi</td></tr>
+<tr><td>table, thead, tbody, tr, th, td</td><td>Menyusun tabel dan baris data</td></tr>
+<tr><td>form method=&quot;post&quot;</td><td>Mengirim isian dalam badan permintaan HTTP</td></tr>
+<tr><td>label for=&quot;jumlah&quot;</td><td>Menghubungkan judul kolom dengan input ber-ID jumlah</td></tr>
+<tr><td>name=&quot;jumlah&quot;</td><td>Nama data yang dibaca PHP dari kiriman form</td></tr>
+<tr><td>id=&quot;jumlah&quot;</td><td>Penanda elemen untuk label, CSS, atau JavaScript</td></tr>
+<tr><td>required</td><td>Menandai kolom wajib</td></tr>
+<tr><td>autofocus</td><td>Meminta browser memfokuskan kolom saat halaman dibuka</td></tr>
+<tr><td>min, max, step</td><td>Batas angka dan langkah nilai yang diizinkan</td></tr>
+<tr><td>input type=&quot;hidden&quot;</td><td>Mengirim ID/aksi tanpa menampilkan kotak input</td></tr>
+<tr><td>data-harga</td><td>Menyimpan harga pada option untuk dibaca JavaScript</td></tr>
+</tbody></table></div>
+<p>Contoh input dari aplikasi:</p>
+<pre><code>&lt;input type=&quot;number&quot; id=&quot;jumlah&quot; name=&quot;jumlah&quot;
+       min=&quot;1&quot; max=&quot;100&quot; step=&quot;1&quot; required&gt;</code></pre>
+<p>Artinya: jumlah wajib diisi bilangan bulat antara 1 dan 100. Pada aplikasi, atribut <code>value</code> juga diisi dari PHP supaya isian edit tampil kembali.</p>
+<p>Form menggunakan <code>novalidate</code> agar pesan validasi otomatis saat submit digantikan oleh pesan JavaScript buatan sendiri. JavaScript tetap memanggil <code>checkValidity()</code> untuk membaca aturan input.</p>
+<p><strong>Penting:</strong> hidden input bukan tempat menyembunyikan rahasia. Nilainya tetap bisa dilihat dan diubah melalui browser. POST juga tidak otomatis membuat data aman; HTTPS mengenkripsi pengiriman.</p>
+<h2 id="bagian-15">Bab 5 — Menata halaman dengan CSS</h2>
+<p><strong>File utama:</strong> assets/css/style.css.</p>
+<p><strong>Tujuan:</strong> memahami setiap aturan visual yang digunakan.</p>
+<h3 id="bagian-16">Langkah kerja</h3>
+<ol>
+<li>Atur font, warna teks, dan background pada body.</li>
+<li>Gunakan flex pada header agar nama warung dan navigasi berjajar.</li>
+<li>Beri main batas lebar dan panel ruang dalam.</li>
+<li>Atur input, tombol, link, dan tabel.</li>
+<li>Tambahkan hover dan penanda fokus.</li>
+<li>Tambahkan media query agar header ditumpuk di HP.</li>
+</ol>
+<p><strong>Latihan:</strong> ubah padding tombol dari 7px 12px menjadi 9px 16px. Amati perubahan tinggi dan lebar. Kembalikan jika terlalu besar.</p>
+<p><strong>Periksa hasil:</strong> pada layar sempit, navigasi tetap terbaca dan tabel bisa digeser.</p>
+<p>Buka <code>assets/css/style.css</code>. Pola CSS adalah selector, properti, dan nilai.</p>
+<pre><code>nav a {
+    color: white;
+    background: #496374;
+}</code></pre>
+<p><code>nav a</code> memilih link di dalam navigasi. <code>color</code> mengatur warna tulisan. <code>background</code> mengatur latar link.</p>
+<div class="table"><table><thead><tr><th>Bagian CSS</th><th>Kegunaan dalam proyek</th></tr></thead><tbody>
+<tr><td>box-sizing: border-box</td><td>Padding dan border ikut diperhitungkan dalam width</td></tr>
+<tr><td>font-family</td><td>Jenis huruf; Georgia untuk nama warung</td></tr>
+<tr><td>font-size</td><td>Besar tulisan</td></tr>
+<tr><td>line-height</td><td>Tinggi baris tulisan</td></tr>
+<tr><td>padding</td><td>Jarak isi dengan tepi dalam kotak</td></tr>
+<tr><td>margin</td><td>Jarak di luar kotak</td></tr>
+<tr><td>border</td><td>Garis pinggir</td></tr>
+<tr><td>border-radius</td><td>Sudut membulat</td></tr>
+<tr><td>max-width: 900px</td><td>Membatasi lebar konten</td></tr>
+<tr><td>margin: 24px auto</td><td>Jarak atas-bawah 24px, posisi horizontal di tengah</td></tr>
+<tr><td>display: flex</td><td>Mengatur anak elemen dalam susunan fleksibel</td></tr>
+<tr><td>gap</td><td>Jarak antar-item flex atau grid</td></tr>
+<tr><td>overflow-x: auto</td><td>Membolehkan tabel digeser horizontal</td></tr>
+<tr><td>:hover</td><td>Tampilan ketika pointer berada di elemen</td></tr>
+<tr><td>:focus-visible</td><td>Penanda fokus, misalnya saat memakai keyboard</td></tr>
+<tr><td>@media</td><td>Aturan yang berlaku pada ukuran layar tertentu</td></tr>
+</tbody></table></div>
+<h3 id="bagian-17">Mengubah ukuran tombol</h3>
+<p>Cari selector <code>button, .btn-tambah, .btn-aksi</code>.</p>
+<pre><code>padding: 7px 12px;
+font: inherit;
+line-height: 1.4;</code></pre>
+<p>7px adalah jarak atas-bawah, 12px jarak kiri-kanan. Ubah menjadi <code>9px 16px</code> untuk tombol lebih besar. <code>font: inherit</code> mengikuti font induknya. Jika ingin menentukan ukuran khusus, tambahkan <code>font-size: 15px</code> setelah <code>font: inherit</code>.</p>
+<p>Kalau hanya tombol Edit dan Hapus yang ingin diubah, buat aturan khusus <code>.btn-aksi</code>. Jangan mengubah semua tombol jika kebutuhan hanya pada tabel.</p>
+<h3 id="bagian-18">Mengubah warna dan bentuk link</h3>
+<p>Ubah <code>background</code> pada selector <code>a</code> untuk link umum, atau <code>nav a</code> untuk navigasi. Selector navigasi lebih spesifik. Aturan <code>nav a[aria-current=&quot;page&quot;]</code> memberi warna berbeda pada halaman aktif.</p>
+<h3 id="bagian-19">Tampilan HP</h3>
+<pre><code>@media (max-width: 600px) {
+    header { flex-direction: column; align-items: flex-start; }
+    .panel { padding: 14px; }
+}</code></pre>
+<p>Saat lebar layar maksimal 600px, isi header ditumpuk dan ruang dalam panel dikurangi. Tabel memakai pembungkus dengan <code>overflow-x: auto</code> supaya tetap bisa dibaca di layar kecil.</p>
+<h2 id="bagian-20">Bab 6 — Menambahkan interaksi JavaScript</h2>
+<p><strong>File utama:</strong> assets/js/app.js.</p>
+<p><strong>Tujuan:</strong> membuat form mudah digunakan sebelum data dikirim ke server.</p>
+<h3 id="bagian-21">Langkah kerja</h3>
+<ol>
+<li>Hubungkan app.js melalui footer agar elemen HTML sudah tersedia.</li>
+<li>Pasang event submit untuk konfirmasi hapus.</li>
+<li>Periksa kolom wajib dan batasi input angka.</li>
+<li>Tampilkan pesan serta arahkan fokus ke kolom salah pertama.</li>
+<li>Hubungkan perubahan menu dan jumlah ke fungsi hitungTotal.</li>
+<li>Tambahkan pencarian anggota.</li>
+</ol>
+<p><strong>Periksa hasil:</strong> form kosong menampilkan pesan, memilih menu mengubah total, dan Batal pada konfirmasi tidak mengirim penghapusan.</p>
+<p>Buka <code>assets/js/app.js</code>.</p>
+<h3 id="bagian-22">A. Konfirmasi hapus</h3>
+<p><code>querySelectorAll(&quot;.form-hapus&quot;)</code> mengambil semua form hapus. <code>addEventListener(&quot;submit&quot;, ...)</code> menunggu form dikirim. <code>confirm()</code> menampilkan pertanyaan. Jika pengguna memilih Batal, <code>event.preventDefault()</code> menghentikan submit.</p>
+<p>Konfirmasi ini membantu menghindari salah klik; penghapusan sebenarnya dilakukan PHP dan SQL.</p>
+<h3 id="bagian-23">B. Validasi dan fokus kursor</h3>
+<p>Urutan kode:</p>
+<ol>
+<li>Ambil form dengan atribut <code>data-validate</code>.</li>
+<li>Saat submit, periksa input dan select.</li>
+<li>Gunakan <code>trim()</code> agar isian spasi saja dianggap kosong.</li>
+<li>Buat elemen span berisi pesan “Form ini wajib diisi.”</li>
+<li>Tandai input dengan <code>aria-invalid</code> dan hubungkan pesan melalui <code>aria-describedby</code>.</li>
+<li>Batalkan submit jika salah, lalu panggil <code>focus()</code> pada input salah pertama.</li>
+</ol>
+<p>Saat pengguna mengetik lagi, pesan sebelumnya dihapus. Validasi JavaScript membantu pengguna, tetapi bisa dilewati; PHP tetap harus memeriksa input.</p>
+<figure><img src="images/validasi.png" alt="Validasi kolom anggota yang masih kosong"></figure>
+<p>Gambar 3. Setelah form kosong dikirim, empat pesan wajib diisi muncul dan fokus kembali ke kolom Nama. Screenshot berasal dari uji browser lokal tanpa menambah data database.</p>
+<h3 id="bagian-24">C. Menghitung total</h3>
+<p>Potongan asli dari fungsi <code>hitungTotal()</code>:</p>
+<pre><code>const harga = Number(menu.selectedOptions[0].dataset.harga || 0);
+const total = harga * Number(jumlah.value);
+document.getElementById(&quot;total&quot;).textContent =
+    &quot;Rp &quot; + total.toLocaleString(&quot;id-ID&quot;);</code></pre>
+<p><code>selectedOptions[0]</code> adalah pilihan menu aktif. <code>dataset.harga</code> membaca <code>data-harga</code>. <code>Number()</code> mengubah nilai menjadi angka. <code>textContent</code> menampilkan teks. Format <code>id-ID</code> memberi pemisah angka sesuai Indonesia.</p>
+<p>Event <code>change</code> dipakai saat menu berganti; event <code>input</code> dipakai saat jumlah berubah.</p>
+<h3 id="bagian-25">D. Pencarian anggota</h3>
+<p>Kode membaca teks setiap baris tabel, mengubahnya menjadi huruf kecil, lalu memeriksa <code>includes()</code>. Baris yang tidak cocok diberi <code>hidden = true</code>.</p>
+<p>Pencarian ini menyaring data yang sudah tampil di browser. Ia tidak mengirim query pencarian baru ke database.</p>
+<h2 id="bagian-26">Bab 7 — Menyiapkan database dan koneksi PHP</h2>
+<p><strong>File utama:</strong> sql/02_geprek.sql, api/includes/env.php, api/includes/koneksi.php.</p>
+<p><strong>Tujuan:</strong> menghubungkan data anggota dengan pesanannya.</p>
+<h3 id="bagian-27">Langkah kerja</h3>
+<ol>
+<li>Buka SQL Editor pada database yang akan dipakai.</li>
+<li>Jalankan isi lengkap sql/02_geprek.sql.</li>
+<li>Pastikan tabel anggota dan pesanan terbentuk.</li>
+<li>Isi konfigurasi .env dengan kredensial sendiri.</li>
+<li>Periksa bahwa pdo_pgsql tersedia.</li>
+<li>Buka halaman Anggota atau Pesanan untuk mencoba pembacaan data.</li>
+</ol>
+<pre><code>$pdo = new PDO($dsn, $user, $pass, [
+    PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION
+]);</code></pre>
+<p>dsn berisi jenis database, host, port, nama database, dan mode SSL. user dan pass berisi kredensial dari environment. Mode exception membuat kegagalan dapat ditangani oleh try/catch.</p>
+<p>Kode koneksi memilih DATABASE_URL jika tersedia; jika tidak, variabel DB_* dipakai. Jangan menulis password langsung dalam handbook atau file kode yang diunggah.</p>
+<p><strong>Periksa hasil:</strong> halaman membaca data atau menampilkan kondisi kosong tanpa pesan gagal koneksi. Berhasil menampilkan halaman Menu saja belum membuktikan database tersambung karena halaman itu membaca array PHP.</p>
+<p>Struktur resmi proyek ada di <code>sql/02_geprek.sql</code>.</p>
+<h3 id="bagian-28">Membuat kedua tabel</h3>
+<p>Jalankan perintah ini melalui SQL Editor pada database yang digunakan aplikasi. Isinya mengikuti skema proyek:</p>
+<pre><code>CREATE TABLE IF NOT EXISTS anggota (
+    id SERIAL PRIMARY KEY,
+    nama VARCHAR(255) NOT NULL,
+    no_anggota VARCHAR(50) NOT NULL UNIQUE,
+    alamat VARCHAR(255),
+    no_hp VARCHAR(30)
+);
+
+CREATE TABLE IF NOT EXISTS pesanan (
+    id SERIAL PRIMARY KEY,
+    anggota_id INTEGER NOT NULL REFERENCES anggota(id) ON DELETE RESTRICT,
+    menu VARCHAR(50) NOT NULL,
+    harga INTEGER NOT NULL CHECK (harga &gt; 0),
+    jumlah INTEGER NOT NULL CHECK (jumlah BETWEEN 1 AND 100),
+    dibuat_pada TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+<p>Buat anggota terlebih dahulu karena pesanan merujuk ID anggota. SERIAL menyediakan nomor otomatis, NOT NULL mewajibkan nilai, UNIQUE mencegah nomor anggota kembar, dan CHECK membatasi nilai. IF NOT EXISTS menghindari pembuatan ulang tabel yang sudah ada; perintah ini tidak memperbarui struktur tabel lama secara otomatis.</p>
+<pre><code>anggota                           pesanan
+id (primary key)  1 ──────── N    anggota_id (foreign key)
+nama                              id (primary key)
+no_anggota (unique)                menu
+alamat                            harga
+no_hp                             jumlah
+                                  dibuat_pada</code></pre>
+<p>Satu anggota bisa memiliki banyak pesanan. Setiap pesanan menunjuk satu anggota.</p>
+<div class="table"><table><thead><tr><th>Kolom</th><th>Tipe / aturan</th></tr></thead><tbody>
+<tr><td>anggota.id</td><td>SERIAL, primary key</td></tr>
+<tr><td>anggota.nama</td><td>VARCHAR(255), wajib di database</td></tr>
+<tr><td>anggota.no_anggota</td><td>VARCHAR(50), wajib dan unik</td></tr>
+<tr><td>anggota.alamat</td><td>VARCHAR(255), database mengizinkan null</td></tr>
+<tr><td>anggota.no_hp</td><td>VARCHAR(30), database mengizinkan null</td></tr>
+<tr><td>pesanan.id</td><td>SERIAL, primary key</td></tr>
+<tr><td>pesanan.anggota_id</td><td>INTEGER, wajib, foreign key ke anggota</td></tr>
+<tr><td>pesanan.menu</td><td>VARCHAR(50), kode menu</td></tr>
+<tr><td>pesanan.harga</td><td>INTEGER, harus lebih dari 0</td></tr>
+<tr><td>pesanan.jumlah</td><td>INTEGER, antara 1 dan 100</td></tr>
+<tr><td>pesanan.dibuat_pada</td><td>TIMESTAMP, otomatis memakai waktu saat insert</td></tr>
+</tbody></table></div>
+<p>Form dan PHP mewajibkan alamat serta nomor HP, meskipun tabel database tidak menggunakan NOT NULL pada kedua kolom itu. Jadi aturan aplikasi lebih ketat daripada skema pada bagian ini.</p>
+<p><code>ON DELETE RESTRICT</code> mencegah anggota dihapus saat masih dirujuk oleh pesanan. Hapus pesanan terkait terlebih dahulu jika memang ingin menghapus anggota latihan.</p>
+<p>Total tidak menjadi kolom tersendiri: dihitung dari <code>harga × jumlah</code>. Harga disimpan pada pesanan. Mengubah array harga tidak langsung mengubah pesanan lama, tetapi menyimpan edit pesanan akan mengambil harga menu yang berlaku saat edit.</p>
+<h2 id="bagian-29">Bab 8 — Memproses tambah, edit, dan hapus</h2>
+<p><strong>File utama:</strong> api/anggota/proses_tambah.php, api/anggota/proses_edit.php, api/pesanan/list.php.</p>
+<p><strong>Tujuan:</strong> mengikuti satu transaksi dari form sampai ke database.</p>
+<h3 id="bagian-30">Langkah kerja: anggota</h3>
+<ol>
+<li>Ambil POST dan rapikan spasi dengan trim.</li>
+<li>Periksa semua kolom wajib.</li>
+<li>Siapkan INSERT menggunakan placeholder.</li>
+<li>Jalankan execute dan tangani nomor anggota yang duplikat.</li>
+<li>Simpan pesan sementara, redirect, lalu tampilkan daftar.</li>
+<li>Untuk edit, gunakan ID agar UPDATE hanya mengubah anggota yang dipilih.</li>
+<li>Untuk hapus, kirim aksi=hapus melalui POST.</li>
+</ol>
+<h3 id="bagian-31">Langkah kerja: pesanan</h3>
+<ol>
+<li>Baca anggota_id, menu, dan jumlah dari POST.</li>
+<li>Validasi ID, kode menu, dan jumlah bulat 1–100.</li>
+<li>Ambil harga dari array PHP, bukan total kiriman browser.</li>
+<li>Gunakan INSERT jika ID kosong atau UPDATE jika mengedit.</li>
+<li>Gunakan DELETE ketika aksi adalah hapus.</li>
+<li>Jalankan SELECT dengan JOIN untuk menampilkan nama anggota.</li>
+</ol>
+<figure><img src="images/pesanan.png" alt="Form dan daftar pesanan"></figure>
+<p>Gambar 4. Tampilan pesanan aktual saat revisi. Data yang sudah ada hanya dibaca; tidak diubah untuk membuat ilustrasi.</p>
+<p><strong>Periksa hasil:</strong> setelah koneksi siap, gunakan data khusus latihan untuk memeriksa tambah, edit, dan hapus.</p>
+<p>CRUD adalah Create, Read, Update, Delete.</p>
+<h3 id="bagian-32">Menelusuri validasi sebelum INSERT</h3>
+<p>Potongan dari pesanan/list.php:</p>
+<pre><code>$anggotaId = filter_input(INPUT_POST, &#x27;anggota_id&#x27;, FILTER_VALIDATE_INT);
+$kode = $_POST[&#x27;menu&#x27;] ?? &#x27;&#x27;;
+$jumlah = filter_input(INPUT_POST, &#x27;jumlah&#x27;, FILTER_VALIDATE_INT);
+if (!$anggotaId || !isset($daftarMenu[$kode]) ||
+    !$jumlah || $jumlah &lt; 1 || $jumlah &gt; 100) {
+    throw new RuntimeException(&#x27;Pilih anggota, menu, dan jumlah antara 1 sampai 100.&#x27;);
+}
+$menu = $daftarMenu[$kode];</code></pre>
+<p>filter_input memeriksa apakah nilai berupa bilangan bulat. isset memastikan kode menu dikenali. Jika salah, exception menghentikan jalur simpan dan ditangkap oleh catch. ID anggota juga harus benar-benar ada; hubungan foreign key diperiksa database ketika query dijalankan.</p>
+<h3 id="bagian-33">Mengisi form edit dan memperbarui data</h3>
+<p>Pada anggota/edit.php, ID dari URL dipakai untuk mengambil data:</p>
+<pre><code>$stmt = $pdo-&gt;prepare(&#x27;SELECT * FROM anggota WHERE id = :id&#x27;);
+$stmt-&gt;execute([&#x27;id&#x27; =&gt; $id]);
+$anggota = $stmt-&gt;fetch(PDO::FETCH_ASSOC);</code></pre>
+<p>fetch mengambil satu baris sebagai array dengan nama kolom sebagai kunci. Form mengisi value menggunakan data itu, misalnya <code>esc($anggota[&#x27;nama&#x27;])</code>. ID dimasukkan ke hidden input untuk dikirim kembali saat menyimpan.</p>
+<p>Untuk pesanan, query pembaruannya adalah:</p>
+<pre><code>$stmt = $pdo-&gt;prepare(
+    &#x27;UPDATE pesanan SET anggota_id = ?, menu = ?, harga = ?, jumlah = ? WHERE id = ?&#x27;
+);
+$stmt-&gt;execute([$anggotaId, $kode, $menu[&#x27;harga&#x27;], $jumlah, $id]);</code></pre>
+<p>SET berisi kolom yang diganti. WHERE menentukan pesanan yang diubah. Urutan lima nilai pada execute harus sama dengan urutan lima placeholder dalam query.</p>
+<div class="table"><table><thead><tr><th>Operasi</th><th>SQL</th><th>Contoh</th></tr></thead><tbody>
+<tr><td>Create</td><td>INSERT</td><td>Menambah anggota atau pesanan</td></tr>
+<tr><td>Read</td><td>SELECT</td><td>Mengisi tabel dan pilihan anggota</td></tr>
+<tr><td>Update</td><td>UPDATE</td><td>Mengubah pesanan terpilih</td></tr>
+<tr><td>Delete</td><td>DELETE</td><td>Menghapus berdasarkan ID</td></tr>
+</tbody></table></div>
+<p>Contoh asli penambahan pesanan:</p>
+<pre><code>$stmt = $pdo-&gt;prepare(
+    &#x27;INSERT INTO pesanan (anggota_id, menu, harga, jumlah) VALUES (?, ?, ?, ?)&#x27;
+);
+$stmt-&gt;execute([$anggotaId, $kode, $menu[&#x27;harga&#x27;], $jumlah]);</code></pre>
+<p><code>prepare()</code> menyiapkan SQL dengan placeholder. <code>execute()</code> memasukkan nilai sesuai urutan. Nilai input dipisahkan dari struktur SQL sehingga tidak digabung langsung menjadi perintah SQL.</p>
+<p>Contoh penghapusan:</p>
+<pre><code>$stmt = $pdo-&gt;prepare(&#x27;DELETE FROM pesanan WHERE id = ?&#x27;);
+$stmt-&gt;execute([$id]);</code></pre>
+<p><code>WHERE id = ?</code> menentukan baris yang dihapus. Tanpa WHERE, DELETE dapat menghapus seluruh isi tabel. Jangan mencoba query tanpa kondisi pada data yang masih dibutuhkan.</p>
+<p>Query daftar pesanan:</p>
+<pre><code>SELECT p.*, a.nama
+FROM pesanan p
+JOIN anggota a ON a.id = p.anggota_id
+ORDER BY p.id DESC</code></pre>
+<p><code>p</code> dan <code>a</code> adalah alias tabel. JOIN mengambil nama anggota agar daftar pesanan tidak hanya menampilkan nomor ID. DESC menampilkan ID terbesar terlebih dahulu.</p>
+<h3 id="bagian-34">Jalur tambah, edit, dan hapus pesanan</h3>
+<ul>
+<li>Tambah: POST dengan ID kosong → validasi → INSERT.</li>
+<li>Buka edit: GET <code>?id=...</code> → isi form dari pesanan yang cocok.</li>
+<li>Simpan edit: POST dengan ID → validasi → UPDATE.</li>
+<li>Hapus: POST dengan <code>aksi=hapus</code> dan ID → DELETE.</li>
+<li>Berhasil: simpan pesan session → redirect ke list.php.</li>
+</ul>
+<p>Redirect setelah POST mengurangi risiko form terkirim ulang ketika halaman hasil di-refresh.</p>
+<h3 id="bagian-35">Alur menyeluruh</h3>
+<pre><code>Browser membuka halaman
+        ↓
+PHP membaca menu / database
+        ↓
+HTML dikirim ke browser
+        ↓
+Pengguna mengisi form
+        ↓
+JavaScript memeriksa input dan menampilkan total
+        ↓
+Form dikirim melalui POST
+        ↓
+PHP memeriksa input lagi
+        ↓
+PDO menjalankan SQL ke PostgreSQL
+        ↓
+Redirect → halaman daftar menampilkan data terbaru</code></pre>
+<p>JavaScript berjalan di browser. PHP berjalan di server. PostgreSQL menyimpan data. Ketiganya punya tugas berbeda.</p>
+<p>Contoh: pengguna memilih Geprek Original sebanyak 2 porsi. Browser menampilkan Rp 30.000. PHP mengambil harga Original dari array menu, lalu menyimpan harga 15.000 dan jumlah 2. Total pada daftar dihitung dari harga tersimpan dikali jumlah.</p>
+<h2 id="bagian-36">Bab 9 — Pengujian dan perbaikan</h2>
+<p><strong>Tujuan:</strong> mencatat bukti hasil, bukan hanya menyiapkan daftar skenario.</p>
+<h3 id="bagian-37">Hasil pemeriksaan saat revisi</h3>
+<div class="table"><table><thead><tr><th>Pemeriksaan</th><th>Hasil aktual</th></tr></thead><tbody>
+<tr><td>Halaman Menu lokal</td><td>Terbuka dan menampilkan daftar menu</td></tr>
+<tr><td>Halaman Tambah Anggota lokal</td><td>Form terlihat</td></tr>
+<tr><td>Halaman Pesanan lokal</td><td>Daftar pesanan terlihat tanpa pesan gagal koneksi</td></tr>
+<tr><td>Submit form anggota kosong</td><td>Empat pesan validasi muncul; fokus kembali ke Nama</td></tr>
+<tr><td>Perkiraan harga Original × 2</td><td>JavaScript menampilkan Rp 30.000</td></tr>
+<tr><td>Jumlah 0, 101, dan 1.5</td><td>checkValidity di browser mengembalikan false</td></tr>
+<tr><td>Tambah, edit, dan hapus database</td><td>Belum diuji ulang pada revisi dokumentasi</td></tr>
+</tbody></table></div>
+<h3 id="bagian-38">Langkah kerja</h3>
+<ol>
+<li>Jalankan skenario dengan data latihan.</li>
+<li>Catat hasil aktual, tanggal, dan jika perlu screenshot.</li>
+<li>Bandingkan dengan hasil yang diharapkan.</li>
+<li>Jika gagal, periksa lapisan yang terkait: browser, PHP, atau database.</li>
+<li>Perbaiki penyebab lalu ulangi skenario yang gagal.</li>
+</ol>
+<p>Gunakan data khusus latihan, bukan data penting. Isi hasil aktual setelah mencoba; daftar ini adalah skenario uji, bukan catatan uji yang sudah lulus.</p>
+<ol>
+<li>Buka masterpage dan Launch Praktikum 8.</li>
+<li>Jelaskan daftar menu, anggota, dan pesanan.</li>
+<li>Tambah anggota “Pelanggan Uji UTS” dengan nomor unik, alamat, dan nomor HP contoh.</li>
+<li>Cari anggota tersebut melalui kotak pencarian.</li>
+<li>Edit nama, simpan, lalu periksa tabel.</li>
+<li>Pesan Geprek Original sebanyak 2 porsi; total yang diharapkan Rp 30.000.</li>
+<li>Simpan, refresh halaman, lalu periksa apakah pesanan tetap tampil dari database.</li>
+<li>Edit jumlah menjadi 3; total yang diharapkan Rp 45.000.</li>
+<li>Coba hapus anggota yang masih punya pesanan; operasi seharusnya ditolak.</li>
+<li>Klik Hapus pesanan, pilih Batal; baris harus tetap ada.</li>
+<li>Hapus pesanan dengan konfirmasi, lalu hapus anggota latihan.</li>
+<li>Tunjukkan validasi form kosong dan batas jumlah 1–100.</li>
+</ol>
+<div class="table"><table><thead><tr><th>Pengujian</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th></tr></thead><tbody>
+<tr><td>Form wajib kosong</td><td>Pesan muncul, fokus pindah ke kolom salah</td><td>Lulus di form anggota pada 27 September 2026</td></tr>
+<tr><td>Jumlah 0 / 101 / pecahan</td><td>Ditolak validasi</td><td>Lulus pemeriksaan browser; penolakan POST langsung belum diuji</td></tr>
+<tr><td>Nomor anggota duplikat</td><td>Pesan nomor sudah digunakan</td><td>Belum diisi</td></tr>
+<tr><td>Refresh setelah simpan</td><td>Tidak menggandakan data dari POST sebelumnya</td><td>Belum diisi</td></tr>
+<tr><td>Ubah menu/jumlah</td><td>Perkiraan total ikut berubah</td><td>Original × 2 menampilkan Rp 30.000 pada 27 September 2026</td></tr>
+<tr><td>Hapus anggota yang dirujuk pesanan</td><td>Ditolak database</td><td>Belum diisi</td></tr>
+</tbody></table></div>
+<p>Jangan mengaku pengujian berhasil sebelum melihat hasilnya. Saat revisi, pembacaan data terlihat berhasil. Operasi tulis tetap perlu dibuktikan dengan pengujian terpisah.</p>
+<h3 id="bagian-39">Menangani masalah</h3>
+<div class="table"><table><thead><tr><th>Gejala</th><th>Yang diperiksa</th></tr></thead><tbody>
+<tr><td>Data warung belum bisa dimuat</td><td>Koneksi gagal; periksa konfigurasi dan penyebab melalui pemeriksaan lokal yang tidak membocorkan kredensial</td></tr>
+<tr><td>password authentication failed</td><td>Password database tidak cocok dengan pengguna/server yang dituju</td></tr>
+<tr><td>Tabel pesanan belum tersedia</td><td>Jalankan skema di database yang benar</td></tr>
+<tr><td>could not find driver</td><td>Aktifkan pdo_pgsql pada PHP yang sedang dijalankan</td></tr>
+<tr><td>Nomor anggota sudah digunakan</td><td>Gunakan nomor berbeda; kolom no_anggota bersifat unik</td></tr>
+<tr><td>Anggota gagal dihapus</td><td>Periksa apakah masih memiliki pesanan</td></tr>
+<tr><td>Tombol simpan pesanan nonaktif</td><td>Pastikan koneksi tersedia dan anggota sudah ada</td></tr>
+<tr><td>CSS belum berubah</td><td>Periksa file CSS yang tepat lalu lakukan hard refresh</td></tr>
+<tr><td>PHP terbaca sebagai teks</td><td>Jalankan melalui server PHP, bukan membuka file langsung</td></tr>
+</tbody></table></div>
+<p>Pesan umum “data belum tersedia” bukan bukti pasti bahwa tabel hilang; query bisa gagal karena sebab lain. Periksa penyebab sebelum mengubah skema.</p>
+<h2 id="bagian-40">Lampiran A — Tanya jawab UTS</h2>
+<p>Gunakan setelah memahami langkah pembuatan. Coba jawab tanpa membaca terlebih dahulu.</p>
+<p><strong>Apa fungsi aplikasi ini?</strong>  </p>
+<p>Mencatat anggota pelanggan dan pesanan ayam geprek. Data transaksi disimpan melalui PHP ke PostgreSQL.</p>
+<p><strong>Apa beda HTML, CSS, JavaScript, dan PHP?</strong>  </p>
+<p>HTML menyusun isi, CSS mengatur tampilan, JavaScript menangani interaksi di browser, PHP memproses permintaan di server.</p>
+<p><strong>Mengapa ada validasi JavaScript dan PHP?</strong>  </p>
+<p>JavaScript memberi tanggapan cepat. PHP tetap memvalidasi karena permintaan bisa dikirim tanpa JavaScript.</p>
+<p><strong>Apa beda id dan name pada input?</strong>  </p>
+<p>id menandai elemen halaman. name menjadi nama nilai yang dikirim oleh form.</p>
+<p><strong>Apa beda GET dan POST di proyek ini?</strong>  </p>
+<p>GET dipakai untuk memilih data edit melalui URL. POST dipakai untuk mengirim perubahan data.</p>
+<p><strong>Bagaimana tombol Edit tahu baris yang dipilih?</strong>  </p>
+<p>Link membawa ID. PHP mengambil atau memilih data yang cocok, lalu mengisi form. ID ikut dikirim saat menyimpan.</p>
+<p><strong>Mengapa harga tidak dipercaya dari browser?</strong>  </p>
+<p>Nilai browser bisa diubah. PHP mengambil harga dari array menu dan menyimpan harga itu.</p>
+<p><strong>Apa primary key dan foreign key?</strong>  </p>
+<p>Primary key mengidentifikasi baris secara unik. Foreign key menghubungkan baris ke data pada tabel lain.</p>
+<p><strong>Mengapa memakai prepared statement?</strong>  </p>
+<p>Untuk memasukkan nilai melalui placeholder, sehingga input tidak digabung langsung sebagai struktur SQL.</p>
+<p><strong>Apakah menu berada di database?</strong>  </p>
+<p>Belum. Menu berada di array pada includes/menu.php. Tabel database menyimpan anggota dan pesanan.</p>
+<p><strong>Apa beda padding dan margin?</strong>  </p>
+<p>Padding adalah jarak di dalam kotak; margin jarak di luar kotak.</p>
+<p><strong>Bagaimana membuat tampilan cocok untuk HP?</strong>  </p>
+<p>Memakai meta viewport, media query, dan pembungkus tabel yang dapat digeser.</p>
+<p><strong>Apa fungsi session?</strong>  </p>
+<p>Di Geprek Kita, session membawa pesan sementara antarpemintaan. Database menyimpan data utama.</p>
+<p><strong>Apakah aplikasi sudah siap menjadi toko online penuh?</strong>  </p>
+<p>Belum. Ini latihan pencatatan, belum ada login, otorisasi, proteksi CSRF, dan pembayaran. Prepared statement saja tidak mencakup semua kebutuhan keamanan aplikasi.</p>
+<h2 id="bagian-41">Lampiran B — Latihan dan presentasi</h2>
+<p>Gunakan salinan latihan jika akan mengubah kode saat belajar.</p>
+<ol>
+<li>Ubah tulisan “Geprek Kita” di header dan jelaskan dampaknya pada semua halaman yang include header.</li>
+<li>Besarkan tombol melalui padding di style.css.</li>
+<li>Ganti background nav a, lalu jelaskan bedanya dengan warna tulisan.</li>
+<li>Ubah harga Original di menu.php, buka ulang halaman, lalu buat pesanan latihan baru.</li>
+<li>Tambah satu item array menu dengan kode unik; periksa daftar menu dan pilihan pesanan.</li>
+<li>Ubah batas jumlah menjadi 50. Sebutkan semua lapisan yang harus diselaraskan: atribut HTML, validasi PHP, dan constraint database. Mengedit file SQL saja tidak otomatis mengubah tabel yang sudah ada.</li>
+<li>Jelaskan query JOIN tanpa membaca handbook.</li>
+</ol>
+<p>Jika menambah menu, nama dan kode harus konsisten. Hindari mengganti atau menghapus kode menu yang sudah dipakai data pesanan tanpa merencanakan penanganan data lama.</p>
+<h3 id="bagian-42">Presentasi singkat</h3>
+<p>“Saya membuat Geprek Kita untuk mencatat pelanggan dan pesanan ayam geprek. HTML digunakan untuk form dan tabel, CSS untuk tampilan, serta JavaScript untuk validasi, pencarian, konfirmasi hapus, dan perkiraan total. PHP menerima form, memeriksa input, lalu menjalankan query melalui PDO. Database memiliki tabel anggota dan pesanan yang terhubung lewat anggota_id. Harga diambil dari array PHP supaya perhitungan tidak hanya mengandalkan browser. Saya menempatkan aplikasi ini sebagai Praktikum 8 dan membukanya dari masterpage.”</p>
+<p>Setelah itu, tunjukkan satu alur lengkap: tambah anggota → pesan dua porsi → simpan → edit → hapus. Utamakan bisa menjelaskan alasan setiap langkah.</p>
+<h3 id="bagian-43">Urutan membaca berkas</h3>
+<ol>
+<li>api/index.php dan includes/menu.php: mulai dari halaman paling sederhana.</li>
+<li>includes/header.php dan footer.php: pahami bagian halaman yang dipakai ulang.</li>
+<li>assets/css/style.css: ubah satu properti sambil melihat hasil.</li>
+<li>assets/js/app.js: pelajari empat interaksi satu per satu.</li>
+<li>anggota/tambah.php dan proses_tambah.php: ikuti alur form ke SQL.</li>
+<li>includes/env.php dan koneksi.php: pahami konfigurasi tanpa menampilkan rahasia.</li>
+<li>sql/02_geprek.sql: jelaskan hubungan kedua tabel.</li>
+<li>pesanan/list.php: ikuti percabangan tambah, edit, hapus, dan penampilan data.</li>
+</ol>
+<p>Handbook ini khusus Geprek Kita. Desain masterpage dan materi lengkap Praktikum 1–7 tidak dibahas sebagai fitur aplikasi Geprek Kita.</p></main></body></html>

@@ -1,12 +1,5 @@
 <?php
 require_once __DIR__ . '/../includes/session.php';
-require __DIR__ . '/../includes/koneksi.php';
-
-if (!$pdo) {
-    $_SESSION['flash'] = ['type' => 'error', 'pesan' => $databaseError];
-    header('Location: tambah.php');
-    exit;
-}
 
 $judul = trim($_POST['judul'] ?? '');
 $pengarang = trim($_POST['pengarang'] ?? '');
@@ -37,19 +30,18 @@ if (!empty($errors)) {
     exit;
 }
 
-$stmt = $pdo->prepare(
-    "INSERT INTO buku (judul, pengarang, tahun, isbn, stok, kategori)
-     VALUES (:judul, :pengarang, :tahun, :isbn, :stok, :kategori)
-     RETURNING id"
-);
-$stmt->execute([
+if (!isset($_SESSION['buku'])) {
+    $_SESSION['buku'] = [];
+}
+
+$_SESSION['buku'][] = [
     'judul' => $judul,
     'pengarang' => $pengarang,
     'tahun' => (int) $tahun,
     'isbn' => $isbn,
     'stok' => (int) $stok,
     'kategori' => $kategori,
-]);
+];
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil ditambahkan.'];
 header('Location: list.php');
