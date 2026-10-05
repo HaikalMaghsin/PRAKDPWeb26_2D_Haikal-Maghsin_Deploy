@@ -1,7 +1,7 @@
 <?php
 
 // Membaca file .env untuk penggunaan di komputer lokal.
-$envFile = dirname(__DIR__, 2) . '/.env';
+$envFile = dirname(__DIR__, 3) . '/.env';
 
 if (is_file($envFile)) {
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);

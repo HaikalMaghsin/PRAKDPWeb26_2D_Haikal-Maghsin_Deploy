@@ -18,8 +18,8 @@ Repo deploy ini menyimpan masterpage dan salinan hasil yang siap ditampilkan:
 - /prak1/ sampai /prak6/: HTML, CSS, JavaScript, dan data JSON latihan.
 - /prak7/: latihan PHP dan form, data sementara dalam session.
 - /prak8/: Geprek Kita dengan database, kodenya berada di api/.
-- /prak9/: Geprek Kita dengan CRUD, pencarian server, dan pagination lima data.
-- /prak10/: Geprek Kita dengan registrasi, login, logout, session database, dan hak akses admin.
+- /prak9/: Geprek Kita dengan CRUD, pencarian server, dan pagination lima data; kode di api/prak9/.
+- /prak10/: Geprek Kita dengan registrasi, login, logout, session database, dan hak akses admin; kode di api/prak10/.
 
 Prak 1 disalin dari kode-praktikum/jobsheet-01, Prak 2 dari folder utama,
 dan Prak 3–7 dari folder Jobsheet3–Jobsheet7 di repo praktikum.
@@ -53,7 +53,7 @@ Konfigurasi memakai sepuluh fungsi PHP. Praktikum 9 dan 10 masing-masing memakai
 4. Anggota yang punya pesanan tidak dapat dihapus sebelum pesanannya dihapus.
 
 Menu dan harga diatur di api/includes/menu.php.
-Salinan Praktikum 9 dan 10 memakai file includes/menu.php di folder masing-masing.
+Salinan Praktikum 9 dan 10 memakai api/prak9/includes/menu.php dan api/prak10/includes/menu.php.
 Satu pesanan berisi satu jenis menu. Untuk menu lain, buat pesanan berikutnya.
 Total dihitung kembali di PHP dari harga menu, bukan dari nilai browser.
 Praktikum 10 menambahkan login petugas. Pembayaran belum diterapkan.
