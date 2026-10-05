@@ -21,7 +21,7 @@ header {
     align-items: center;
     gap: 16px;
 }
-/* Georgia sudah ada di komputer, jadi tidak perlu download font. */
+
 header strong { font-family: Georgia, serif; font-size: 28px; font-style: italic; }
 nav { display: flex; flex-wrap: wrap; gap: 8px; }
 /* Semua link diberi latar. Padding membuat link lebih mudah diklik. */
