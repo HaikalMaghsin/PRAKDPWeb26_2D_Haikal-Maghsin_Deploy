@@ -1,6 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
+    "api/prak9.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
+    "api/prak10.php": {
+      "runtime": "vercel-php@0.9.0"
+    },
     "api/prak7.php": {
       "runtime": "vercel-php@0.9.0"
     },
@@ -27,6 +33,8 @@
     }
   },
   "rewrites": [
+    { "source": "/prak9/:path*", "destination": "/api/prak9.php" },
+    { "source": "/prak10/:path*", "destination": "/api/prak10.php" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/prak7/assets/:path*", "destination": "/prak7/assets/:path*" },
     { "source": "/prak7/:path*", "destination": "/api/prak7.php" },

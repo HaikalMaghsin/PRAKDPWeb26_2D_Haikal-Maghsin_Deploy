@@ -6,7 +6,7 @@ if ($path === '/' || $path === '/index.html') {
     readfile(__DIR__ . '/index.html');
     return;
 }
-if (preg_match('#^/prak[1-8]$#', $path)) {
+if (preg_match('#^/prak(?:[1-9]|10)$#', $path)) {
     header('Location: ' . $path . '/');
     return;
 }
@@ -26,6 +26,14 @@ if (preg_match('#^/prak([1-6])/$#', $path, $match)) {
 }
 if (strpos($path, '/prak7/') === 0) {
     require __DIR__ . '/api/prak7.php';
+    return;
+}
+if (strpos($path, '/prak9/') === 0) {
+    require __DIR__ . '/api/prak9.php';
+    return;
+}
+if (strpos($path, '/prak10/') === 0) {
+    require __DIR__ . '/api/prak10.php';
     return;
 }
 if (strpos($path, '/prak8/') === 0) {

@@ -18,6 +18,8 @@ Repo deploy ini menyimpan masterpage dan salinan hasil yang siap ditampilkan:
 - /prak1/ sampai /prak6/: HTML, CSS, JavaScript, dan data JSON latihan.
 - /prak7/: latihan PHP dan form, data sementara dalam session.
 - /prak8/: Geprek Kita dengan database, kodenya berada di api/.
+- /prak9/: Geprek Kita dengan CRUD, pencarian server, dan pagination lima data.
+- /prak10/: Geprek Kita dengan registrasi, login, logout, session database, dan hak akses admin.
 
 Prak 1 disalin dari kode-praktikum/jobsheet-01, Prak 2 dari folder utama,
 dan Prak 3–7 dari folder Jobsheet3–Jobsheet7 di repo praktikum.
@@ -42,7 +44,7 @@ Menggunakan HTML, CSS, JavaScript, PHP, dan PostgreSQL (Supabase).
 
 Tidak memerlukan npm. File .env jangan diunggah ke Git.
 Untuk Vercel, isi variabel yang sama di Environment Variables lalu deploy ulang.
-Konfigurasi memakai delapan fungsi PHP.
+Konfigurasi memakai sepuluh fungsi PHP. Praktikum 9 dan 10 masing-masing memakai satu pintu masuk agar jumlah fungsi tetap terbatas.
 
 ## Cara memakai
 1. Tambahkan anggota pelanggan.
@@ -51,9 +53,20 @@ Konfigurasi memakai delapan fungsi PHP.
 4. Anggota yang punya pesanan tidak dapat dihapus sebelum pesanannya dihapus.
 
 Menu dan harga diatur di api/includes/menu.php.
+Salinan Praktikum 9 dan 10 memakai file includes/menu.php di folder masing-masing.
 Satu pesanan berisi satu jenis menu. Untuk menu lain, buat pesanan berikutnya.
 Total dihitung kembali di PHP dari harga menu, bukan dari nilai browser.
-Ini latihan pencatatan penjualan, belum mencakup login dan pembayaran.
+Praktikum 10 menambahkan login petugas. Pembayaran belum diterapkan.
+
+## Tambahan Praktikum 9 dan 10
+
+Tema Geprek Kita dipakai pada anggota pelanggan dan pesanan, mengikuti alur CRUD dari Jobsheet 9 serta autentikasi dari Jobsheet 10.
+
+Jalankan `sql/03_auth.sql` di SQL Editor database Supabase sebelum memakai registrasi dan login. Tabel `users` menyimpan akun dengan password hash; tabel `geprek_sessions` menyimpan sesi antar-instance Vercel.
+
+Akun registrasi mendapat role `petugas`. Hanya admin boleh menghapus anggota. Untuk akun sendiri yang ditunjuk admin, ubah kolom `role` menjadi `admin` di database, lalu login kembali. Anggota yang masih punya pesanan tetap tidak bisa dihapus.
+
+Lokal: jalankan `php -S localhost:8000 router.php`, buka `/prak9/` atau `/prak10/`. Kredensial tetap memakai file `.env` atau environment variable Vercel.
 
 ## Bahan penjelasan UTS
 - HTML: header, nav, form, input, select, dan table.
