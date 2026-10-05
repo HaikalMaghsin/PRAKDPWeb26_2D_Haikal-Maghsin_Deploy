@@ -70,19 +70,19 @@ Alamat yang dibuka pengguna tidak selalu sama dengan letak file. Rute `/prak8/` 
 | Alamat / file | Kegunaan |
 | --- | --- |
 | `/` → `index.html` | Masterpage untuk membuka praktikum 1–8 |
-| `/prak8/index.php` → `api/index.php` | Halaman menu Geprek Kita |
-| `api/includes/header.php` | Bagian atas, navigasi, fungsi esc |
-| `api/includes/footer.php` | Bagian bawah dan pemanggilan JavaScript |
-| `api/includes/menu.php` | Array nama menu dan harga |
-| `api/includes/env.php` | Membaca konfigurasi lokal dari .env |
-| `api/includes/koneksi.php` | Membuat koneksi PDO ke PostgreSQL |
-| `api/includes/session.php` | Memulai session untuk pesan sementara |
-| `api/anggota/list.php` | Membaca dan menampilkan anggota |
-| `api/anggota/tambah.php` | Form tambah anggota |
-| `api/anggota/proses_tambah.php` | Validasi dan INSERT anggota |
-| `api/anggota/edit.php` | Mengambil anggota berdasarkan ID untuk form edit |
-| `api/anggota/proses_edit.php` | UPDATE atau DELETE anggota |
-| `api/pesanan/list.php` | Form, daftar, tambah, edit, dan hapus pesanan |
+| `/prak8/index.php` → `prak8/index.php` | Halaman menu Geprek Kita |
+| `prak8/includes/header.php` | Bagian atas, navigasi, fungsi esc |
+| `prak8/includes/footer.php` | Bagian bawah dan pemanggilan JavaScript |
+| `prak8/includes/menu.php` | Array nama menu dan harga |
+| `prak8/includes/env.php` | Membaca konfigurasi lokal dari .env |
+| `prak8/includes/koneksi.php` | Membuat koneksi PDO ke PostgreSQL |
+| `prak8/includes/session.php` | Memulai session untuk pesan sementara |
+| `prak8/anggota/list.php` | Membaca dan menampilkan anggota |
+| `prak8/anggota/tambah.php` | Form tambah anggota |
+| `prak8/anggota/proses_tambah.php` | Validasi dan INSERT anggota |
+| `prak8/anggota/edit.php` | Mengambil anggota berdasarkan ID untuk form edit |
+| `prak8/anggota/proses_edit.php` | UPDATE atau DELETE anggota |
+| `prak8/pesanan/list.php` | Form, daftar, tambah, edit, dan hapus pesanan |
 | `assets/css/style.css` | CSS aplikasi Geprek Kita |
 | `assets/js/app.js` | Validasi, konfirmasi, pencarian, dan total |
 | `sql/02_geprek.sql` | Struktur tabel anggota dan pesanan |
@@ -147,7 +147,7 @@ Kode memprioritaskan DATABASE_URL jika terisi. Jika tidak, kode membaca variabel
 
 ## Bab 3 — Membuat kerangka halaman dan menu
 
-**File utama:** api/includes/header.php, api/includes/footer.php, api/includes/menu.php, api/index.php.
+**File utama:** prak8/includes/header.php, prak8/includes/footer.php, prak8/includes/menu.php, prak8/index.php.
 
 **Tujuan:** memahami bagaimana satu kerangka dipakai banyak halaman.
 
@@ -217,7 +217,7 @@ Fungsi `esc()` di header memakai `htmlspecialchars(..., ENT_QUOTES, 'UTF-8')`. T
 
 ## Bab 4 — Membuat form dan tabel HTML
 
-**File utama:** api/anggota/tambah.php dan api/pesanan/list.php.
+**File utama:** prak8/anggota/tambah.php dan prak8/pesanan/list.php.
 
 **Tujuan:** menghubungkan input yang terlihat dengan data yang dikirim.
 
@@ -255,7 +255,7 @@ Berikut contoh minimal pola form anggota. Form lengkap di tambah.php juga mempun
 
 Pada form pesanan, action tidak ditulis. Browser mengirim form kembali ke halaman pesanan yang sedang dibuka. Karena itu, pengolahan POST ditempatkan di bagian atas pesanan/list.php, sebelum HTML dikirim.
 
-Buka `api/pesanan/list.php` dan `api/includes/header.php`.
+Buka `prak8/pesanan/list.php` dan `prak8/includes/header.php`.
 
 | Elemen / atribut | Penjelasan sederhana |
 | --- | --- |
@@ -427,7 +427,7 @@ Pencarian ini menyaring data yang sudah tampil di browser. Ia tidak mengirim que
 
 ## Bab 7 — Menyiapkan database dan koneksi PHP
 
-**File utama:** sql/02_geprek.sql, api/includes/env.php, api/includes/koneksi.php.
+**File utama:** sql/02_geprek.sql, prak8/includes/env.php, prak8/includes/koneksi.php.
 
 **Tujuan:** menghubungkan data anggota dengan pesanannya.
 
@@ -513,7 +513,7 @@ Total tidak menjadi kolom tersendiri: dihitung dari `harga × jumlah`. Harga dis
 
 ## Bab 8 — Memproses tambah, edit, dan hapus
 
-**File utama:** api/anggota/proses_tambah.php, api/anggota/proses_edit.php, api/pesanan/list.php.
+**File utama:** prak8/anggota/proses_tambah.php, prak8/anggota/proses_edit.php, prak8/pesanan/list.php.
 
 **Tujuan:** mengikuti satu transaksi dari form sampai ke database.
 
@@ -800,7 +800,7 @@ Setelah itu, tunjukkan satu alur lengkap: tambah anggota → pesan dua porsi →
 ### Urutan membaca berkas
 
 
-1. api/index.php dan includes/menu.php: mulai dari halaman paling sederhana.
+1. prak8/index.php dan includes/menu.php: mulai dari halaman paling sederhana.
 2. includes/header.php dan footer.php: pahami bagian halaman yang dipakai ulang.
 3. assets/css/style.css: ubah satu properti sambil melihat hasil.
 4. assets/js/app.js: pelajari empat interaksi satu per satu.

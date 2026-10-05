@@ -90,19 +90,19 @@ nav a { display: block; padding: 3px 0; }
 <p>Alamat yang dibuka pengguna tidak selalu sama dengan letak file. Rute <code>/prak8/</code> diarahkan ke kode di folder <code>api/</code>.</p>
 <div class="table"><table><thead><tr><th>Alamat / file</th><th>Kegunaan</th></tr></thead><tbody>
 <tr><td><code>/</code> → <code>index.html</code></td><td>Masterpage untuk membuka praktikum 1–8</td></tr>
-<tr><td><code>/prak8/index.php</code> → <code>api/index.php</code></td><td>Halaman menu Geprek Kita</td></tr>
-<tr><td><code>api/includes/header.php</code></td><td>Bagian atas, navigasi, fungsi esc</td></tr>
-<tr><td><code>api/includes/footer.php</code></td><td>Bagian bawah dan pemanggilan JavaScript</td></tr>
-<tr><td><code>api/includes/menu.php</code></td><td>Array nama menu dan harga</td></tr>
-<tr><td><code>api/includes/env.php</code></td><td>Membaca konfigurasi lokal dari .env</td></tr>
-<tr><td><code>api/includes/koneksi.php</code></td><td>Membuat koneksi PDO ke PostgreSQL</td></tr>
-<tr><td><code>api/includes/session.php</code></td><td>Memulai session untuk pesan sementara</td></tr>
-<tr><td><code>api/anggota/list.php</code></td><td>Membaca dan menampilkan anggota</td></tr>
-<tr><td><code>api/anggota/tambah.php</code></td><td>Form tambah anggota</td></tr>
-<tr><td><code>api/anggota/proses_tambah.php</code></td><td>Validasi dan INSERT anggota</td></tr>
-<tr><td><code>api/anggota/edit.php</code></td><td>Mengambil anggota berdasarkan ID untuk form edit</td></tr>
-<tr><td><code>api/anggota/proses_edit.php</code></td><td>UPDATE atau DELETE anggota</td></tr>
-<tr><td><code>api/pesanan/list.php</code></td><td>Form, daftar, tambah, edit, dan hapus pesanan</td></tr>
+<tr><td><code>/prak8/index.php</code> → <code>prak8/index.php</code></td><td>Halaman menu Geprek Kita</td></tr>
+<tr><td><code>prak8/includes/header.php</code></td><td>Bagian atas, navigasi, fungsi esc</td></tr>
+<tr><td><code>prak8/includes/footer.php</code></td><td>Bagian bawah dan pemanggilan JavaScript</td></tr>
+<tr><td><code>prak8/includes/menu.php</code></td><td>Array nama menu dan harga</td></tr>
+<tr><td><code>prak8/includes/env.php</code></td><td>Membaca konfigurasi lokal dari .env</td></tr>
+<tr><td><code>prak8/includes/koneksi.php</code></td><td>Membuat koneksi PDO ke PostgreSQL</td></tr>
+<tr><td><code>prak8/includes/session.php</code></td><td>Memulai session untuk pesan sementara</td></tr>
+<tr><td><code>prak8/anggota/list.php</code></td><td>Membaca dan menampilkan anggota</td></tr>
+<tr><td><code>prak8/anggota/tambah.php</code></td><td>Form tambah anggota</td></tr>
+<tr><td><code>prak8/anggota/proses_tambah.php</code></td><td>Validasi dan INSERT anggota</td></tr>
+<tr><td><code>prak8/anggota/edit.php</code></td><td>Mengambil anggota berdasarkan ID untuk form edit</td></tr>
+<tr><td><code>prak8/anggota/proses_edit.php</code></td><td>UPDATE atau DELETE anggota</td></tr>
+<tr><td><code>prak8/pesanan/list.php</code></td><td>Form, daftar, tambah, edit, dan hapus pesanan</td></tr>
 <tr><td><code>assets/css/style.css</code></td><td>CSS aplikasi Geprek Kita</td></tr>
 <tr><td><code>assets/js/app.js</code></td><td>Validasi, konfirmasi, pencarian, dan total</td></tr>
 <tr><td><code>sql/02_geprek.sql</code></td><td>Struktur tabel anggota dan pesanan</td></tr>
@@ -144,7 +144,7 @@ DB_SSLMODE=require</code></pre>
 <p>Kode memprioritaskan DATABASE_URL jika terisi. Jika tidak, kode membaca variabel DB_*. Loader .env tidak menimpa variabel yang sudah tersedia di environment proses/server.</p>
 <p>.env tidak boleh dimasukkan ke handbook atau Git. Pada hosting, isi Environment Variables yang diperlukan. Mengubah file lokal tidak otomatis memperbarui konfigurasi deployment.</p>
 <h2 id="bagian-10">Bab 3 — Membuat kerangka halaman dan menu</h2>
-<p><strong>File utama:</strong> api/includes/header.php, api/includes/footer.php, api/includes/menu.php, api/index.php.</p>
+<p><strong>File utama:</strong> prak8/includes/header.php, prak8/includes/footer.php, prak8/includes/menu.php, prak8/index.php.</p>
 <p><strong>Tujuan:</strong> memahami bagaimana satu kerangka dipakai banyak halaman.</p>
 <h3 id="bagian-11">Langkah kerja</h3>
 <ol>
@@ -190,7 +190,7 @@ require __DIR__ . &#x27;/includes/menu.php&#x27;;</code></pre>
 <p>Kode seperti <code>original</code> menjadi kunci menu. Angka harga tidak memakai titik ribuan. Titik pemisah ditambahkan saat ditampilkan.</p>
 <p>Fungsi <code>esc()</code> di header memakai <code>htmlspecialchars(..., ENT_QUOTES, &#x27;UTF-8&#x27;)</code>. Tujuannya membuat isi pengguna ditampilkan sebagai teks HTML, bukan dianggap markup. Ini berbeda dari prepared statement yang melindungi pemakaian nilai dalam SQL.</p>
 <h2 id="bagian-12">Bab 4 — Membuat form dan tabel HTML</h2>
-<p><strong>File utama:</strong> api/anggota/tambah.php dan api/pesanan/list.php.</p>
+<p><strong>File utama:</strong> prak8/anggota/tambah.php dan prak8/pesanan/list.php.</p>
 <p><strong>Tujuan:</strong> menghubungkan input yang terlihat dengan data yang dikirim.</p>
 <h3 id="bagian-13">Langkah kerja</h3>
 <ol>
@@ -218,7 +218,7 @@ require __DIR__ . &#x27;/includes/menu.php&#x27;;</code></pre>
 <li>PHP membaca nilai melalui <code>$_POST[&#x27;nama&#x27;]</code>.</li>
 </ol>
 <p>Pada form pesanan, action tidak ditulis. Browser mengirim form kembali ke halaman pesanan yang sedang dibuka. Karena itu, pengolahan POST ditempatkan di bagian atas pesanan/list.php, sebelum HTML dikirim.</p>
-<p>Buka <code>api/pesanan/list.php</code> dan <code>api/includes/header.php</code>.</p>
+<p>Buka <code>prak8/pesanan/list.php</code> dan <code>prak8/includes/header.php</code>.</p>
 <div class="table"><table><thead><tr><th>Elemen / atribut</th><th>Penjelasan sederhana</th></tr></thead><tbody>
 <tr><td>header, nav, main, footer</td><td>Membagi halaman menurut fungsinya</td></tr>
 <tr><td>section</td><td>Mengelompokkan bagian isi</td></tr>
@@ -334,7 +334,7 @@ document.getElementById(&quot;total&quot;).textContent =
 <p>Kode membaca teks setiap baris tabel, mengubahnya menjadi huruf kecil, lalu memeriksa <code>includes()</code>. Baris yang tidak cocok diberi <code>hidden = true</code>.</p>
 <p>Pencarian ini menyaring data yang sudah tampil di browser. Ia tidak mengirim query pencarian baru ke database.</p>
 <h2 id="bagian-26">Bab 7 — Menyiapkan database dan koneksi PHP</h2>
-<p><strong>File utama:</strong> sql/02_geprek.sql, api/includes/env.php, api/includes/koneksi.php.</p>
+<p><strong>File utama:</strong> sql/02_geprek.sql, prak8/includes/env.php, prak8/includes/koneksi.php.</p>
 <p><strong>Tujuan:</strong> menghubungkan data anggota dengan pesanannya.</p>
 <h3 id="bagian-27">Langkah kerja</h3>
 <ol>
@@ -396,7 +396,7 @@ no_hp                             jumlah
 <p><code>ON DELETE RESTRICT</code> mencegah anggota dihapus saat masih dirujuk oleh pesanan. Hapus pesanan terkait terlebih dahulu jika memang ingin menghapus anggota latihan.</p>
 <p>Total tidak menjadi kolom tersendiri: dihitung dari <code>harga × jumlah</code>. Harga disimpan pada pesanan. Mengubah array harga tidak langsung mengubah pesanan lama, tetapi menyimpan edit pesanan akan mengambil harga menu yang berlaku saat edit.</p>
 <h2 id="bagian-29">Bab 8 — Memproses tambah, edit, dan hapus</h2>
-<p><strong>File utama:</strong> api/anggota/proses_tambah.php, api/anggota/proses_edit.php, api/pesanan/list.php.</p>
+<p><strong>File utama:</strong> prak8/anggota/proses_tambah.php, prak8/anggota/proses_edit.php, prak8/pesanan/list.php.</p>
 <p><strong>Tujuan:</strong> mengikuti satu transaksi dari form sampai ke database.</p>
 <h3 id="bagian-30">Langkah kerja: anggota</h3>
 <ol>
@@ -599,7 +599,7 @@ Redirect → halaman daftar menampilkan data terbaru</code></pre>
 <p>Setelah itu, tunjukkan satu alur lengkap: tambah anggota → pesan dua porsi → simpan → edit → hapus. Utamakan bisa menjelaskan alasan setiap langkah.</p>
 <h3 id="bagian-43">Urutan membaca berkas</h3>
 <ol>
-<li>api/index.php dan includes/menu.php: mulai dari halaman paling sederhana.</li>
+<li>prak8/index.php dan includes/menu.php: mulai dari halaman paling sederhana.</li>
 <li>includes/header.php dan footer.php: pahami bagian halaman yang dipakai ulang.</li>
 <li>assets/css/style.css: ubah satu properti sambil melihat hasil.</li>
 <li>assets/js/app.js: pelajari empat interaksi satu per satu.</li>

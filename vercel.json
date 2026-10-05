@@ -1,49 +1,21 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/prak9.php": {
-      "runtime": "vercel-php@0.9.0"
-    },
-    "api/prak10.php": {
-      "runtime": "vercel-php@0.9.0"
-    },
-    "api/prak7.php": {
-      "runtime": "vercel-php@0.9.0"
-    },
-    "api/index.php": {
-      "runtime": "vercel-php@0.9.0"
-    },
-    "api/pesanan/list.php": {
-      "runtime": "vercel-php@0.9.0"
-    },
-    "api/anggota/list.php": {
-      "runtime": "vercel-php@0.9.0"
-    },
-    "api/anggota/tambah.php": {
-      "runtime": "vercel-php@0.9.0"
-    },
-    "api/anggota/proses_tambah.php": {
-      "runtime": "vercel-php@0.9.0"
-    },
-    "api/anggota/edit.php": {
-      "runtime": "vercel-php@0.9.0"
-    },
-    "api/anggota/proses_edit.php": {
-      "runtime": "vercel-php@0.9.0"
-    }
+    "api/prak7.php": { "runtime": "vercel-php@0.9.0" },
+    "api/prak8.php": { "runtime": "vercel-php@0.9.0" },
+    "api/prak9.php": { "runtime": "vercel-php@0.9.0" },
+    "api/prak10.php": { "runtime": "vercel-php@0.9.0" }
   },
-  "rewrites": [
-    { "source": "/prak9/:path*", "destination": "/api/prak9.php" },
-    { "source": "/prak10/:path*", "destination": "/api/prak10.php" },
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/prak7/assets/:path*", "destination": "/prak7/assets/:path*" },
-    { "source": "/prak7/:path*", "destination": "/api/prak7.php" },
-    { "source": "/prak8/", "destination": "/api/index.php" },
-    { "source": "/prak8/index.php", "destination": "/api/index.php" },
-    { "source": "/prak8/anggota/:path*", "destination": "/api/anggota/:path*" },
-    { "source": "/prak8/pesanan/:path*", "destination": "/api/pesanan/:path*" },
-    { "source": "/index.php", "destination": "/api/index.php" },
-    { "source": "/pesanan/:path*", "destination": "/api/pesanan/:path*" },
-    { "source": "/anggota/:path*", "destination": "/api/anggota/:path*" }
+  "routes": [
+    { "src": "^/$", "dest": "/index.html" },
+    { "src": "^/prak7/assets/(.*)$", "dest": "/prak7/assets/$1" },
+    { "src": "^/prak7(?:/.*)?$", "dest": "/api/prak7.php" },
+    { "src": "^/prak8(?:/.*)?$", "dest": "/api/prak8.php" },
+    { "src": "^/prak9(?:/.*)?$", "dest": "/api/prak9.php" },
+    { "src": "^/prak10(?:/.*)?$", "dest": "/api/prak10.php" },
+    { "src": "^/(?:index\\.php|anggota/.*|pesanan/.*)$", "dest": "/api/prak8.php" },
+    { "src": "^/api/.*$", "status": 404 },
+    { "handle": "filesystem" },
+    { "src": "/.*", "status": 404 }
   ]
 }

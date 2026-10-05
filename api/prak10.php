@@ -21,4 +21,4 @@ if (!isset($routes[$route])) {
     http_response_code(404);
     exit('Halaman tidak ditemukan.');
 }
-require __DIR__ . '/prak10/' . $routes[$route];
+require dirname(__DIR__) . '/prak10/' . $routes[$route];

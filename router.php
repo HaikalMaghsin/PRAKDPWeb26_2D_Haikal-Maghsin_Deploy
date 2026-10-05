@@ -36,27 +36,9 @@ if (strpos($path, '/prak10/') === 0) {
     require __DIR__ . '/api/prak10.php';
     return;
 }
-if (strpos($path, '/prak8/') === 0) {
-    $path = substr($path, strlen('/prak8'));
-}
-
-$routes = [
-    '/' => 'index.php',
-    '/index.php' => 'index.php',
-    '/pesanan/list.php' => 'pesanan/list.php',
-    '/anggota/list.php' => 'anggota/list.php',
-    '/anggota/tambah.php' => 'anggota/tambah.php',
-    '/anggota/proses_tambah.php' => 'anggota/proses_tambah.php',
-    '/anggota/edit.php' => 'anggota/edit.php',
-    '/anggota/proses_edit.php' => 'anggota/proses_edit.php',
-];
-
-if (!isset($routes[$path])) {
-    http_response_code(404);
-    echo 'Halaman tidak ditemukan.';
+if (strpos($path, '/prak8/') === 0 || $path === '/index.php' || strpos($path, '/anggota/') === 0 || strpos($path, '/pesanan/') === 0) {
+    require __DIR__ . '/api/prak8.php';
     return;
 }
-
-$_SERVER['SCRIPT_FILENAME'] = __DIR__ . '/api/' . $routes[$path];
-$_SERVER['SCRIPT_NAME'] = $path === '/' ? '/index.php' : $path;
-require $_SERVER['SCRIPT_FILENAME'];
+http_response_code(404);
+echo 'Halaman tidak ditemukan.';

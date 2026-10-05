@@ -17,9 +17,9 @@ Repo deploy ini menyimpan masterpage dan salinan hasil yang siap ditampilkan:
 - / atau index.html: masterpage.
 - /prak1/ sampai /prak6/: HTML, CSS, JavaScript, dan data JSON latihan.
 - /prak7/: latihan PHP dan form, data sementara dalam session.
-- /prak8/: Geprek Kita dengan database, kodenya berada di api/.
-- /prak9/: Geprek Kita dengan CRUD, pencarian server, dan pagination lima data; kode di api/prak9/.
-- /prak10/: Geprek Kita dengan registrasi, login, logout, session database, dan hak akses admin; kode di api/prak10/.
+- /prak8/: Geprek Kita dengan database, kode di prak8/.
+- /prak9/: Geprek Kita dengan CRUD, pencarian server, dan pagination lima data; kode di prak9/.
+- /prak10/: Geprek Kita dengan registrasi, login, logout, session database, dan hak akses admin; kode di prak10/.
 
 Prak 1 disalin dari kode-praktikum/jobsheet-01, Prak 2 dari folder utama,
 dan Prak 3–7 dari folder Jobsheet3–Jobsheet7 di repo praktikum.
@@ -44,7 +44,7 @@ Menggunakan HTML, CSS, JavaScript, PHP, dan PostgreSQL (Supabase).
 
 Tidak memerlukan npm. File .env jangan diunggah ke Git.
 Untuk Vercel, isi variabel yang sama di Environment Variables lalu deploy ulang.
-Konfigurasi memakai sepuluh fungsi PHP. Praktikum 9 dan 10 masing-masing memakai satu pintu masuk agar jumlah fungsi tetap terbatas.
+Konfigurasi memakai empat fungsi PHP. Folder api/ hanya berisi pintu masuk Praktikum 7–10. Rute PHP diproses sebelum file statis agar Launch membuka halaman, bukan mengunduh kode PHP.
 
 ## Cara memakai
 1. Tambahkan anggota pelanggan.
@@ -52,8 +52,8 @@ Konfigurasi memakai sepuluh fungsi PHP. Praktikum 9 dan 10 masing-masing memakai
 3. Simpan pesanan. Data bisa diedit atau dihapus dari tabel.
 4. Anggota yang punya pesanan tidak dapat dihapus sebelum pesanannya dihapus.
 
-Menu dan harga diatur di api/includes/menu.php.
-Salinan Praktikum 9 dan 10 memakai api/prak9/includes/menu.php dan api/prak10/includes/menu.php.
+Menu dan harga diatur di prak8/includes/menu.php.
+Salinan Praktikum 9 dan 10 memakai prak9/includes/menu.php dan prak10/includes/menu.php.
 Satu pesanan berisi satu jenis menu. Untuk menu lain, buat pesanan berikutnya.
 Total dihitung kembali di PHP dari harga menu, bukan dari nilai browser.
 Praktikum 10 menambahkan login petugas. Pembayaran belum diterapkan.
