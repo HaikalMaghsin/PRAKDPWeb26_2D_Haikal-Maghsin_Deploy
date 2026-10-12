@@ -4,24 +4,28 @@ include __DIR__ . '/../includes/header.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
-$daftarAnggota = $_SESSION['anggota'] ?? [];
+
+$daftarAnggota = array_values($_SESSION['anggota'] ?? []);
+usort($daftarAnggota, fn($a, $b) => ($b['id'] ?? 0) <=> ($a['id'] ?? 0));
 ?>
-        <section>
-            <h2>Daftar Anggota</h2>
+        <section class="panel">
+            <h1>Daftar Anggota</h1>
+            <p class="page-description">Daftar anggota pelanggan Geprek Kita.</p>
 
             <a class="btn-tambah" href="tambah.php">+ Tambah Anggota</a>
 
             <?php if ($flash): ?>
-                <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo $flash['pesan']; ?></p>
+                <p class="flash flash-<?php echo esc($flash['type']); ?>"><?php echo esc($flash['pesan']); ?></p>
             <?php endif; ?>
 
             <div class="search-box">
                 <label for="search-input">Cari Nama Anggota</label>
-                <input type="text" id="search-input" placeholder="Ketik nama anggota...">
+                <input type="search" id="search-input" placeholder="Ketik nama atau nomor anggota..." aria-controls="tabel-data">
             </div>
+            <p class="filter-status" id="filter-status" role="status" hidden></p>
 
             <div class="table-responsive">
-            <table>
+            <table id="tabel-data">
                 <thead>
                     <tr>
                         <th>No. Anggota</th>
@@ -39,13 +43,17 @@ $daftarAnggota = $_SESSION['anggota'] ?? [];
                     <?php else: ?>
                         <?php foreach ($daftarAnggota as $anggota): ?>
                         <tr>
-                            <td><?php echo esc($anggota['no_anggota']); ?></td>
-                            <td><?php echo esc($anggota['nama']); ?></td>
-                            <td><?php echo esc($anggota['alamat']); ?></td>
-                            <td><?php echo esc($anggota['no_hp']); ?></td>
+                            <td><?php echo esc($anggota['no_anggota'] ?? ''); ?></td>
+                            <td><?php echo esc($anggota['nama'] ?? ''); ?></td>
+                            <td><?php echo esc($anggota['alamat'] ?? ''); ?></td>
+                            <td><?php echo esc($anggota['no_hp'] ?? ''); ?></td>
                             <td>
-                                <button type="button" class="btn-aksi btn-edit">Edit</button>
-                                <button type="button" class="btn-aksi btn-hapus">Hapus</button>
+                                <a class="btn-aksi btn-edit" href="edit.php?id=<?php echo esc($anggota['id'] ?? ''); ?>">Edit</a>
+                                <form class="form-hapus" method="post" action="proses_edit.php" data-nama="<?php echo esc($anggota['nama'] ?? 'anggota ini'); ?>">
+                                    <input type="hidden" name="aksi" value="hapus">
+                                    <input type="hidden" name="id" value="<?php echo esc($anggota['id'] ?? ''); ?>">
+                                    <button type="submit" class="btn-aksi btn-hapus">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                         <?php endforeach; ?>

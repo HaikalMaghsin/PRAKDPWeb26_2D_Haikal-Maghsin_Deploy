@@ -13,6 +13,24 @@ if ($nama === '') {
 if ($noAnggota === '') {
     $errors[] = "No. Anggota wajib diisi.";
 }
+if ($alamat === '') {
+    $errors[] = "Alamat wajib diisi.";
+}
+if ($noHp === '') {
+    $errors[] = "No. Hp wajib diisi.";
+}
+
+if (!isset($_SESSION['anggota'])) {
+    $_SESSION['anggota'] = [];
+}
+
+// Cek nomor anggota unik
+foreach ($_SESSION['anggota'] as $item) {
+    if (strcasecmp($item['no_anggota'], $noAnggota) === 0) {
+        $errors[] = "Nomor anggota sudah digunakan.";
+        break;
+    }
+}
 
 if (!empty($errors)) {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => implode(' ', $errors)];
@@ -20,11 +38,9 @@ if (!empty($errors)) {
     exit;
 }
 
-if (!isset($_SESSION['anggota'])) {
-    $_SESSION['anggota'] = [];
-}
-
-$_SESSION['anggota'][] = [
+$nextId = empty($_SESSION['anggota']) ? 1 : (max(array_keys($_SESSION['anggota'])) + 1);
+$_SESSION['anggota'][$nextId] = [
+    'id' => $nextId,
     'nama' => $nama,
     'no_anggota' => $noAnggota,
     'alamat' => $alamat,

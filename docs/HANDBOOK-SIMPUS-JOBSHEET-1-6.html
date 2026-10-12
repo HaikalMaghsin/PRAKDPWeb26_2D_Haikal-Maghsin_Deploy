@@ -1,0 +1,479 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Handbook SIMPUS-Mini (Jobsheet 1–6)</title><style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #efefea; color: #293c4a; font: 15px/1.7 Arial, sans-serif; }
+main { max-width: 940px; margin: 24px auto; background: white; padding: 48px; }
+h1 { font: 34px/1.2 Georgia, serif; border-bottom: 4px solid #222831; padding-bottom: 20px; color: #222831; }
+h2 { font-size: 23px; margin-top: 40px; color: #222831; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+h3 { font-size: 17px; margin-top: 24px; color: #393E46; }
+a { color: #1d5b8a; }
+code { background: #edf1f3; font: 0.9em Consolas, monospace; overflow-wrap: anywhere; padding: 2px 5px; border-radius: 3px; }
+pre { padding: 16px; background: #222831; color: #EEEEEE; border-radius: 6px; overflow-x: auto; }
+pre code { background: none; color: inherit; padding: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; margin: 16px 0; }
+th, td { padding: 9px 12px; border: 1px solid #cbd6dc; text-align: left; vertical-align: top; }
+th { background: #e8eef1; font-weight: bold; }
+.table { overflow-x: auto; margin: 16px 0; }
+nav { padding: 20px; background: #eef2f4; margin: 32px 0; border-radius: 6px; }
+nav h2 { margin-top: 0; border: none; padding: 0; }
+nav a { display: block; padding: 5px 0; font-weight: 500; }
+.toolbar { max-width: 940px; margin: 20px auto; display: flex; flex-wrap: wrap; gap: 10px; }
+.toolbar a, button { background: #222831; color: white; border: 0; border-radius: 5px; padding: 10px 14px; font: inherit; text-decoration: none; cursor: pointer; }
+.toolbar a:hover, button:hover { background: #393E46; }
+@media(max-width:640px) { main { padding: 22px; margin: 0; } .toolbar { padding: 0 16px; } h1 { font-size: 26px; } }
+@page { size: A4; margin: 18mm; }
+@media print {
+    body { background: white; font-size: 10pt; line-height: 1.5; }
+    main { padding: 0; margin: 0; max-width: none; }
+    .toolbar { display: none; }
+    .cover { padding-top: 20mm; break-after: page; }
+    nav { background: white; margin: 0; padding: 0; break-after: page; }
+    h1 { font-size: 26pt; }
+    h2 { font-size: 17pt; break-before: page; margin-top: 0; }
+    h3 { font-size: 12pt; }
+    h1, h2, h3 { break-after: avoid; }
+    table { font-size: 9pt; }
+    tr, pre { break-inside: avoid; }
+    pre { background: #f8fafc; color: #1e293b; border: 1px solid #cbd5e1; }
+    p, li { orphans: 3; widows: 3; }
+    a { color: inherit; text-decoration: none; }
+}
+</style></head><body><div class="toolbar"><button onclick="window.print()">Cetak / Simpan PDF</button><a href="/docs/HANDBOOK-SIMPUS-JOBSHEET-1-6.md" target="_blank">Buka Sumber Markdown</a><a href="/">Masterpage</a></div><main><section class="cover"><h1 id="bagian-1">Handbook SIMPUS-Mini: Panduan Penguasaan Jobsheet 1–6</h1>
+<p><strong>Haikal Maghsin · NIM 254107020189 · Kelas TI 2D</strong>  </p>
+<p>Mata Kuliah: Desain dan Pemrograman Web (DPWeb)  </p>
+<p>Topik: Pemrograman Web Sisi Klien (HTML, CSS, RWD, UI/UX, JavaScript DOM, Fetch API &amp; JSON)  </p>
+<p>Edisi: Persiapan Uji Praktikum &amp; Ujian Tengah Semester (UTS)</p>
+<p>---</p></section><nav aria-label="Daftar isi"><h2>Daftar Isi</h2><a href="#bagian-2">Daftar Isi</a><a href="#bagian-3">1. Peta Jalan &amp; Evolusi Aplikasi (Jobsheet 1 sampai 6)</a><a href="#bagian-4">Bab 1 — HTML5 Dasar &amp; Struktur Semantik (Jobsheet 1)</a><a href="#bagian-8">Bab 2 — CSS Dasar, Box Model, Typography &amp; Warna (Jobsheet 2)</a><a href="#bagian-13">Bab 3 — Responsive Web Design, Media Query &amp; CSS Grid (Jobsheet 3)</a><a href="#bagian-18">Bab 4 — Perancangan UI/UX, Wireframe &amp; User Flow (Jobsheet 4)</a><a href="#bagian-21">Bab 5 — JavaScript DOM, Validasi Form, Live Search &amp; Dashboard (Jobsheet 5)</a><a href="#bagian-27">Bab 6 — Asynchronous JavaScript, JSON &amp; Fetch API (Jobsheet 6)</a><a href="#bagian-31">Bab 7 — Kamus Istilah &amp; Tanya-Jawab Penguji (FAQ Dosen &amp; Aslab)</a></nav><h2 id="bagian-2">Daftar Isi</h2>
+<ol>
+<li><a href="#1-peta-jalan--evolusi-aplikasi-jobsheet-1-sampai-6">Peta Jalan &amp; Evolusi Aplikasi (Jobsheet 1 sampai 6)</a></li>
+<li><a href="#bab-1--html5-dasar--struktur-semantik-jobsheet-1">Bab 1 — HTML5 Dasar &amp; Struktur Semantik (Jobsheet 1)</a></li>
+<li><a href="#bab-2--css-dasar-box-model-typography--warna-jobsheet-2">Bab 2 — CSS Dasar, Box Model, Typography &amp; Warna (Jobsheet 2)</a></li>
+<li><a href="#bab-3--responsive-web-design-media-query--css-grid-jobsheet-3">Bab 3 — Responsive Web Design, Media Query &amp; CSS Grid (Jobsheet 3)</a></li>
+<li><a href="#bab-4--perancangan-uiux-wireframe--user-flow-jobsheet-4">Bab 4 — Perancangan UI/UX, Wireframe &amp; User Flow (Jobsheet 4)</a></li>
+<li><a href="#bab-5--javascript-dom-validasi-form-live-search--dashboard-jobsheet-5">Bab 5 — JavaScript DOM, Validasi Form, Live Search &amp; Dashboard (Jobsheet 5)</a></li>
+<li><a href="#bab-6--asynchronous-javascript-json--fetch-api-jobsheet-6">Bab 6 — Asynchronous JavaScript, JSON &amp; Fetch API (Jobsheet 6)</a></li>
+<li><a href="#bab-7--kamus-istilah--tanya-jawab-penguji-faq-dosen--aslab">Bab 7 — Kamus Istilah &amp; Tanya-Jawab Penguji (FAQ Dosen &amp; Aslab)</a></li>
+</ol>
+<p>---</p>
+<h2 id="bagian-3">1. Peta Jalan &amp; Evolusi Aplikasi (Jobsheet 1 sampai 6)</h2>
+<p>Aplikasi <strong>SIMPUS-Mini</strong> (Sistem Informasi Perpustakaan Mini) dibangun secara bertahap dari Jobsheet 1 hingga Jobsheet 6. Memahami garis waktu ini sangat penting agar kamu bisa menjelaskan proses evolusi kodenya kepada dosen/aslab:</p>
+<pre><code>[Jobsheet 1] HTML Murni (Semantik, Tabel Statis, Form Polos)
+     │
+     ▼
+[Jobsheet 2] CSS Styling (Reset, Box Model, Palette Warna, Zebra Table, Button)
+     │
+     ▼
+[Jobsheet 3] Responsive Web Design (Mobile-First, Hamburger CSS-Only, CSS Grid)
+     │
+     ▼
+[Jobsheet 4] Desain UI/UX (Wireframing, User Flow Peminjaman &amp; Pengembalian, Role)
+     │
+     ▼
+[Jobsheet 5] Interaktivitas JS DOM (Validasi Form, Confirm Delete, Live Search Table, Split Dashboard)
+     │
+     ▼
+[Jobsheet 6] Asinkron &amp; Data (JSON Data, Fetch API, Promise, Async/Await, Dynamic DOM Injection)</code></pre>
+<div class="table"><table><thead><tr><th>Praktikum</th><th>Fokus Utama</th><th>File Kunci</th><th>Ciri Khas Tampilan / Fitur</th></tr></thead><tbody>
+<tr><td><strong>Prak 1</strong></td><td>Struktur Tulang Web</td><td><code>index.html</code>, <code>buku/list.html</code>, <code>anggota/list.html</code></td><td>Polos hitam putih tanpa CSS, tabel default browser</td></tr>
+<tr><td><strong>Prak 2</strong></td><td>Estetika &amp; Visual</td><td><code>assets/css/style.css</code></td><td>Mulai ada warna <code>#222831</code>, tombol warna-warni, tabel bergaris</td></tr>
+<tr><td><strong>Prak 3</strong></td><td>Responsivitas Layar</td><td><code>assets/css/style.css</code></td><td>Tampilan bisa mengecil di HP, menu hamburger, kartu 3 kolom</td></tr>
+<tr><td><strong>Prak 4</strong></td><td>Perancangan Sistem</td><td><code>docs/wireframe.md</code></td><td>Dokumen alur user flow tamu vs petugas dan sketsa ASCII</td></tr>
+<tr><td><strong>Prak 5</strong></td><td>Interaksi &amp; Validasi</td><td><code>assets/js/app.js</code>, <code>style.css</code></td><td>Pencarian langsung saat ngetik, validasi tahun/stok, Dashboard 2 kolom</td></tr>
+<tr><td><strong>Prak 6</strong></td><td>Konsumsi Data JSON</td><td><code>assets/js/buku.js</code>, <code>data/buku.json</code></td><td>Tabel kosong saat HTML dimuat, diisi otomatis via <code>fetch()</code></td></tr>
+</tbody></table></div>
+<p>---</p>
+<h2 id="bagian-4">Bab 1 — HTML5 Dasar &amp; Struktur Semantik (Jobsheet 1)</h2>
+<p><strong>Tujuan:</strong> Membangun kerangka halaman web perpustakaan yang memiliki arti struktural (*semantic*) bagi browser dan mesin pencari, tanpa bantuan CSS maupun JavaScript.</p>
+<h3 id="bagian-5">1.1 Tag Semantik HTML5</h3>
+<p>Tag semantik adalah tag yang namanya secara eksplisit menjelaskan fungsinya di dalam dokumen:</p>
+<p>* <code>&lt;header&gt;</code>: Kepala halaman, membungkus judul utama aplikasi (<code>&lt;h1&gt;</code>) dan navigasi.</p>
+<p>* <code>&lt;nav&gt;</code>: Area navigasi yang membungkus daftar link (<code>&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;...&quot;&gt;</code>).</p>
+<p>* <code>&lt;main&gt;</code>: Konten utama yang unik untuk halaman tersebut. Tidak boleh ada lebih dari satu <code>&lt;main&gt;</code> per halaman.</p>
+<p>* <code>&lt;section&gt;</code>: Pengelompokan bagian konten yang memiliki topik/judul (<code>&lt;h2&gt;</code>).</p>
+<p>* <code>&lt;article&gt;</code>: Bagian konten mandiri yang berdiri sendiri (digunakan untuk tiap kartu ringkasan).</p>
+<p>* <code>&lt;footer&gt;</code>: Kaki halaman, berisi informasi hak cipta (<code>&amp;copy;</code>) dan identitas jobsheet.</p>
+<h3 id="bagian-6">1.2 Struktur Tabel Data</h3>
+<p>Tabel digunakan untuk menampilkan data katalog buku dan daftar anggota:</p>
+<pre><code>&lt;table border=&quot;1&quot;&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Judul&lt;/th&gt;
+            &lt;th&gt;Pengarang&lt;/th&gt;
+            &lt;th&gt;Tahun&lt;/th&gt;
+            &lt;th&gt;Stok&lt;/th&gt;
+            &lt;th&gt;Aksi&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Laskar Pelangi&lt;/td&gt;
+            &lt;td&gt;Andrea Hirata&lt;/td&gt;
+            &lt;td&gt;2005&lt;/td&gt;
+            &lt;td&gt;7&lt;/td&gt;
+            &lt;td&gt;
+                &lt;a href=&quot;edit.html&quot;&gt;Edit&lt;/a&gt;
+                &lt;a href=&quot;#&quot;&gt;Hapus&lt;/a&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<p>* <code>&lt;thead&gt;</code> dan <code>&lt;tbody&gt;</code> memisahkan kepala tabel (kolom) dengan baris isi data.</p>
+<p>* <code>&lt;th&gt;</code> (*Table Header*) otomatis dicetak tebal dan rata tengah oleh browser.</p>
+<p>* <code>&lt;td&gt;</code> (*Table Data*) menampung nilai tiap sel data.</p>
+<h3 id="bagian-7">1.3 Form Input dan Atribut HTML5</h3>
+<p>Digunakan pada form penambahan buku dan anggota:</p>
+<pre><code>&lt;form action=&quot;#&quot; method=&quot;get&quot;&gt;
+    &lt;p&gt;
+        &lt;label for=&quot;judul&quot;&gt;Judul Buku&lt;/label&gt;
+        &lt;input type=&quot;text&quot; id=&quot;judul&quot; name=&quot;judul&quot; required&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;label for=&quot;tahun&quot;&gt;Tahun Terbit&lt;/label&gt;
+        &lt;input type=&quot;number&quot; id=&quot;tahun&quot; name=&quot;tahun&quot; min=&quot;1900&quot; max=&quot;2026&quot;&gt;
+    &lt;/p&gt;
+    &lt;button type=&quot;submit&quot;&gt;Simpan&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p>* <strong>Hubungan <code>&lt;label for=&quot;id&quot;&gt;</code> dan <code>&lt;input id=&quot;id&quot;&gt;</code></strong>: Memastikan saat pengguna mengklik teks label, kursor langsung aktif (*focus*) di dalam kotak input terkait. Ini syarat penting aksesibilitas web (A11y).</p>
+<p>* <strong>Atribut <code>name</code></strong>: Kunci parameter yang dikirimkan ke server saat form disubmit.</p>
+<p>* <strong>Atribut <code>required</code></strong>: Validasi bawaan browser agar field tidak boleh kosong.</p>
+<p>---</p>
+<h2 id="bagian-8">Bab 2 — CSS Dasar, Box Model, Typography &amp; Warna (Jobsheet 2)</h2>
+<p><strong>Tujuan:</strong> Memberikan gaya tampilan, tata letak, warna, dan hirarki visual sehingga aplikasi nyaman dipandang.</p>
+<h3 id="bagian-9">2.1 CSS Reset &amp; <code>box-sizing: border-box</code></h3>
+<p>Di baris paling atas CSS:</p>
+<pre><code>* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}</code></pre>
+<p>* <strong>Kenapa wajib <code>box-sizing: border-box</code>?</strong>  </p>
+<p>  Secara default (<code>content-box</code>), jika sebuah kotak diberi <code>width: 200px; padding: 20px; border: 5px;</code>, maka lebar total kotak menjadi <code>200 + 40 + 10 = 250px</code> (melar keluar!).  </p>
+<p>  Dengan <code>border-box</code>, lebar total tetap <strong>200px</strong>. Padding dan border dimasukkan ke dalam ruang yang ada. Layout tidak akan bocor/hancur.</p>
+<h3 id="bagian-10">2.2 Color Palette dengan CSS Variables (<code>:root</code>)</h3>
+<p>Variabel CSS didefinisikan secara global di <code>:root</code>:</p>
+<pre><code>:root {
+    --warna-gelap: #222831;   /* Warna header &amp; tombol submit */
+    --warna-abu:   #393E46;   /* Warna latar kartu statistik */
+    --warna-aksen: #c9c9c9;   /* Warna highlight teks/link hover */
+    --warna-terang: #EEEEEE;  /* Background body */
+    --warna-putih:  #FFFFFF;  /* Background section &amp; teks putih */
+    --warna-hapus:  #D9534F;  /* Warna merah tombol hapus */
+}</code></pre>
+<p>* <strong>Keuntungan:</strong> Jika ingin mengganti skema warna seluruh website, cukup ubah satu nilai hex di <code>:root</code>, semua halaman otomatis berubah serempak.</p>
+<h3 id="bagian-11">2.3 Styling Tabel Modern</h3>
+<p>* <code>border-collapse: collapse;</code>: Menyatukan border antar sel agar tidak bergaris ganda.</p>
+<p>* <code>tbody tr:nth-child(even)</code>: Menerapkan <strong>Zebra Striping</strong> (baris genap abu-abu tipis, baris ganjil putih) agar mata pengguna tidak selip saat membaca data tabel yang banyak.</p>
+<p>* <code>tbody tr:hover</code>: Memberikan highlight saat kursor melintas di atas baris.</p>
+<h3 id="bagian-12">2.4 Tombol Aksi (<code>.btn-aksi</code>)</h3>
+<pre><code>.btn-aksi {
+    display: inline-block;
+    padding: 0.35rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn-edit  { background-color: #f0ad4e; color: #fff; } /* Kuning oranye */
+.btn-hapus { background-color: #d9534f; color: #fff; } /* Merah */
+.btn-tambah{ background-color: #198754; color: #fff; } /* Hijau */</code></pre>
+<p>---</p>
+<h2 id="bagian-13">Bab 3 — Responsive Web Design, Media Query &amp; CSS Grid (Jobsheet 3)</h2>
+<p><strong>Tujuan:</strong> Memastikan halaman web dapat menyesuaikan tata letaknya secara mulus baik di layar HP (360px), tablet (768px), maupun laptop/desktop (1024px+).</p>
+<h3 id="bagian-14">3.1 Konsep Mobile-First</h3>
+<p>* CSS ditulis dari aturan layar terkecil terlebih dahulu (tanpa media query).</p>
+<p>* Ketika layar melebar, kita gunakan <code>@media (min-width: ...)</code> untuk menambah kolom atau mengubah posisi elemen.</p>
+<p>* Keunggulan: Performa di perangkat mobile lebih ringan karena tidak perlu membatalkan aturan desktop yang berat.</p>
+<h3 id="bagian-15">3.2 Trik Hamburger Menu Tanpa JavaScript (CSS-Only Checkbox Hack)</h3>
+<p>Di Jobsheet 3, menu hamburger dioperasikan murni oleh CSS tanpa setetes pun JavaScript:</p>
+<pre><code>&lt;input type=&quot;checkbox&quot; id=&quot;nav-toggle&quot; class=&quot;nav-toggle sr-only&quot;&gt;
+&lt;label for=&quot;nav-toggle&quot; class=&quot;nav-toggle-label&quot;&gt;&amp;#9776;&lt;/label&gt;
+&lt;nav&gt;
+    &lt;ul&gt;...&lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+<p>Cara kerjanya di CSS:</p>
+<ol>
+<li>Checkbox disembunyikan menggunakan kelas <code>.sr-only</code>.</li>
+<li>Ikon hamburger dibuat dari <code>&lt;label for=&quot;nav-toggle&quot;&gt;&amp;#9776;&lt;/label&gt;</code>. Saat ikon diklik, checkbox otomatis tercentang (<code>checked</code>).</li>
+<li>Selector CSS menangkap status centang tersebut:</li>
+</ol>
+<p>   ```css</p>
+<p>   header nav { display: none; } /* Default: navigasi sembunyi */</p>
+<p>   .nav-toggle:checked ~ nav { display: block; } /* Jika checkbox tercentang, buka nav! */</p>
+<p>   ```</p>
+<ol>
+<li>Di desktop (<code>@media (min-width: 768px)</code>), checkbox dan ikon hamburger di-<code>display: none;</code>, sedangkan <code>header nav</code> dibuat <code>display: block;</code> permanen.</li>
+</ol>
+<h3 id="bagian-16">3.3 Kartu Statistik dengan CSS Grid</h3>
+<pre><code>/* Tampilan Desktop Asli */
+main section:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolom sama lebar */
+    gap: 1rem;
+}</code></pre>
+<p>* <code>repeat(3, 1fr)</code> membagi lebar kontainer menjadi 3 pecahan sama rata.</p>
+<h3 id="bagian-17">3.4 Solusi Tabel Meluap: <code>.table-responsive</code></h3>
+<p>Layar HP terlalu sempit untuk memuat 5 kolom tabel sekaligus. Solusinya:</p>
+<pre><code>.table-responsive {
+    max-width: 100%;
+    overflow-x: auto; /* Munculkan scrollbar horizontal jika tabel lebih lebar dari layar */
+}
+.table-responsive table {
+    min-width: 640px; /* Jaga agar teks tabel tidak berhimpitan */
+}</code></pre>
+<p>---</p>
+<h2 id="bagian-18">Bab 4 — Perancangan UI/UX, Wireframe &amp; User Flow (Jobsheet 4)</h2>
+<p><strong>Tujuan:</strong> Merancang pengalaman pengguna (UX) dan antarmuka (UI) sebelum melangkah ke implementasi logika program yang kompleks.</p>
+<h3 id="bagian-19">4.1 Pembagian Aktor</h3>
+<p>* <strong>Tamu (Guest)</strong>: Pengguna publik tanpa autentikasi. Hanya diizinkan melihat katalog buku dan anggota (Read-Only).</p>
+<p>* <strong>Petugas (Staff / Admin)</strong>: Pengguna yang login menggunakan kredensial (Username &amp; Password). Memiliki hak akses penuh (CRUD) dan transaksi peminjaman/pengembalian.</p>
+<h3 id="bagian-20">4.2 User Flow Peminjaman &amp; Pengembalian</h3>
+<p>Alur transaksi peminjaman buku:</p>
+<pre><code>[Petugas Login] ──&gt; [Buka Dashboard] ──&gt; [Klik &quot;Peminjaman Baru&quot;]
+                          │
+                          ▼
+                 [Pilih Anggota Peminjam]
+                          │
+                          ▼
+                 [Pilih Judul Buku (Stok &gt; 0)]
+                          │
+                          ▼
+                 [Klik Simpan Transaksi]
+                          │
+                          ▼
+                 [Stok Buku Berkurang -1] ──&gt; [Kembali ke Dashboard]</code></pre>
+<p>Alur transaksi pengembalian buku:</p>
+<pre><code>[Buka Daftar Peminjaman Aktif] ──&gt; [Cari Nama Anggota / ID Transaksi]
+                                              │
+                                              ▼
+                                     [Klik &quot;Tandai Kembali&quot;]
+                                              │
+                                              ▼
+                                     [Stok Buku Bertambah +1]
+                                              │
+                                              ▼
+                                     [Status Berubah: &quot;Selesai&quot;]</code></pre>
+<p>---</p>
+<h2 id="bagian-21">Bab 5 — JavaScript DOM, Validasi Form, Live Search &amp; Dashboard (Jobsheet 5)</h2>
+<p><strong>Tujuan:</strong> Memberikan interaktivitas dinamis pada halaman menggunakan JavaScript berbasis *Document Object Model* (DOM).</p>
+<p>Di Jobsheet 5, file JavaScript utama berada di <a href="file:///E:/Tugas%20Kuliah/Second%20Collage/PRAKDPWeb26_2D_Haikal-Maghsin_Deploy/prak5/assets/js/app.js">prak5/assets/js/app.js</a>.</p>
+<h3 id="bagian-22">5.1 Event <code>DOMContentLoaded</code></h3>
+<pre><code>document.addEventListener(&quot;DOMContentLoaded&quot;, function () {
+    initNavToggle();
+    initHapusConfirm();
+    initTableFilter();
+    initValidasiForm();
+});</code></pre>
+<p>* <strong>Mengapa harus menunggu <code>DOMContentLoaded</code>?</strong>  </p>
+<p>  Agar kode JavaScript baru dijalankan setelah seluruh elemen HTML selesai dibaca oleh browser. Jika dijalankan sebelum HTML siap, pemanggilan elemen seperti <code>document.getElementById(...)</code> akan menghasilkan <code>null</code> (error!).</p>
+<p>---</p>
+<h3 id="bagian-23">5.2 Fitur 1: Konfirmasi Hapus Baris Dinamis</h3>
+<pre><code>function initHapusConfirm() {
+    const tombolHapus = document.querySelectorAll(&quot;.btn-hapus&quot;);
+
+    tombolHapus.forEach(function (tombol) {
+        tombol.addEventListener(&quot;click&quot;, function () {
+            const baris = tombol.closest(&quot;tr&quot;);
+            const namaData = baris ? baris.querySelector(&quot;td&quot;)?.textContent.trim() : &quot;data ini&quot;;
+            const yakin = confirm(&#x27;Yakin ingin menghapus &quot;&#x27; + namaData + &#x27;&quot;?&#x27;);
+
+            if (yakin &amp;&amp; baris) {
+                baris.remove(); /* Menghapus elemen &lt;tr&gt; langsung dari DOM */
+            }
+        });
+    });
+}</code></pre>
+<p>* <code>tombol.closest(&quot;tr&quot;)</code>: Berjalan ke atas hirarki DOM mencari elemen induk baris <code>&lt;tr&gt;</code> terdekat dari tombol hapus yang diklik.</p>
+<p>* <code>confirm(...)</code>: Memunculkan dialog konfirmasi standar browser. Mengembalikan <code>true</code> jika pengguna menekan tombol &quot;OK&quot;, dan <code>false</code> jika menekan &quot;Cancel&quot;.</p>
+<p>* <code>baris.remove()</code>: Menghapus baris secara instan dari tampilan layar tanpa me-refresh halaman.</p>
+<p>---</p>
+<h3 id="bagian-24">5.3 Fitur 2: Live Search Filtering (Pencarian Real-Time)</h3>
+<pre><code>function initTableFilter() {
+    const inputCari = document.getElementById(&quot;search-input&quot;);
+    const tabel = document.querySelector(&quot;.table-responsive table&quot;);
+
+    if (!inputCari || !tabel) return;
+
+    inputCari.addEventListener(&quot;keyup&quot;, function () {
+        const keyword = inputCari.value.toLowerCase();
+        const baris = tabel.querySelectorAll(&quot;tbody tr&quot;);
+
+        baris.forEach(function (row) {
+            const isiBaris = row.textContent.toLowerCase();
+            row.style.display = isiBaris.includes(keyword) ? &quot;&quot; : &quot;none&quot;;
+        });
+    });
+}</code></pre>
+<p>* <strong>Event <code>keyup</code></strong>: Memicu pencarian setiap kali pengguna melepaskan tombol keyboard saat mengetik di input pencarian.</p>
+<p>* <code>.toLowerCase()</code>: Mengubah teks input dan teks tabel menjadi huruf kecil agar pencarian bersifat *case-insensitive* (mengetik &quot;laskar&quot; tetap menemukan &quot;Laskar&quot;).</p>
+<p>* <code>.includes(keyword)</code>: Mengecek apakah teks dalam baris mengandung kata kunci. Jika cocok, baris ditampilkan (<code>&quot;&quot;</code>); jika tidak cocok, disembunyikan (<code>&quot;none&quot;</code>).</p>
+<p>---</p>
+<h3 id="bagian-25">5.4 Fitur 3: Validasi Form Multilevel Sisi Klien</h3>
+<pre><code>function validasiAngka(form) {
+    let valid = true;
+    const tahun = form.querySelector(&quot;[name=&#x27;tahun&#x27;]&quot;);
+    const stok = form.querySelector(&quot;[name=&#x27;stok&#x27;]&quot;);
+
+    if (tahun &amp;&amp; tahun.value.trim() !== &quot;&quot;) {
+        const nilaiTahun = Number(tahun.value);
+        if (nilaiTahun &lt; 1900 || nilaiTahun &gt; 2026) {
+            tampilkanError(tahun, &quot;Tahun harus berada di antara 1900 sampai 2026.&quot;);
+            valid = false;
+        }
+    }
+
+    if (stok &amp;&amp; stok.value.trim() !== &quot;&quot;) {
+        const nilaiStok = Number(stok.value);
+        if (nilaiStok &lt; 0) {
+            tampilkanError(stok, &quot;Stok tidak boleh bernilai negatif.&quot;);
+            valid = false;
+        }
+    }
+
+    return valid;
+}</code></pre>
+<p>* <strong><code>event.preventDefault()</code></strong>: Jika salah satu validasi gagal (<code>!wajibValid || !angkaValid</code>), pengiriman form dibatalkan sehingga halaman tidak reload dan data pengguna tidak hilang.</p>
+<p>* <strong><code>tampilkanError(...)</code></strong>: Membuat elemen <code>&lt;span class=&quot;error&quot;&gt;</code> baru secara dinamis dan menyisipkannya tepat di bawah input yang bermasalah menggunakan <code>insertAdjacentElement(&quot;afterend&quot;, error)</code>.</p>
+<p>---</p>
+<h3 id="bagian-26">5.5 Inovasi Khusus: Split Hero Dashboard 2 Kolom (Prak 5 &amp; 6)</h3>
+<p>Fitur unggulan pembeda yang kamu buat:</p>
+<pre><code>/* Mengunci tata letak 2 kolom khusus di Beranda */
+@media (min-width: 768px) {
+    main.dashboard-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 50% kiri : 50% kanan */
+        gap: 1.5rem;
+        align-items: stretch;          /* Tinggi kotak kiri &amp; kanan sama persis */
+    }
+
+    /* Kotak Kiri: Hero Banner dengan Tombol Aksi */
+    main.dashboard-grid .sec-hero {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Judul di atas, tombol di paling bawah */
+    }
+
+    /* Kotak Kanan: Kartu Statistik */
+    main.dashboard-grid .sec-stats {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 0.75rem;
+    }
+
+    main.dashboard-grid .sec-stats article h3 {
+        white-space: nowrap; /* Teks &quot;Sedang Dipinjam&quot; tidak akan pernah patah baris */
+    }
+}</code></pre>
+<p>---</p>
+<h2 id="bagian-27">Bab 6 — Asynchronous JavaScript, JSON &amp; Fetch API (Jobsheet 6)</h2>
+<p><strong>Tujuan:</strong> Mengambil data eksternal berformat JSON dari server/file secara asinkron menggunakan Fetch API dan merendernya ke tabel HTML secara dinamis.</p>
+<p>Di Jobsheet 6, file kuncinya adalah:</p>
+<p>* Sumber data: <a href="file:///E:/Tugas%20Kuliah/Second%20Collage/PRAKDPWeb26_2D_Haikal-Maghsin_Deploy/prak6/data/buku.json">prak6/data/buku.json</a> dan <code>anggota.json</code>.</p>
+<p>* Script pemroses: <a href="file:///E:/Tugas%20Kuliah/Second%20Collage/PRAKDPWeb26_2D_Haikal-Maghsin_Deploy/prak6/assets/js/buku.js">prak6/assets/js/buku.js</a>.</p>
+<h3 id="bagian-28">6.1 Format Data JSON</h3>
+<p>Contoh isi file <code>data/buku.json</code>:</p>
+<pre><code>[
+  {
+    &quot;id&quot;: 1,
+    &quot;judul&quot;: &quot;Laskar Pelangi&quot;,
+    &quot;pengarang&quot;: &quot;Andrea Hirata&quot;,
+    &quot;tahun&quot;: 2005,
+    &quot;stok&quot;: 7
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;judul&quot;: &quot;Bumi Manusia&quot;,
+    &quot;pengarang&quot;: &quot;Pramoedya Ananta Toer&quot;,
+    &quot;tahun&quot;: 1980,
+    &quot;stok&quot;: 4
+  }
+]</code></pre>
+<p>* <strong>Ciri khas JSON</strong>: Kunci (*key*) wajib diapit tanda petik ganda (<code>&quot;judul&quot;</code>), format teks ringan, dan didukung secara native oleh JavaScript melalui fungsi <code>JSON.parse()</code> dan <code>JSON.stringify()</code>.</p>
+<p>---</p>
+<h3 id="bagian-29">6.2 Bedah Kode <code>muatDaftarBuku()</code> (Async / Await)</h3>
+<pre><code>async function muatDaftarBuku() {
+    const tbody = document.querySelector(&quot;.table-responsive table tbody&quot;);
+    const loading = document.getElementById(&quot;loading-indicator&quot;);
+
+    if (!tbody) return;
+
+    // 1. Munculkan indikator loading
+    if (loading) loading.style.display = &quot;block&quot;;
+    tbody.innerHTML = &quot;&quot;; // Bersihkan tabel terlebih dahulu
+
+    try {
+        // 2. Simulasi jeda network 600ms agar efek loading terlihat
+        await new Promise(resolve =&gt; setTimeout(resolve, 600));
+
+        // 3. Permintaan data via HTTP Fetch
+        const response = await fetch(&quot;../data/buku.json&quot;);
+        if (!response.ok) {
+            throw new Error(&quot;status &quot; + response.status);
+        }
+
+        // 4. Parsing response HTTP menjadi Array Objek JavaScript
+        const daftarBuku = await response.json();
+
+        // 5. Looping data dan injeksikan ke dalam DOM
+        daftarBuku.forEach(function (buku) {
+            const tr = document.createElement(&quot;tr&quot;);
+            tr.innerHTML =
+                &quot;&lt;td&gt;&quot; + buku.judul + &quot;&lt;/td&gt;&quot; +
+                &quot;&lt;td&gt;&quot; + buku.pengarang + &quot;&lt;/td&gt;&quot; +
+                &quot;&lt;td&gt;&quot; + buku.tahun + &quot;&lt;/td&gt;&quot; +
+                &quot;&lt;td&gt;&quot; + buku.stok + &quot;&lt;/td&gt;&quot; +
+                &quot;&lt;td&gt;&quot; +
+                    &quot;&lt;a href=\&quot;edit.html\&quot; class=\&quot;btn-aksi btn-edit\&quot;&gt;Edit&lt;/a&gt; &quot; +
+                    &quot;&lt;button type=\&quot;button\&quot; class=\&quot;btn-aksi btn-hapus\&quot;&gt;Hapus&lt;/button&gt;&quot; +
+                &quot;&lt;/td&gt;&quot;;
+            tbody.appendChild(tr);
+        });
+    } catch (error) {
+        // 6. Tangani kegagalan koneksi / 404 Not Found
+        tbody.innerHTML = &quot;&lt;tr&gt;&lt;td colspan=\&quot;5\&quot;&gt;Gagal memuat data buku: &quot; + error.message + &quot;&lt;/td&gt;&lt;/tr&gt;&quot;;
+    } finally {
+        // 7. Sembunyikan indikator loading baik saat sukses maupun gagal
+        if (loading) loading.style.display = &quot;none&quot;;
+    }
+}</code></pre>
+<h3 id="bagian-30">6.3 Mengapa Menggunakan <code>async</code> dan <code>await</code>?</h3>
+<p>* Tanpa <code>async/await</code>, pembacaan data network akan memblokir (*freeze*) antarmuka browser.</p>
+<p>* <code>await</code> memberitahu JavaScript: *&quot;Tunggu data ini selesai diunduh di latar belakang, tanpa membuat browser macet. Setelah datanya tiba, lanjutkan ke baris berikutnya.&quot;*</p>
+<p>* Blok <code>try...catch...finally</code> memastikan jika terjadi error (misalnya file JSON terhapus atau server mati), aplikasi tidak crash dan pengguna melihat pesan peringatan yang ramah.</p>
+<p>---</p>
+<h2 id="bagian-31">Bab 7 — Kamus Istilah &amp; Tanya-Jawab Penguji (FAQ Dosen &amp; Aslab)</h2>
+<p>Hafalkan pertanyaan-pertanyaan ini karena sering ditanyakan saat demonstrasi kode:</p>
+<h3 id="bagian-32">Q1: Apa perbedaan utama antara Jobsheet 1, 3, 5, dan 6?</h3>
+<p>&gt; <strong>Jawaban:</strong>  </p>
+<p>&gt; - <strong>Jobsheet 1</strong> hanya kerangka struktur HTML murni dengan data yang ditulis mati (*hardcoded*).  </p>
+<p>&gt; - <strong>Jobsheet 3</strong> membuat tampilan responsif di layar mobile dan tablet menggunakan CSS Grid dan Media Query.  </p>
+<p>&gt; - <strong>Jobsheet 5</strong> menambahkan interaktivitas di sisi klien (validasi form tanpa reload, hapus baris dinamis, dan pencarian langsung).  </p>
+<p>&gt; - <strong>Jobsheet 6</strong> memisahkan data dari dokumen HTML; data disimpan dalam file JSON dan dimuat secara asinkron menggunakan Fetch API.</p>
+<h3 id="bagian-33">Q2: Mengapa kita memakai <code>const</code> dan <code>let</code> di JavaScript, bukan <code>var</code>?</h3>
+<p>&gt; <strong>Jawaban:</strong>  </p>
+<p>&gt; <code>const</code> dan <code>let</code> memiliki sifat *block-scoped* (hanya hidup di dalam kurung kurawal <code>{}</code> tempat mereka dibuat), sehingga mencegah bentrok variabel (*variable shadowing/hoisting*). Gunakan <code>const</code> untuk nilai yang tidak akan diganti, dan <code>let</code> untuk variabel yang nilainya akan berubah.</p>
+<h3 id="bagian-34">Q3: Mengapa kamu memakai <code>event.preventDefault()</code> pada validasi form?</h3>
+<p>&gt; <strong>Jawaban:</strong>  </p>
+<p>&gt; Secara bawaan, aksi klik tombol submit pada form akan langsung mengirim data dan me-refresh halaman. <code>event.preventDefault()</code> digunakan untuk membatalkan perilaku bawaan tersebut jika validasi input gagal, sehingga halaman tidak me-refresh dan inputan pengguna tidak terhapus.</p>
+<h3 id="bagian-35">Q4: Di Jobsheet 3 ada menu hamburger tanpa JS, lalu di Jobsheet 5 ada JS toggle. Apa bedanya?</h3>
+<p>&gt; <strong>Jawaban:</strong>  </p>
+<p>&gt; Di Jobsheet 3 kita menggunakan teknik <strong>CSS Checkbox Hack</strong> (<code>.nav-toggle:checked ~ nav</code>) untuk membuktikan bahwa CSS modern mampu menangani interaksi sederhana tanpa skrip. Sedangkan di Jobsheet 5, kita beralih ke manipulasi class JavaScript (<code>classList.toggle(&quot;nav-open&quot;)</code>) yang lebih standar, fleksibel, dan mendukung penambahan atribut aksesibilitas <code>aria-expanded</code> untuk pembaca layar (*screen reader*).</p>
+<h3 id="bagian-36">Q5: Mengapa kamu menggunakan <code>1fr 1fr</code> pada dashboard 2 kolom di Jobsheet 5 &amp; 6?</h3>
+<p>&gt; <strong>Jawaban:</strong>  </p>
+<p>&gt; Unit <code>fr</code> (*fractional unit*) pada CSS Grid membagi sisa ruang secara fleksibel setelah dikurangi ukuran <code>gap</code>. Menggunakan <code>1fr 1fr</code> menjamin kedua kolom memiliki lebar tepat 50% tanpa resiko meluap (*overflow*) ke samping, dan dipadukan dengan <code>align-items: stretch</code> agar tinggi kotak kiri dan kanan selalu sama persis.</p>
+<h3 id="bagian-37">Q6: Bagaimana alur kerja <code>fetch()</code> di Jobsheet 6?</h3>
+<p>&gt; <strong>Jawaban:</strong>  </p>
+<p>&gt; Fungsi <code>fetch(&quot;../data/buku.json&quot;)</code> mengirimkan HTTP GET Request asinkron ke server untuk mengambil file JSON. Hasilnya berupa objek <code>Response</code>. Kita mengecek <code>response.ok</code>, lalu mengubah stream data menjadi array objek menggunakan <code>await response.json()</code>, kemudian melakukan perulangan <code>forEach</code> untuk membuat elemen <code>&lt;tr&gt;</code> dan menempelkannya ke <code>&lt;tbody&gt;</code> tabel.</p>
+<p>---</p>
+<h3 id="bagian-38">Ringkasan Perintah Lokal untuk Pengujian</h3>
+<p>Jalankan server lokal dari folder root:</p>
+<pre><code>php -S localhost:8000</code></pre>
+<p>Buka halaman di browser:</p>
+<p>* Jobsheet 1 (HTML polos): <code>http://localhost:8000/prak1/index.html</code></p>
+<p>* Jobsheet 2 (CSS styling): <code>http://localhost:8000/prak2/index.html</code></p>
+<p>* Jobsheet 3 (CSS responsif): <code>http://localhost:8000/prak3/index.html</code></p>
+<p>* Jobsheet 4 (Wireframe dokumen): <code>http://localhost:8000/prak4/docs/wireframe.md</code></p>
+<p>* Jobsheet 5 (JS DOM &amp; Dashboard 2 Kolom): <code>http://localhost:8000/prak5/index.html</code></p>
+<p>* Jobsheet 6 (Fetch JSON Dinamis): <code>http://localhost:8000/prak6/index.html</code></p>
+<p>* Geprek Kita (Full PHP &amp; Session / DB): <code>http://localhost:8000/prak7/</code> dan <code>http://localhost:8000/prak8/</code></p></main></body></html>

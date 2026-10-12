@@ -4,8 +4,13 @@ $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $page = substr($path, strlen('/prak7/'));
 if ($page === '') $page = 'index.php';
 $allowed = [
-    'index.php', 'buku/list.php', 'buku/tambah.php', 'buku/proses_tambah.php',
-    'anggota/list.php', 'anggota/tambah.php', 'anggota/proses_tambah.php',
+    'index.php',
+    'anggota/list.php',
+    'anggota/tambah.php',
+    'anggota/proses_tambah.php',
+    'anggota/edit.php',
+    'anggota/proses_edit.php',
+    'pesanan/list.php',
 ];
 if (!in_array($page, $allowed, true)) {
     http_response_code(404);

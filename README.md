@@ -1,13 +1,16 @@
-# Geprek Kita
+# Geprek Kita & Portofolio Praktikum Web
 
-Panduan belajar UTS: [Handbook Geprek Kita](docs/HANDBOOK-GEPREK-KITA.md).
-Versi siap cetak tersedia di [handbook HTML](docs/HANDBOOK-GEPREK-KITA.html).
+Panduan belajar & ujian:
+- **Jobsheet 1–6 (SIMPUS-Mini)**: [Handbook SIMPUS-Mini](docs/HANDBOOK-SIMPUS-JOBSHEET-1-6.md) · Versi cetak: [Handbook SIMPUS HTML](docs/HANDBOOK-SIMPUS-JOBSHEET-1-6.html)
+- **Jobsheet 7–10 (Geprek Kita)**: [Handbook Geprek Kita](docs/HANDBOOK-GEPREK-KITA.md) · Versi cetak: [Handbook Geprek Kita HTML](docs/HANDBOOK-GEPREK-KITA.html)
+
 Buka file HTML di browser lalu pilih Cetak / Simpan PDF.
 
-Handbook berisi 9 bab pembuatan, screenshot aplikasi, pengujian, dan lampiran UTS.
-Sumbernya adalah Markdown. Setelah mengeditnya, jalankan
-`python scripts/build_handbook.py` untuk memperbarui versi HTML, lalu cetak
-ulang ke PDF melalui browser. File PDF harus diperbarui terpisah agar isinya sama.
+Handbook Jobsheet 1–6 mencakup materi HTML5 Semantik, CSS Layout & Typography, RWD & CSS Grid, UI/UX Wireframe, JavaScript DOM & Validasi Form, serta Fetch API & JSON.
+Handbook Geprek Kita berisi 9 bab pembuatan, screenshot aplikasi, pengujian, dan lampiran UTS.
+Sumbernya adalah Markdown. Setelah mengeditnya, jalankan:
+- `python scripts/build_simpus_handbook.py` untuk memperbarui Handbook SIMPUS HTML.
+- `python scripts/build_handbook.py` untuk memperbarui Handbook Geprek Kita HTML.
 
 ## Rangkaian repo dan masterpage
 
@@ -15,15 +18,15 @@ Repo praktikum (folder lokal ../P.D.Web) adalah sumber latihan.
 Repo deploy ini menyimpan masterpage dan salinan hasil yang siap ditampilkan:
 
 - / atau index.html: masterpage.
-- /prak1/ sampai /prak6/: HTML, CSS, JavaScript, dan data JSON latihan.
-- /prak7/: latihan PHP dan form, data sementara dalam session.
+- /prak1/ sampai /prak6/: HTML, CSS, JavaScript, dan data JSON latihan (SIMPUS-Mini).
+- /prak7/: latihan PHP dan form, data sementara dalam session (Ayam Geprek Kita).
 - /prak8/: Geprek Kita dengan database, kode di prak8/.
 - /prak9/: Geprek Kita dengan CRUD, pencarian server, dan pagination lima data; kode di prak9/.
 - /prak10/: Geprek Kita dengan registrasi, login, logout, session database, dan hak akses admin; kode di prak10/.
 
 Prak 1 disalin dari kode-praktikum/jobsheet-01, Prak 2 dari folder utama,
-dan Prak 3–7 dari folder Jobsheet3–Jobsheet7 di repo praktikum.
-Tema SIMPUS pada arsip 1–7 dipertahankan. Prak 8 adalah proyek Geprek Kita.
+dan Prak 3–6 dari folder Jobsheet3–Jobsheet6 di repo praktikum.
+Tema SIMPUS pada arsip 1–6 dipertahankan. Prak 7–10 adalah proyek Geprek Kita.
 Salinan ini tidak otomatis tersinkron; perubahan sumber perlu disalin lagi.
 Repo praktikum belum diubah oleh penataan ini.
 

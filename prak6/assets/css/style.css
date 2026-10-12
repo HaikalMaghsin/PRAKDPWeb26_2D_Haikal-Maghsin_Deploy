@@ -54,7 +54,7 @@ header nav a:hover {
 
 /* ===== Main Layout ===== */
 main {
-    max-width: 1000px;
+    max-width: 850px;
     margin: 2rem auto;
     padding: 0 1.5rem;
 }
@@ -71,12 +71,133 @@ section h2 {
     margin-bottom: 1rem;
     color: var(--warna-gelap);
 }
+.sec-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1%;
+}
+
+/* ===== Hero Quick Actions ===== */
+.hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-hero-primary {
+    background-color: var(--warna-gelap);
+    color: var(--warna-putih);
+}
+
+.btn-hero-primary:hover {
+    background-color: #393E46;
+    color: var(--warna-putih);
+    text-decoration: none;
+}
+
+.btn-hero-secondary {
+    background-color: #e2e8f0;
+    color: var(--warna-gelap);
+}
+
+.btn-hero-secondary:hover {
+    background-color: #cbd5e1;
+    text-decoration: none;
+}
+
+/* ===== Dashboard Grid (Mobile Default) ===== */
+main.dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+main.dashboard-grid .sec-hero {
+    border-left: 5px solid var(--warna-gelap);
+    margin-bottom: 0;
+}
+
+main.dashboard-grid .sec-hero h2 {
+    font-size: 1.35rem;
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+}
+
+main.dashboard-grid .sec-hero p {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+main.dashboard-grid .sec-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 0;
+}
+
+main.dashboard-grid .sec-stats h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+main.dashboard-grid .sec-stats article {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    border-radius: 6px;
+    background-color: var(--warna-abu);
+    border-left: 4px solid var(--warna-aksen);
+    text-align: left;
+}
+
+main.dashboard-grid .sec-stats article:nth-of-type(1) {
+    border-left-color: #3b82f6; /* Aksen Buku: Biru */
+}
+
+main.dashboard-grid .sec-stats article:nth-of-type(2) {
+    border-left-color: #10b981; /* Aksen Anggota: Hijau */
+}
+
+main.dashboard-grid .sec-stats article:nth-of-type(3) {
+    border-left-color: #f59e0b; /* Aksen Sedang Dipinjam: Kuning Amber */
+}
+
+main.dashboard-grid .sec-stats article h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--warna-terang);
+    margin: 0;
+    white-space: nowrap;
+}
+
+main.dashboard-grid .sec-stats article p {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--warna-putih);
+    margin: 0;
+    line-height: 1;
+} 
 
 /* ===== Kartu Statistik (CSS Grid) ===== */
 main section:nth-of-type(2) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 main section:nth-of-type(2) h2 {
@@ -88,16 +209,18 @@ main section:nth-of-type(2) article {
     border-radius: 8px;
     padding: 1.25rem;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 main section:nth-of-type(2) article h3 {
-    font-size: 0.95rem;
+    font-size: 2rem;
     color: var(--warna-terang);
     margin-bottom: 0.5rem;
 }
 
 main section:nth-of-type(2) article p {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--warna-putih);
 }
@@ -225,7 +348,7 @@ footer {
 :root {
     --warna-gelap: #222831;
     --warna-abu: #393E46;
-    --warna-aksen: #00ADB5;
+    --warna-aksen: #c9c9c9;
     --warna-terang: #EEEEEE;
     --warna-putih: #FFFFFF;
     --warna-hapus: #D9534F;
@@ -392,6 +515,7 @@ form select {
     }
 
     main {
+        max-width: 900px;
         margin: 2rem auto;
         padding: 0 1.5rem;
     }
@@ -404,11 +528,56 @@ form select {
     form select {
         max-width: 400px;
     }
+
+    /* Desktop Dashboard: 2 Kolom Sejajar & Seimbang (50% : 50%) */
+    main.dashboard-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: stretch;
+    }
+
+    main.dashboard-grid section {
+        margin-bottom: 0;
+    }
+
+    main.dashboard-grid .sec-hero {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    main.dashboard-grid .sec-hero h2 {
+        font-size: 1.45rem;
+        line-height: 1.35;
+    }
+
+    main.dashboard-grid .sec-stats {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 0.75rem;
+    }
+
+    main.dashboard-grid .sec-stats article {
+        padding: 0.9rem 1.25rem;
+    }
+
+    main.dashboard-grid .sec-stats article h3 {
+        font-size: 0.95rem;
+        white-space: nowrap;
+    }
+
+    main.dashboard-grid .sec-stats article p {
+        font-size: 1.65rem;
+    }
 }
 
-/* Desktop: tiga kartu seperti tampilan Jobsheet 2. */
+/* Desktop: kartu statistik halaman non-dashboard */
 @media (min-width: 1024px) {
-    main section:nth-of-type(2) {
+    main:not(.dashboard-grid) section:nth-of-type(2) {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }

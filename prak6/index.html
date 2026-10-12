@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>SIMPUS-Mini</h1>
+        <h1>SIMPUS &mdash; Sistem Perpus Mini Kall</h1>
         <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Buka/tutup menu navigasi" aria-controls="menu-utama" aria-expanded="false">&#9776;</button>
         <nav id="menu-utama" aria-label="Navigasi utama">
             <ul>
@@ -19,13 +19,19 @@
         </nav>
     </header>
 
-    <main>
-        <section>
-            <h2>Selamat Datang di Sistem Perpustakaan Mini</h2>
-            <p>Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.</p>
+    <main class="dashboard-grid">
+        <section class="sec-hero">
+            <div class="hero-content">
+                <h2>Selamat Datang di Sistem Perpustakaan Mini</h2>
+                <p>Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.</p>
+            </div>
+            <div class="hero-actions">
+                <a href="buku/list.html" class="btn-hero btn-hero-primary">Kelola Buku &rarr;</a>
+                <a href="anggota/list.html" class="btn-hero btn-hero-secondary">Kelola Anggota &rarr;</a>
+            </div>
         </section>
 
-        <section>
+        <section class="sec-stats">
             <h2>Ringkasan</h2>
             <article>
                 <h3>Total Buku</h3>
