@@ -11,7 +11,7 @@ function esc($value): string {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Geprek Kita | <?php echo esc($page_title ?? 'Beranda'); ?></title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo $base; ?>assets/css/style.css">
 </head>
 <body>
 <header>

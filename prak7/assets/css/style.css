@@ -1,5 +1,7 @@
 /* Biar ukuran kotak sudah termasuk padding dan garis pinggir. */
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 /* Ini warna latar, jenis tulisan, dan ukuran tulisan seluruh halaman. */
 body {
@@ -22,8 +24,18 @@ header {
     gap: 16px;
 }
 
-header strong { font-family: Georgia, serif; font-size: 28px; font-style: italic; }
-nav { display: flex; flex-wrap: wrap; gap: 8px; }
+header strong {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-style: italic;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
 /* Semua link diberi latar. Padding membuat link lebih mudah diklik. */
 a {
     display: inline-block;
@@ -33,20 +45,60 @@ a {
     border-radius: 6px;
     text-decoration: none;
 }
-a:hover { background: #d0dce5; }
-nav a { color: white; background: #496374; }
-nav a:hover, nav a[aria-current="page"] { background: #eef1f3; color: #294f69; }
+
+a:hover {
+    background: #d0dce5;
+}
+
+nav a {
+    color: white;
+    background: #496374;
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+    background: #eef1f3;
+    color: #294f69;
+}
 
 /* Lebar isi dibatasi supaya tidak terlalu melebar di laptop. */
-main { max-width: 900px; margin: 24px auto; padding: 0 16px; }
-.panel { background: white; padding: 20px; border: 1px solid #d9dddd; border-radius: 8px; margin-bottom: 20px; }
-h1 { font-size: 24px; margin: 0 0 12px; }
-h2 { font-size: 19px; }
-footer { padding: 20px; text-align: center; color: #626b71; }
+main {
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.panel {
+    background: white;
+    padding: 20px;
+    border: 1px solid #d9dddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0 0 12px;
+}
+
+h2 {
+    font-size: 19px;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    color: #626b71;
+}
 
 /* Label ada di atas kotak. Ubah padding untuk mengubah tinggi input. */
-label { display: block; margin-bottom: 4px; }
-input:not([type="hidden"]), select {
+label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+input:not([type="hidden"]),
+select {
     width: 100%;
     max-width: 420px;
     padding: 8px;
@@ -54,14 +106,20 @@ input:not([type="hidden"]), select {
     border-radius: 3px;
     font: inherit;
 }
-input:focus, select:focus, a:focus-visible, button:focus-visible {
+
+input:focus,
+select:focus,
+a:focus-visible,
+button:focus-visible {
     outline: 2px solid #427a9f;
     outline-offset: 2px;
 }
 
 /* Padding: angka pertama atas-bawah, angka kedua kiri-kanan.
    Font-size untuk ukuran tulisan tombol. */
-button, .btn-tambah, .btn-aksi {
+button,
+.btn-tambah,
+.btn-aksi {
     display: inline-block;
     padding: 7px 12px;
     font: inherit;
@@ -73,33 +131,113 @@ button, .btn-tambah, .btn-aksi {
     text-decoration: none;
     cursor: pointer;
 }
-button:hover, .btn-tambah:hover { background: #233947; }
-button:disabled { opacity: 0.5; cursor: default; }
-.btn-edit { background: #e3eaf0; color: #294f69; }
-.btn-hapus { background: #f2dddd; color: #832f2f; }
-.btn-hapus:hover { background: #e7c3c3; }
-.form-hapus { display: inline; margin: 0; }
-.form-actions { display: flex; align-items: center; gap: 12px; }
+
+button:hover,
+.btn-tambah:hover {
+    background: #233947;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.btn-edit {
+    background: #e3eaf0;
+    color: #294f69;
+}
+
+.btn-hapus {
+    background: #f2dddd;
+    color: #832f2f;
+}
+
+.btn-hapus:hover {
+    background: #e7c3c3;
+}
+
+.form-hapus {
+    display: inline;
+    margin: 0;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
 /* Tabel boleh digeser ke samping kalau layar HP terlalu kecil. */
-.table-responsive { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
-th, td { padding: 10px; border: 1px solid #d9dddd; text-align: left; }
-th { background: #e5eaf0; }
-.aksi { white-space: nowrap; }
-.search-box { margin-top: 16px; }
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #d9dddd;
+    text-align: left;
+}
+
+th {
+    background: #e5eaf0;
+}
+
+.aksi {
+    white-space: nowrap;
+}
+
+.search-box {
+    margin-top: 16px;
+}
 
 /* Pesan berhasil warna hijau, pesan salah warna merah. */
-.flash { padding: 10px; background: #e6f0e5; }
-.flash-error { background: #f9e5e5; color: #832f2f; }
-.error { display: block; color: #a22b2b; font-size: 13px; }
-[aria-invalid="true"] { border-color: #a22b2b !important; }
+.flash {
+    padding: 10px;
+    background: #e6f0e5;
+}
+
+.flash-error {
+    background: #f9e5e5;
+    color: #832f2f;
+}
+
+.error {
+    display: block;
+    color: #a22b2b;
+    font-size: 13px;
+}
+
+[aria-invalid="true"] {
+    border-color: #a22b2b !important;
+}
 
 /* Di HP, nama warung dan navigasi ditumpuk agar muat. */
-.pagination { margin-top: 16px; }
-.auth-status { padding: 7px 12px; }
-.search-box button { margin-top: 8px; }
+.pagination {
+    margin-top: 16px;
+}
+
+.auth-status {
+    padding: 7px 12px;
+}
+
+.search-box button {
+    margin-top: 8px;
+}
+
 @media (max-width: 600px) {
-    header { flex-direction: column; align-items: flex-start; }
-    .panel { padding: 14px; }
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .panel {
+        padding: 14px;
+    }
 }
