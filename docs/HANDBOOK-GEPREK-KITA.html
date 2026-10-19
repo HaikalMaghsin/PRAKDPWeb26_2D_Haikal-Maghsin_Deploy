@@ -42,7 +42,7 @@ nav a { display: block; padding: 3px 0; }
 <p>Desain dan Pemrograman Web · Panduan praktik untuk UTS  </p>
 <p>Edisi revisi · 27 September 2026</p>
 <p>Panduan ini mengikuti urutan membangun dan memahami aplikasi: persiapan, struktur halaman, desain, interaksi, database, dan proses transaksi. Buka proyek sambil membaca, jalankan setiap langkah, lalu cocokkan hasilnya.</p>
-<p>Potongan kode merupakan bagian penting dari implementasi, bukan pengganti semua isi file. Gunakan berkas sumber yang disebutkan untuk melihat kode lengkap. Bila kode sudah ada, pelajari dan ubah salinan latihan; jangan menempel ulang potongan hingga menjadi duplikat.</p></section><nav aria-label="Daftar isi"><h2>Daftar Isi</h2><a href="#bagian-2">Cara menggunakan handbook</a><a href="#bagian-3">Bab 1 — Mengenal aplikasi</a><a href="#bagian-6">Bab 2 — Menyiapkan proyek dan server</a><a href="#bagian-10">Bab 3 — Membuat kerangka halaman dan menu</a><a href="#bagian-12">Bab 4 — Membuat form dan tabel HTML</a><a href="#bagian-15">Bab 5 — Menata halaman dengan CSS</a><a href="#bagian-20">Bab 6 — Menambahkan interaksi JavaScript</a><a href="#bagian-26">Bab 7 — Menyiapkan database dan koneksi PHP</a><a href="#bagian-29">Bab 8 — Memproses tambah, edit, dan hapus</a><a href="#bagian-36">Bab 9 — Pengujian dan perbaikan</a><a href="#bagian-40">Lampiran A — Tanya jawab UTS</a><a href="#bagian-41">Lampiran B — Latihan dan presentasi</a></nav><h2 id="bagian-2">Cara menggunakan handbook</h2>
+<p>Potongan kode merupakan bagian penting dari implementasi, bukan pengganti semua isi file. Gunakan berkas sumber yang disebutkan untuk melihat kode lengkap. Bila kode sudah ada, pelajari dan ubah salinan latihan; jangan menempel ulang potongan hingga menjadi duplikat.</p></section><nav aria-label="Daftar isi"><h2>Daftar Isi</h2><a href="#bagian-2">Cara menggunakan handbook</a><a href="#bagian-3">Bab 1 — Mengenal aplikasi</a><a href="#bagian-6">Bab 2 — Menyiapkan proyek dan server</a><a href="#bagian-10">Bab 3 — Membuat kerangka halaman dan menu</a><a href="#bagian-12">Bab 4 — Membuat form dan tabel HTML</a><a href="#bagian-15">Bab 5 — Menata halaman dengan CSS</a><a href="#bagian-20">Bab 6 — Menambahkan interaksi JavaScript</a><a href="#bagian-26">Bab 7 — Menyiapkan database dan koneksi PHP</a><a href="#bagian-29">Bab 8 — Memproses tambah, edit, dan hapus</a><a href="#bagian-36">Bab 9 — Pengujian dan perbaikan</a><a href="#bagian-40">Lampiran A — Tanya jawab UTS</a><a href="#bagian-41">Lampiran B — Latihan dan presentasi</a><a href="#bagian-44">Bab 10 — Pengerasan keamanan web dasar (Jobsheet 11)</a><a href="#bagian-46">Bab 11 — Integrasi modul transaksi dan stok (Jobsheet 12)</a><a href="#bagian-48">Bab 12 — Deployment dan dokumentasi final (Jobsheet 13)</a><a href="#bagian-50">Lampiran C — Tanya jawab dan persiapan UAS</a></nav><h2 id="bagian-2">Cara menggunakan handbook</h2>
 <ol>
 <li>Baca tujuan dan langkah kerja setiap bab.</li>
 <li>Buka file yang dirujuk.</li>
@@ -608,4 +608,104 @@ Redirect → halaman daftar menampilkan data terbaru</code></pre>
 <li>sql/02_geprek.sql: jelaskan hubungan kedua tabel.</li>
 <li>pesanan/list.php: ikuti percabangan tambah, edit, hapus, dan penampilan data.</li>
 </ol>
-<p>Handbook ini khusus Geprek Kita. Desain masterpage dan materi lengkap Praktikum 1–7 tidak dibahas sebagai fitur aplikasi Geprek Kita.</p></main></body></html>
+<p>Handbook ini khusus Geprek Kita. Desain masterpage dan materi lengkap Praktikum 1–6 tidak dibahas sebagai fitur aplikasi Geprek Kita.</p>
+<h2 id="bagian-44">Bab 10 — Pengerasan keamanan web dasar (Jobsheet 11)</h2>
+<p><strong>File utama:</strong> prak11/includes/helpers.php, prak11/includes/csrf.php, prak11/includes/session.php, prak11/auth/proses_login.php.</p>
+<p><strong>Tujuan:</strong> menutup kerentanan keamanan dasar web pada seluruh formulir dan aksi aplikasi.</p>
+<h3 id="bagian-45">Langkah kerja</h3>
+<ol>
+<li>Buat helper <code>esc($value)</code> dan <code>e($value)</code> menggunakan <code>htmlspecialchars($value, ENT_QUOTES, &#x27;UTF-8&#x27;)</code>.</li>
+<li>Bungkus seluruh output data kiriman pengguna dan database dengan fungsi escape.</li>
+<li>Buat modul CSRF pada <code>includes/csrf.php</code> dengan <code>csrf_token()</code>, <code>csrf_field()</code>, dan <code>csrf_verify()</code>.</li>
+<li>Pasang <code>csrf_field()</code> pada semua formulir POST: login, register, tambah/edit/hapus anggota, dan pesanan.</li>
+<li>Jalankan <code>csrf_verify()</code> pada seluruh berkas pemrosesan sebelum kueri SQL dijalankan.</li>
+<li>Regenerasi ID sesi dengan <code>session_regenerate_id(true)</code> sesaat setelah verifikasi password berhasil.</li>
+<li>Audit seluruh kueri database untuk menjamin pemakaian 100% prepared statements PDO.</li>
+</ol>
+<div class="table"><table><thead><tr><th>Kerentanan</th><th>Ancaman</th><th>Solusi pada Geprek Kita</th></tr></thead><tbody>
+<tr><td>Cross-Site Scripting (XSS)</td><td>Injeksi skrip berbahaya pada tampilan browser</td><td>Fungsi <code>esc()</code> mengubah karakter khusus menjadi entitas HTML</td></tr>
+<tr><td>Cross-Site Request Forgery (CSRF)</td><td>Pemalsuan kiriman formulir dari situs lain</td><td>Token acak 32-byte rahasia per-sesi diverifikasi via <code>hash_equals()</code></td></tr>
+<tr><td>SQL Injection</td><td>Manipulasi kueri basis data lewat input</td><td>Parameter binding pada prepared statements PDO</td></tr>
+<tr><td>Session Fixation</td><td>Pembajakan ID sesi pengguna sebelum login</td><td><code>session_regenerate_id(true)</code> menerbitkan ID baru saat autentikasi</td></tr>
+<tr><td>Insecure Cookies</td><td>Akses cookie sesi oleh skrip pihak ketiga</td><td>Cookie flag <code>httponly=true</code>, <code>samesite=Lax</code>, dan <code>secure</code> adaptif</td></tr>
+</tbody></table></div>
+<pre><code>function csrf_verify(): void {
+    $token = $_POST[&#x27;csrf_token&#x27;] ?? &#x27;&#x27;;
+    $sessionToken = $_SESSION[&#x27;csrf_token&#x27;] ?? &#x27;&#x27;;
+    if ($token === &#x27;&#x27; || !hash_equals($sessionToken, $token)) {
+        http_response_code(403);
+        exit(&#x27;Permintaan ditolak: token CSRF tidak valid atau telah kedaluwarsa.&#x27;);
+    }
+}</code></pre>
+<p>Urutan pengamanan pada berkas aksi:</p>
+<ol>
+<li><code>auth.php</code>: memastikan pengguna sudah login (tamu dialihkan ke login).</li>
+<li><code>csrf_verify()</code>: memastikan formulir dikirim dari aplikasi resmi.</li>
+<li>Validasi &amp; sanitasi input: memeriksa tipe data dan batasan nilai.</li>
+<li>Eksekusi query database via prepared statement.</li>
+</ol>
+<h2 id="bagian-46">Bab 11 — Integrasi modul transaksi dan stok (Jobsheet 12)</h2>
+<p><strong>File utama:</strong> sql/04_transaksi.sql, prak12/includes/menu.php, prak12/pesanan/list.php, prak12/pesanan/riwayat.php, prak12/index.php.</p>
+<p><strong>Tujuan:</strong> menghubungkan seluruh entitas aplikasi ke dalam transaksi atomik (ACID) dan mengelola stok fisik menu.</p>
+<h3 id="bagian-47">Langkah kerja</h3>
+<ol>
+<li>Jalankan <code>sql/04_transaksi.sql</code> untuk membuat tabel <code>menu</code> dengan kolom <code>stok</code> dan menambah kolom <code>status</code>, <code>user_id</code>, dan <code>selesai_pada</code> pada tabel <code>pesanan</code>.</li>
+<li>Hubungkan <code>includes/menu.php</code> ke tabel <code>menu</code> agar sisa stok terbaca real-time.</li>
+<li>Terapkan transaksi atomik <code>$pdo-&gt;beginTransaction()</code> saat mencatat pesanan baru.</li>
+<li>Kunci baris menu menggunakan <code>SELECT ... FOR UPDATE</code> untuk mencegah race condition.</li>
+<li>Kurangi stok menu saat pesanan dibuat dan pulihkan stok bila pesanan dibatalkan.</li>
+<li>Tambahkan aksi penyelesaian transaksi (<code>status = &#x27;selesai&#x27;</code>) saat pesanan disajikan dan dibayar.</li>
+<li>Bangun halaman riwayat transaksi (<code>pesanan/riwayat.php</code>) menggunakan <code>JOIN</code> multi-tabel (<code>pesanan</code>, <code>anggota</code>, <code>users</code>).</li>
+<li>Perbarui Beranda (<code>index.php</code>) dengan kartu metrik agregat langsung dari database (<code>COUNT</code> dan <code>SUM</code>).</li>
+</ol>
+<pre><code>SELECT p.*, a.nama AS nama_anggota, a.no_anggota,
+       COALESCE(u.nama, &#x27;Petugas Kasir&#x27;) AS nama_petugas
+FROM pesanan p
+JOIN anggota a ON a.id = p.anggota_id
+LEFT JOIN users u ON u.id = p.user_id
+ORDER BY p.id DESC;</code></pre>
+<pre><code>Kasir mencatat pesanan
+        ↓
+$pdo-&gt;beginTransaction()
+        ↓
+SELECT stok FROM menu WHERE kode = ? FOR UPDATE  (Kunci baris stok)
+        ↓
+Cek: stok &gt;= jumlah ?  ──[Tidak]──&gt; rollBack() &amp; tampilkan pesan error
+        ↓ [Ya]
+UPDATE menu SET stok = stok - jumlah WHERE kode = ?
+        ↓
+INSERT INTO pesanan (..., status=&#x27;menunggu&#x27;, user_id=...)
+        ↓
+$pdo-&gt;commit()  (Transaksi selesai &amp; stok terpotong)</code></pre>
+<p>Aturan bisnis mandiri: pelanggan yang memiliki 3 antrean pesanan berstatus <code>menunggu</code> dibatasi dari menambah pesanan baru sampai pesanan sebelumnya diselesaikan oleh kasir.</p>
+<h2 id="bagian-48">Bab 12 — Deployment dan dokumentasi final (Jobsheet 13)</h2>
+<p><strong>File utama:</strong> prak13/includes/config.php, prak13/includes/koneksi.php, prak13/docs/manual-pengguna.md, prak13/docs/naskah-presentasi.md, prak13/README.md.</p>
+<p><strong>Tujuan:</strong> memisahkan konfigurasi sensitif untuk server produksi, menyusun panduan pengguna, dan menyiapkan naskah demo UAS.</p>
+<h3 id="bagian-49">Langkah kerja</h3>
+<ol>
+<li>Buat <code>includes/config.php</code> untuk memusatkan pembacaan variabel lingkungan (<code>DATABASE_URL</code>, <code>DB_HOST</code>, <code>DB_USER</code>, <code>DB_PASS</code>, <code>DB_NAME</code>).</li>
+<li>Pisahkan inisialisasi koneksi pada <code>includes/koneksi.php</code> agar membaca konfigurasi terpusat.</li>
+<li>Pastikan file kredensial lokal <code>.env</code> tidak terunggah ke Git dengan memeriksa <code>.gitignore</code>.</li>
+<li>Siapkan berkas serverless <code>api/prak13.php</code> dan perbarui <code>vercel.json</code> serta <code>router.php</code>.</li>
+<li>Susun manual operasional pengguna akhir pada <code>docs/manual-pengguna.md</code>.</li>
+<li>Siapkan draf naskah presentasi berdurasi 5–7 menit pada <code>docs/naskah-presentasi.md</code>.</li>
+<li>Perbarui masterpage <code>index.html</code> dan <code>README.md</code> utama.</li>
+</ol>
+<div class="table"><table><thead><tr><th>Berkas Dokumentasi</th><th>Peruntukan</th></tr></thead><tbody>
+<tr><td><code>docs/manual-pengguna.md</code></td><td>Petunjuk operasional bagi petugas kasir dan admin warung</td></tr>
+<tr><td><code>docs/naskah-presentasi.md</code></td><td>Naskah presentasi 5-7 menit untuk demo di hadapan dosen penguji UAS</td></tr>
+<tr><td><code>docs/security-checklist.md</code></td><td>Laporan audit pengerasan keamanan web dasar OWASP</td></tr>
+<tr><td><code>prak13/README.md</code></td><td>Dokumentasi arsitektur teknis final, skema ERD, dan panduan instalasi</td></tr>
+<tr><td><code>docs/laporan/Jobsheet*.md</code></td><td>Laporan resmi praktikum per-jobsheet sesuai format akademik</td></tr>
+</tbody></table></div>
+<h2 id="bagian-50">Lampiran C — Tanya jawab dan persiapan UAS</h2>
+<p><strong>Apa beda transaksi biasa dengan transaksi ACID di Jobsheet 12?</strong>  </p>
+<p>Transaksi biasa menjalankan query satu per satu. Jika penyimpanan pesanan berhasil namun pemotongan stok gagal, data menjadi tidak konsisten. Transaksi ACID (<code>beginTransaction</code>, <code>commit</code>, <code>rollBack</code>) menjamin bahwa penyimpanan pesanan dan pemotongan stok terjadi bersamaan atau dibatalkan seluruhnya jika salah satu gagal.</p>
+<p><strong>Mengapa perlu <code>SELECT ... FOR UPDATE</code>?</strong>  </p>
+<p>Untuk mengunci baris stok menu selama transaksi berlangsung. Hal ini mencegah dua permintaan bersamaan membaca stok yang sama dan menghasilkan sisa stok minus (*race condition*).</p>
+<p><strong>Bagaimana aplikasi mencegah serangan CSRF?</strong>  </p>
+<p>Setiap formulir POST menyertakan token acak rahasia 32-byte yang tersimpan di sesi pengguna. Server memvalidasi token tersebut dengan <code>hash_equals()</code>. Permintaan dari situs eksternal yang tidak memiliki token sesi akan ditolak dengan HTTP 403 Forbidden.</p>
+<p><strong>Mengapa fungsi <code>esc()</code> menggunakan <code>ENT_QUOTES</code>?</strong>  </p>
+<p>Flag <code>ENT_QUOTES</code> mengonversi tanda petik ganda (<code>&quot;</code>) dan petik tunggal (<code>&#x27;</code>) menjadi entitas HTML, sehingga nilai kiriman pengguna aman saat disematkan ke dalam atribut HTML (seperti <code>value=&quot;...&quot;</code>).</p>
+<p><strong>Mengapa kredensial basis data dipisahkan ke <code>includes/config.php</code>?</strong>  </p>
+<p>Agar kode aplikasi tidak menyimpan password secara terbuka (*hardcoded*). Di server produksi (seperti Vercel), kredensial dibaca langsung dari Environment Variables, sementara di server lokal dibaca dari file <code>.env</code> yang diabaikan oleh Git.</p></main></body></html>

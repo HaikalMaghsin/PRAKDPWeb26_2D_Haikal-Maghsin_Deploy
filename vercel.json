@@ -4,7 +4,10 @@
     "api/prak7.php": { "runtime": "vercel-php@0.9.0" },
     "api/prak8.php": { "runtime": "vercel-php@0.9.0" },
     "api/prak9.php": { "runtime": "vercel-php@0.9.0" },
-    "api/prak10.php": { "runtime": "vercel-php@0.9.0" }
+    "api/prak10.php": { "runtime": "vercel-php@0.9.0" },
+    "api/prak11.php": { "runtime": "vercel-php@0.9.0" },
+    "api/prak12.php": { "runtime": "vercel-php@0.9.0" },
+    "api/prak13.php": { "runtime": "vercel-php@0.9.0" }
   },
   "routes": [
     { "src": "^/$", "dest": "/index.html" },
@@ -13,6 +16,9 @@
     { "src": "^/prak8(?:/.*)?$", "dest": "/api/prak8.php" },
     { "src": "^/prak9(?:/.*)?$", "dest": "/api/prak9.php" },
     { "src": "^/prak10(?:/.*)?$", "dest": "/api/prak10.php" },
+    { "src": "^/prak11(?:/.*)?$", "dest": "/api/prak11.php" },
+    { "src": "^/prak12(?:/.*)?$", "dest": "/api/prak12.php" },
+    { "src": "^/prak13(?:/.*)?$", "dest": "/api/prak13.php" },
     { "src": "^/(?:index\\.php|anggota/.*|pesanan/.*)$", "dest": "/api/prak8.php" },
     { "src": "^/api/.*$", "status": 404 },
     { "handle": "filesystem" },

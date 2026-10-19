@@ -809,4 +809,130 @@ Setelah itu, tunjukkan satu alur lengkap: tambah anggota → pesan dua porsi →
 7. sql/02_geprek.sql: jelaskan hubungan kedua tabel.
 8. pesanan/list.php: ikuti percabangan tambah, edit, hapus, dan penampilan data.
 
-Handbook ini khusus Geprek Kita. Desain masterpage dan materi lengkap Praktikum 1–7 tidak dibahas sebagai fitur aplikasi Geprek Kita.
+Handbook ini khusus Geprek Kita. Desain masterpage dan materi lengkap Praktikum 1–6 tidak dibahas sebagai fitur aplikasi Geprek Kita.
+
+## Bab 10 — Pengerasan keamanan web dasar (Jobsheet 11)
+
+**File utama:** prak11/includes/helpers.php, prak11/includes/csrf.php, prak11/includes/session.php, prak11/auth/proses_login.php.
+
+**Tujuan:** menutup kerentanan keamanan dasar web pada seluruh formulir dan aksi aplikasi.
+
+### Langkah kerja
+
+1. Buat helper `esc($value)` dan `e($value)` menggunakan `htmlspecialchars($value, ENT_QUOTES, 'UTF-8')`.
+2. Bungkus seluruh output data kiriman pengguna dan database dengan fungsi escape.
+3. Buat modul CSRF pada `includes/csrf.php` dengan `csrf_token()`, `csrf_field()`, dan `csrf_verify()`.
+4. Pasang `csrf_field()` pada semua formulir POST: login, register, tambah/edit/hapus anggota, dan pesanan.
+5. Jalankan `csrf_verify()` pada seluruh berkas pemrosesan sebelum kueri SQL dijalankan.
+6. Regenerasi ID sesi dengan `session_regenerate_id(true)` sesaat setelah verifikasi password berhasil.
+7. Audit seluruh kueri database untuk menjamin pemakaian 100% prepared statements PDO.
+
+| Kerentanan | Ancaman | Solusi pada Geprek Kita |
+| --- | --- | --- |
+| Cross-Site Scripting (XSS) | Injeksi skrip berbahaya pada tampilan browser | Fungsi `esc()` mengubah karakter khusus menjadi entitas HTML |
+| Cross-Site Request Forgery (CSRF) | Pemalsuan kiriman formulir dari situs lain | Token acak 32-byte rahasia per-sesi diverifikasi via `hash_equals()` |
+| SQL Injection | Manipulasi kueri basis data lewat input | Parameter binding pada prepared statements PDO |
+| Session Fixation | Pembajakan ID sesi pengguna sebelum login | `session_regenerate_id(true)` menerbitkan ID baru saat autentikasi |
+| Insecure Cookies | Akses cookie sesi oleh skrip pihak ketiga | Cookie flag `httponly=true`, `samesite=Lax`, dan `secure` adaptif |
+
+```php
+function csrf_verify(): void {
+    $token = $_POST['csrf_token'] ?? '';
+    $sessionToken = $_SESSION['csrf_token'] ?? '';
+    if ($token === '' || !hash_equals($sessionToken, $token)) {
+        http_response_code(403);
+        exit('Permintaan ditolak: token CSRF tidak valid atau telah kedaluwarsa.');
+    }
+}
+```
+
+Urutan pengamanan pada berkas aksi:
+1. `auth.php`: memastikan pengguna sudah login (tamu dialihkan ke login).
+2. `csrf_verify()`: memastikan formulir dikirim dari aplikasi resmi.
+3. Validasi & sanitasi input: memeriksa tipe data dan batasan nilai.
+4. Eksekusi query database via prepared statement.
+
+## Bab 11 — Integrasi modul transaksi dan stok (Jobsheet 12)
+
+**File utama:** sql/04_transaksi.sql, prak12/includes/menu.php, prak12/pesanan/list.php, prak12/pesanan/riwayat.php, prak12/index.php.
+
+**Tujuan:** menghubungkan seluruh entitas aplikasi ke dalam transaksi atomik (ACID) dan mengelola stok fisik menu.
+
+### Langkah kerja
+
+1. Jalankan `sql/04_transaksi.sql` untuk membuat tabel `menu` dengan kolom `stok` dan menambah kolom `status`, `user_id`, dan `selesai_pada` pada tabel `pesanan`.
+2. Hubungkan `includes/menu.php` ke tabel `menu` agar sisa stok terbaca real-time.
+3. Terapkan transaksi atomik `$pdo->beginTransaction()` saat mencatat pesanan baru.
+4. Kunci baris menu menggunakan `SELECT ... FOR UPDATE` untuk mencegah race condition.
+5. Kurangi stok menu saat pesanan dibuat dan pulihkan stok bila pesanan dibatalkan.
+6. Tambahkan aksi penyelesaian transaksi (`status = 'selesai'`) saat pesanan disajikan dan dibayar.
+7. Bangun halaman riwayat transaksi (`pesanan/riwayat.php`) menggunakan `JOIN` multi-tabel (`pesanan`, `anggota`, `users`).
+8. Perbarui Beranda (`index.php`) dengan kartu metrik agregat langsung dari database (`COUNT` dan `SUM`).
+
+```sql
+SELECT p.*, a.nama AS nama_anggota, a.no_anggota,
+       COALESCE(u.nama, 'Petugas Kasir') AS nama_petugas
+FROM pesanan p
+JOIN anggota a ON a.id = p.anggota_id
+LEFT JOIN users u ON u.id = p.user_id
+ORDER BY p.id DESC;
+```
+
+```text
+Kasir mencatat pesanan
+        ↓
+$pdo->beginTransaction()
+        ↓
+SELECT stok FROM menu WHERE kode = ? FOR UPDATE  (Kunci baris stok)
+        ↓
+Cek: stok >= jumlah ?  ──[Tidak]──> rollBack() & tampilkan pesan error
+        ↓ [Ya]
+UPDATE menu SET stok = stok - jumlah WHERE kode = ?
+        ↓
+INSERT INTO pesanan (..., status='menunggu', user_id=...)
+        ↓
+$pdo->commit()  (Transaksi selesai & stok terpotong)
+```
+
+Aturan bisnis mandiri: pelanggan yang memiliki 3 antrean pesanan berstatus `menunggu` dibatasi dari menambah pesanan baru sampai pesanan sebelumnya diselesaikan oleh kasir.
+
+## Bab 12 — Deployment dan dokumentasi final (Jobsheet 13)
+
+**File utama:** prak13/includes/config.php, prak13/includes/koneksi.php, prak13/docs/manual-pengguna.md, prak13/docs/naskah-presentasi.md, prak13/README.md.
+
+**Tujuan:** memisahkan konfigurasi sensitif untuk server produksi, menyusun panduan pengguna, dan menyiapkan naskah demo UAS.
+
+### Langkah kerja
+
+1. Buat `includes/config.php` untuk memusatkan pembacaan variabel lingkungan (`DATABASE_URL`, `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_NAME`).
+2. Pisahkan inisialisasi koneksi pada `includes/koneksi.php` agar membaca konfigurasi terpusat.
+3. Pastikan file kredensial lokal `.env` tidak terunggah ke Git dengan memeriksa `.gitignore`.
+4. Siapkan berkas serverless `api/prak13.php` dan perbarui `vercel.json` serta `router.php`.
+5. Susun manual operasional pengguna akhir pada `docs/manual-pengguna.md`.
+6. Siapkan draf naskah presentasi berdurasi 5–7 menit pada `docs/naskah-presentasi.md`.
+7. Perbarui masterpage `index.html` dan `README.md` utama.
+
+| Berkas Dokumentasi | Peruntukan |
+| --- | --- |
+| `docs/manual-pengguna.md` | Petunjuk operasional bagi petugas kasir dan admin warung |
+| `docs/naskah-presentasi.md` | Naskah presentasi 5-7 menit untuk demo di hadapan dosen penguji UAS |
+| `docs/security-checklist.md` | Laporan audit pengerasan keamanan web dasar OWASP |
+| `prak13/README.md` | Dokumentasi arsitektur teknis final, skema ERD, dan panduan instalasi |
+| `docs/laporan/Jobsheet*.md` | Laporan resmi praktikum per-jobsheet sesuai format akademik |
+
+## Lampiran C — Tanya jawab dan persiapan UAS
+
+**Apa beda transaksi biasa dengan transaksi ACID di Jobsheet 12?**  
+Transaksi biasa menjalankan query satu per satu. Jika penyimpanan pesanan berhasil namun pemotongan stok gagal, data menjadi tidak konsisten. Transaksi ACID (`beginTransaction`, `commit`, `rollBack`) menjamin bahwa penyimpanan pesanan dan pemotongan stok terjadi bersamaan atau dibatalkan seluruhnya jika salah satu gagal.
+
+**Mengapa perlu `SELECT ... FOR UPDATE`?**  
+Untuk mengunci baris stok menu selama transaksi berlangsung. Hal ini mencegah dua permintaan bersamaan membaca stok yang sama dan menghasilkan sisa stok minus (*race condition*).
+
+**Bagaimana aplikasi mencegah serangan CSRF?**  
+Setiap formulir POST menyertakan token acak rahasia 32-byte yang tersimpan di sesi pengguna. Server memvalidasi token tersebut dengan `hash_equals()`. Permintaan dari situs eksternal yang tidak memiliki token sesi akan ditolak dengan HTTP 403 Forbidden.
+
+**Mengapa fungsi `esc()` menggunakan `ENT_QUOTES`?**  
+Flag `ENT_QUOTES` mengonversi tanda petik ganda (`"`) dan petik tunggal (`'`) menjadi entitas HTML, sehingga nilai kiriman pengguna aman saat disematkan ke dalam atribut HTML (seperti `value="..."`).
+
+**Mengapa kredensial basis data dipisahkan ke `includes/config.php`?**  
+Agar kode aplikasi tidak menyimpan password secara terbuka (*hardcoded*). Di server produksi (seperti Vercel), kredensial dibaca langsung dari Environment Variables, sementara di server lokal dibaca dari file `.env` yang diabaikan oleh Git.

@@ -23,10 +23,13 @@ Repo deploy ini menyimpan masterpage dan salinan hasil yang siap ditampilkan:
 - /prak8/: Geprek Kita dengan database, kode di prak8/.
 - /prak9/: Geprek Kita dengan CRUD, pencarian server, dan pagination lima data; kode di prak9/.
 - /prak10/: Geprek Kita dengan registrasi, login, logout, session database, dan hak akses admin; kode di prak10/.
+- /prak11/: Geprek Kita dengan hardening keamanan web (XSS protection, CSRF token, session fixation, audit query); kode di prak11/.
+- /prak12/: Geprek Kita dengan transaksi atomik (ACID), manajemen stok real-time, status sirkulasi, dan riwayat pesanan; kode di prak12/.
+- /prak13/: Geprek Kita versi final siap deploy, pemisahan konfigurasi environment, manual pengguna, dan draf naskah demo UAS; kode di prak13/.
 
 Prak 1 disalin dari kode-praktikum/jobsheet-01, Prak 2 dari folder utama,
 dan Prak 3–6 dari folder Jobsheet3–Jobsheet6 di repo praktikum.
-Tema SIMPUS pada arsip 1–6 dipertahankan. Prak 7–10 adalah proyek Geprek Kita.
+Tema SIMPUS pada arsip 1–6 dipertahankan. Prak 7–13 adalah proyek Geprek Kita.
 Salinan ini tidak otomatis tersinkron; perubahan sumber perlu disalin lagi.
 Repo praktikum belum diubah oleh penataan ini.
 
@@ -69,15 +72,35 @@ Jalankan `sql/03_auth.sql` di SQL Editor database Supabase sebelum memakai regis
 
 Akun registrasi mendapat role `petugas`. Hanya admin boleh menghapus anggota. Untuk akun sendiri yang ditunjuk admin, ubah kolom `role` menjadi `admin` di database, lalu login kembali. Anggota yang masih punya pesanan tetap tidak bisa dihapus.
 
-Lokal: jalankan `php -S localhost:8000 router.php`, buka `/prak9/` atau `/prak10/`. Kredensial tetap memakai file `.env` atau environment variable Vercel.
+## Tambahan Praktikum 11, 12, dan 13
 
-## Bahan penjelasan UTS
-- HTML: header, nav, form, input, select, dan table.
-- CSS: warna, font, margin, padding, border, flex, dan media query.
-- JavaScript: validasi, fokus input, konfirmasi hapus, pencarian, dan total harga.
-- PHP: membaca POST, percabangan, perulangan, session, dan prepared statement.
-- Database: anggota terhubung ke pesanan melalui anggota_id.
+1. **Praktikum 11 (Keamanan Web Dasar)**:
+   - Proteksi XSS terpusat menggunakan fungsi helper `esc()` / `e()` (`htmlspecialchars` flag `ENT_QUOTES`).
+   - Proteksi CSRF berbasis token per-sesi acak 32-byte pada seluruh form POST (Login, Register, Anggota, Pesanan).
+   - Penegakan urutan guard clause (`auth.php` sebelum `csrf_verify()`).
+   - Audit 100% kueri prepared statement PDO terhadap SQL Injection.
+   - Dokumen audit keamanan: `prak11/docs/security-checklist.md`.
 
-assets/css/style.css diberi komentar singkat. Ubah padding tombol untuk
-ukurannya dan font-size untuk besar tulisan. Tidak memakai framework CSS.
-Data buku lama tidak dihapus dari database; aplikasi baru tidak memakainya.
+2. **Praktikum 12 (Integrasi Modul Transaksi & Stok)**:
+   - Skema basis data diperluas dengan tabel `menu` (stok fisik) dan kolom status pesanan (`sql/04_transaksi.sql`).
+   - Transaksi atomik database (ACID) via `$pdo->beginTransaction()` dan `$pdo->commit()`.
+   - Penguncian baris `SELECT ... FOR UPDATE` pada stok menu untuk mencegah race condition.
+   - Pemotongan stok saat pesan baru dan pemulihan stok otomatis saat pesanan dibatalkan.
+   - Aksi penyelesaian pesanan (`status = 'selesai'`) dan penegakan batas maksimal antrean pesanan pending.
+   - Modul Riwayat Transaksi (`pesanan/riwayat.php`) via JOIN multi-tabel serta ringkasan omset penjualan.
+   - Dashboard Beranda real-time dengan kartu agregat dari database.
+
+3. **Praktikum 13 (Deployment & Dokumentasi Final)**:
+   - Pemisahan konfigurasi lingkungan secara terpusat pada `includes/config.php` via variabel lingkungan.
+   - Manual pengguna operasional: `prak13/docs/manual-pengguna.md`.
+   - Draf naskah presentasi teknis UAS (5–7 menit): `prak13/docs/naskah-presentasi.md`.
+   - Laporan praktikum: `docs/laporan/Jobsheet11.md`, `Jobsheet12.md`, `Jobsheet13.md`.
+
+Lokal: jalankan `php -S localhost:8000 router.php`, buka `/prak11/`, `/prak12/`, atau `/prak13/`.
+
+## Bahan Penjelasan UAS
+- Arsitektur: HTML5 semantik, CSS responsif tanpa framework, JavaScript validasi & interaktif, PHP native MVC-like, PostgreSQL relasional.
+- Keamanan: Sanitasi XSS `esc()`, CSRF token hash-equals, PDO prepared statements, session fixation mitigation.
+- Transaksi ACID: `beginTransaction()`, `commit()`, `rollBack()`, row-locking `SELECT ... FOR UPDATE` menjamin integritas stok.
+- Relasi Multi-Tabel: `JOIN` antara `pesanan`, `anggota`, `users`, dan `menu`.
+- Siap Produksi: Pemisahan konfigurasi `.env`, isolasi sesi per-path, dan integrasi Vercel serverless.

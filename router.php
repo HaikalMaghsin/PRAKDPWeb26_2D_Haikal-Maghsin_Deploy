@@ -6,12 +6,12 @@ if ($path === '/' || $path === '/index.html') {
     readfile(__DIR__ . '/index.html');
     return;
 }
-if (preg_match('#^/prak(?:[1-9]|10)$#', $path)) {
+if (preg_match('#^/prak(?:[1-9]|1[0-3])$#', $path)) {
     header('Location: ' . $path . '/');
     return;
 }
 // Seperti hosting biasa, file HTML, CSS, JS, dan gambar disajikan langsung.
-if ($path === '/docs/HANDBOOK-GEPREK-KITA.html') {
+if ($path === '/docs/HANDBOOK-GEPREK-KITA.html' || $path === '/docs/HANDBOOK-SIMPUS-JOBSHEET-1-6.html') {
     return false;
 }
 if (in_array($path, ['/docs/HANDBOOK-GEPREK-KITA.pdf', '/docs/images/menu.png', '/docs/images/anggota.png', '/docs/images/pesanan.png', '/docs/images/validasi.png'], true)) {
@@ -34,6 +34,18 @@ if (strpos($path, '/prak9/') === 0) {
 }
 if (strpos($path, '/prak10/') === 0) {
     require __DIR__ . '/api/prak10.php';
+    return;
+}
+if (strpos($path, '/prak11/') === 0) {
+    require __DIR__ . '/api/prak11.php';
+    return;
+}
+if (strpos($path, '/prak12/') === 0) {
+    require __DIR__ . '/api/prak12.php';
+    return;
+}
+if (strpos($path, '/prak13/') === 0) {
+    require __DIR__ . '/api/prak13.php';
     return;
 }
 if (strpos($path, '/prak8/') === 0 || $path === '/index.php' || strpos($path, '/anggota/') === 0 || strpos($path, '/pesanan/') === 0) {

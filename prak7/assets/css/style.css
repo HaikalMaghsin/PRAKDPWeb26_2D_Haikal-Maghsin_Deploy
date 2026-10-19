@@ -64,8 +64,8 @@ nav a[aria-current="page"] {
 /* Lebar isi dibatasi supaya tidak terlalu melebar di laptop. */
 main {
     max-width: 900px;
-    margin: 24px auto;
-    padding: 0 16px;
+    margin: 19px auto;
+    padding: 19px 16px;
 }
 
 .panel {
